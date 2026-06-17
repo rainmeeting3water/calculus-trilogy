@@ -71,6 +71,12 @@
 
 本教材建議維持「三個模組獨立、首頁負責導覽」的架構。
 
+## 雙語版本說明
+
+本教材採用「中文主概念 + 英文數學詞彙輔助」的雙語呈現方式，目的不是完全替換成英文，而是協助學生建立中文概念與英文術語之間的連結。
+
+英文用語優先採用 IBDP Mathematics、國際高中數學教材與英美數學課堂常見表達，例如 anti-derivative、anti-differentiation、family of curves、gradient、accumulation function 與 signed area。完整詞彙請參考 BILINGUAL_GLOSSARY.md。
+
 ## 部署方式
 
 ### GitHub Pages

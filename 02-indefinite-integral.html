@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>不定積分：從微分倒著走</title>
+    <title>不定積分 Indefinite Integrals：從微分倒著走</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -435,36 +435,65 @@
         .trilogy-nav-btn.secondary:hover {
             background: #E2E8F0;
         }
+
+        .en-sub {
+            display: block;
+            margin-top: 4px;
+            color: #64748B;
+            font-size: 0.92em;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .en-inline {
+            color: #64748B;
+            font-size: 0.95em;
+            margin-left: 4px;
+        }
+
+        .bilingual-term {
+            display: inline-block;
+            margin-left: 4px;
+            color: #4F46E5;
+            font-size: 0.92em;
+            font-weight: 600;
+        }
+
+        .bilingual-note {
+            color: #64748B;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>不定積分：從微分倒著走</h1>
-        <h2>理解 <span class="math formula">&int; f(x)dx = F(x) + C</span> 的真正意義</h2>
+        <h1>不定積分：從微分倒著走<span class="en-sub">Indefinite Integrals: Anti-differentiation and Families of Curves</span></h1>
+        <h2>理解 <span class="math formula">&int; f(x)dx = F(x) + C</span> 的真正意義<span class="en-sub">Interpret an indefinite integral as a family of anti-derivatives.</span></h2>
         <div class="intro-text">
             我們先從熟悉的微分開始。<br>
-            如果某個函數微分後會變成 <span class="math">f(x)</span>，那麼我們能不能反過來，找出微分前的函數？
+            如果某個函數微分後會變成 <span class="math">f(x)</span>，那麼我們能不能反過來，找出微分前的函數？<span class="en-sub">If a function has derivative f(x), can we work backward to find an anti-derivative?</span>
         </div>
     </header>
 
     <div class="section">
-        <h3 class="section-title">一、核心概念：兩種運算的差別</h3>
+        <h3 class="section-title">一、核心概念：兩種運算的差別<span class="en-sub">Core Idea: Differentiation and Anti-differentiation</span></h3>
         <div class="concept-box">
-            <h4>▶ 微分：已知 F(x)，求它的導函數 F'(x)</h4>
+            <h4>▶ 微分：已知 F(x)，求它的導函數 F'(x)<span class="en-sub">Differentiation: find the derivative F'(x)</span></h4>
             <p style="margin-bottom: 15px;">已知一個函數 <span class="math">F(x)</span>，求它的變化率 <span class="math">F'(x)</span>。</p>
             
-            <h4>▶ 不定積分：已知變化率，反推原函數</h4>
-            <p>已知 <span class="math">f(x)</span>，反過來找一個函數 <span class="math">F(x)</span>，使得 <span class="math">F'(x) = f(x)</span>。這樣的 <span class="math">F(x)</span> 稱為反導函數，也常稱為原函數。</p>
-            <p style="margin-top: 10px; color: var(--text-light);">💡 注意：不定積分不是單一答案，而是一整族函數 <span class="math">F(x) + C</span>，其中 C 是任意常數。</p>
+            <h4>▶ 不定積分：已知變化率，反推原函數<span class="en-sub">Indefinite integration: work backward from a rate of change</span></h4>
+            <p>已知 <span class="math">f(x)</span>，反過來找一個函數 <span class="math">F(x)</span>，使得 <span class="math">F'(x) = f(x)</span>。這樣的 <span class="math">F(x)</span> 稱為反導函數，也常稱為原函數<span class="bilingual-term">anti-derivative / antiderivative</span>。</p>
+            <p style="margin-top: 10px; color: var(--text-light);">💡 注意：不定積分不是單一答案，而是一整族函數 <span class="math">F(x) + C</span><span class="en-inline">a family of curves</span>，其中 C 是任意常數。</p>
         </div>
     </div>
 
     <div class="section">
-        <h3 class="section-title">二、互動圖形觀察</h3>
+        <h3 class="section-title">二、互動圖形觀察<span class="en-sub">Interactive Graph</span></h3>
         <p style="margin-bottom: 15px; color: var(--text-light);">
-            請拖動常數 C 滑桿。觀察雖然 <span class="math">F(x) + C</span> 上下移動了，但它的斜率變化（也就是微分結果 <span class="math">f(x)</span>）卻保持不變！
+            請拖動常數 C 滑桿。觀察雖然 <span class="math">F(x) + C</span> 上下移動了，但它的 gradient (slope) 變化（也就是微分結果 <span class="math">f(x)</span>）卻保持不變！
         </p>
         
         <div class="interactive-grid">
@@ -474,8 +503,8 @@
                     <canvas id="graphCanvas" width="600" height="400"></canvas>
                 </div>
                 <div class="legend">
-                    <div class="legend-item"><div class="color-box" style="background: var(--curve-F);"></div> 目前選定的一條函數 F(x) + C</div>
-                    <div class="legend-item"><div class="color-box" style="background: var(--curve-f); border-top: 2px dashed #fff;"></div> 目標函數 f(x) (固定不動)</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--curve-F);"></div> 目前選定的一條函數 F(x) + C<span class="en-sub">selected curve from the family</span></div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--curve-f); border-top: 2px dashed #fff;"></div> 目標函數 f(x) (固定不動)<span class="en-sub">target function f(x), fixed</span></div>
                 </div>
             </div>
 
@@ -483,7 +512,7 @@
             <div class="controls">
                 <div class="control-group">
                     <label>
-                        <span>目標函數 f(x)</span>
+                        <span>目標函數 f(x)<span class="en-sub">target function</span></span>
                     </label>
                     <select id="funcSelect">
                         <option value="2x">f(x) = 2x</option>
@@ -497,7 +526,7 @@
 
                 <div class="control-group">
                     <label>
-                        <span>常數 C</span>
+                        <span>常數 C<span class="en-sub">constant C</span></span>
                         <span id="cValDisplay">0.0</span>
                     </label>
                     <input type="range" id="cSlider" min="-5" max="5" step="0.1" value="0">
@@ -508,52 +537,52 @@
         <!-- 數值卡片區 -->
         <div class="data-cards">
             <div class="card">
-                <div class="card-title">目標函數 f(x)</div>
+                <div class="card-title">目標函數 f(x)<span class="en-sub">target function</span></div>
                 <div class="card-value math" id="val-fx" style="background:transparent; padding:0;">2x</div>
             </div>
             <div class="card">
-                <div class="card-title">找到的一個反導函數 F(x)</div>
+                <div class="card-title">找到的一個反導函數 F(x)<span class="en-sub">one anti-derivative</span></div>
                 <div class="card-value math" id="val-Fx" style="background:transparent; padding:0;">x<sup>2</sup></div>
             </div>
             <div class="card highlight-card">
-                <div class="card-title">目前選定的一條函數 F(x) + C</div>
+                <div class="card-title">目前選定的一條函數 F(x) + C<span class="en-sub">selected curve from the family</span></div>
                 <div class="card-value math" id="val-FxC" style="background:transparent; padding:0; color: var(--curve-F);">x<sup>2</sup></div>
             </div>
             <div class="card" style="background: #F0FDF4; border-color: var(--secondary);">
-                <div class="card-title">微分檢查 [F(x) + C]'</div>
+                <div class="card-title">微分檢查 [F(x) + C]'<span class="en-sub">verify by differentiation</span></div>
                 <div class="card-value math" id="val-deriv" style="background:transparent; padding:0; color: #065F46;">2x = f(x)</div>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <h3 class="section-title">三、為什麼會有一整族函數？（5 個概念步驟）</h3>
+        <h3 class="section-title">三、為什麼會有一整族函數？（5 個概念步驟）<span class="en-sub">Why Is There a Family of Curves?</span></h3>
         
         <div class="step">
-            <div class="step-num">Step 1：從微分開始</div>
+            <div class="step-num">Step 1：從微分開始<span class="en-sub">Start with differentiation</span></div>
             <p>我們知道：<span class="math formula">d/dx (x<sup>2</sup>) = 2x</span></p>
         </div>
         
         <div class="step">
-            <div class="step-num">Step 2：反過來問</div>
+            <div class="step-num">Step 2：反過來問<span class="en-sub">Ask the reverse question</span></div>
             <p>如果已知結果是 <span class="math">2x</span>，誰微分後會得到 <span class="math">2x</span>？</p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 3：發現不只一個答案</div>
+            <div class="step-num">Step 3：發現不只一個答案<span class="en-sub">Notice there is more than one answer</span></div>
             <p><span class="math">x<sup>2</sup></span>、<span class="math">x<sup>2</sup> + 3</span>、<span class="math">x<sup>2</sup> - 5</span> 微分後都會得到 <span class="math">2x</span>。</p>
-            <p>因為在圖形上，加減常數只是把曲線上下平移，每一點的切線斜率（變化率）完全沒有改變。</p>
+            <p>因為在圖形上，加減常數只是把曲線上下平移，每一點的切線 gradient (slope)（rate of change）完全沒有改變。</p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 4：常數 C 的意義</div>
+            <div class="step-num">Step 4：常數 C 的意義<span class="en-sub">Meaning of the constant C</span></div>
             <p>因為常數微分後會變成 0，所以當我們反向尋找時，原本的常數是多少就「遺失」了，無法唯一決定。</p>
             <p>因此我們用 <span class="math">C</span> 來代表所有可能的常數：</p>
             <p class="math-block formula">&int; 2x dx = x<sup>2</sup> + C</p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 5：一般化公式</div>
+            <div class="step-num">Step 5：一般化公式<span class="en-sub">General form</span></div>
             <p>若找到一個函數 <span class="math">F(x)</span> 滿足 <span class="math">F'(x) = f(x)</span>，則：</p>
             <div class="math-block formula formula-row" style="border-color: var(--primary); background: #EEF2FF;">
                 <span class="big-op"><span class="op-symbol">&int;</span></span>
@@ -563,17 +592,17 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">四、不同 C 值的微分結果比較</h3>
+        <h3 class="section-title">四、不同 C 值的微分結果比較<span class="en-sub">Comparing Different Values of C</span></h3>
         <p style="margin-bottom: 15px;">以下表格展示，無論常數 C 填多少，微分後都會「殊途同歸」回到 <span class="math">f(x)</span>。</p>
         
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>常數 C</th>
-                        <th>函數族 F(x) + C</th>
-                        <th>微分結果 [F(x) + C]'</th>
-                        <th>觀察</th>
+                        <th>常數 C<br><span class="en-sub">constant C</span></th>
+                        <th>函數族 F(x) + C<br><span class="en-sub">family of curves</span></th>
+                        <th>微分結果 [F(x) + C]'<br><span class="en-sub">derivative</span></th>
+                        <th>觀察<br><span class="en-sub">observation</span></th>
                     </tr>
                 </thead>
                 <tbody id="cTableBody">
@@ -584,7 +613,7 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">五、自我小測驗</h3>
+        <h3 class="section-title">五、自我小測驗<span class="en-sub">Self-check Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
             <p><strong>第 1 題：</strong>不定積分 <span class="math formula">&int; 2x dx = ?</span></p>
@@ -643,7 +672,7 @@
     </div>
 
     <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
-        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：反導函數為什麼能幫我們算定積分？</h3>
+        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：反導函數為什麼能幫我們算定積分？<span class="en-sub">Next: How Anti-derivatives Help Evaluate Definite Integrals</span></h3>
         <p style="text-align: center; margin-bottom: 20px;">這是微積分中最重要的連結之一。</p>
         
         <p>在這個模組中，我們知道不定積分是在找微分前的函數，也就是反導函數或原函數：</p>
@@ -664,7 +693,7 @@
     </div>
 
     <div class="section" style="text-align: center; background: white; border: 1px solid #E2E8F0;">
-        <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨</h3>
+        <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨<span class="en-sub">Summary</span></h3>
         
         <ol style="text-align: left; max-width: 500px; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.8;">
             <li><strong>微分</strong>是已知 <span class="math">F(x)</span>，求它的導函數 <span class="math">F'(x)</span>，也就是 <span class="math">f(x)</span>。</li>
@@ -685,11 +714,11 @@
 </div>
 
 <div class="trilogy-nav">
-    <div class="trilogy-nav-title">微積分三部曲｜第二站完成</div>
+    <div class="trilogy-nav-title">微積分三部曲｜第二站完成<span class="en-sub">Calculus Trilogy | Stage 2 Complete</span></div>
     <div class="trilogy-nav-buttons">
-        <a class="trilogy-nav-btn secondary" href="01-definite-integral.html">← 上一站：定積分</a>
-        <a class="trilogy-nav-btn secondary" href="index.html">返回首頁</a>
-        <a class="trilogy-nav-btn" href="03-fundamental-theorem.html">下一站：微積分基本定理 →</a>
+        <a class="trilogy-nav-btn secondary" href="01-definite-integral.html">← 上一站：定積分<span class="en-sub">Previous: Definite Integrals</span></a>
+        <a class="trilogy-nav-btn secondary" href="index.html">返回首頁<span class="en-sub">Back to Home</span></a>
+        <a class="trilogy-nav-btn" href="03-fundamental-theorem.html">下一站：微積分基本定理 →<span class="en-sub">Next: Fundamental Theorem of Calculus</span></a>
     </div>
 </div>
 
@@ -963,10 +992,10 @@
 
         if (selected === answers[qNum]) {
             feedbackDiv.classList.add('feedback-correct');
-            feedbackDiv.innerHTML = `<strong>✅ 正確！</strong> ${feedbacks[qNum].correct}`;
+            feedbackDiv.innerHTML = `<strong>✅ 正確！ Correct.</strong> ${feedbacks[qNum].correct}`;
         } else {
             feedbackDiv.classList.add('feedback-wrong');
-            feedbackDiv.innerHTML = `<strong>❌ 答錯了：</strong> ${feedbacks[qNum].wrong}`;
+            feedbackDiv.innerHTML = `<strong>❌ 答錯了 / Try again:</strong> ${feedbacks[qNum].wrong}`;
         }
     }
 

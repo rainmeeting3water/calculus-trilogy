@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>定積分：把很多小面積加起來</title>
+    <title>定積分 Definite Integrals：把很多小面積加起來</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -526,37 +526,66 @@
         .trilogy-nav-btn.secondary:hover {
             background: #E2E8F0;
         }
+
+        .en-sub {
+            display: block;
+            margin-top: 4px;
+            color: #64748B;
+            font-size: 0.92em;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .en-inline {
+            color: #64748B;
+            font-size: 0.95em;
+            margin-left: 4px;
+        }
+
+        .bilingual-term {
+            display: inline-block;
+            margin-left: 4px;
+            color: #4F46E5;
+            font-size: 0.92em;
+            font-weight: 600;
+        }
+
+        .bilingual-note {
+            color: #64748B;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>定積分：把很多小面積加起來</h1>
-        <h2>從矩形近似理解 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 的意義</h2>
+        <h1>定積分：把很多小面積加起來<span class="en-sub">Definite Integrals: Accumulation and Riemann Sums</span></h1>
+        <h2>從矩形近似理解 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 的意義<span class="en-sub">Use rectangle approximation to interpret a definite integral as accumulation.</span></h2>
         <div class="intro-text">
-            我們先不要急著背公式。<br>
-            先想一件事：如果想知道曲線從 <span class="math">a</span> 到 <span class="math">b</span> 累積了多少，可以怎麼用很多個小矩形慢慢逼近？
+            我們先不要急著背公式。<span class="en-sub">Do not start by memorising a formula.</span><br>
+            先想一件事：如果想知道曲線從 <span class="math">a</span> 到 <span class="math">b</span> 累積了多少，可以怎麼用很多個小矩形慢慢逼近？<span class="en-sub">How can small rectangles estimate the accumulation from a to b?</span>
         </div>
     </header>
 
     <div class="section">
-        <h3 class="section-title">一、互動圖形區</h3>
+        <h3 class="section-title">一、互動圖形區<span class="en-sub">Interactive Graph</span></h3>
         <p style="margin-bottom: 15px; color: var(--text-light);">
-            請調整下限 a、上限 b 以及分割數 n，觀察矩形面積總和如何變化。
+            請調整下限 a、上限 b 以及分割數 n，觀察矩形面積總和如何變化。<span class="en-sub">Adjust the lower limit a, upper limit b, and number of subdivisions n to see how the Riemann sum changes.</span>
         </p>
         
         <div class="interactive-grid">
             <!-- 畫布區 -->
             <div>
                 <div class="canvas-container">
-                    <div id="alertMsg" class="alert-box">方向反過來，定積分值會變號</div>
+                    <div id="alertMsg" class="alert-box">方向反過來，定積分值會變號 / Reversing direction changes the sign of the definite integral</div>
                     <canvas id="graphCanvas" width="600" height="400"></canvas>
                 </div>
                 <div class="legend">
-                    <div class="legend-item"><div class="color-box" style="background: var(--pos-area); border-color: var(--pos-border);"></div> f(x)&gt;0：圖形在 x 軸上方</div>
-                    <div class="legend-item"><div class="color-box" style="background: var(--neg-area); border-color: var(--neg-border);"></div> f(x)&lt;0：圖形在 x 軸下方</div>
-                    <div class="legend-item"><div class="color-box" style="background: var(--curve); width: 2px;"></div> 函數曲線 f(x)</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--pos-area); border-color: var(--pos-border);"></div> f(x)&gt;0：圖形在 x 軸上方<span class="en-sub">above the x-axis</span></div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--neg-area); border-color: var(--neg-border);"></div> f(x)&lt;0：圖形在 x 軸下方<span class="en-sub">below the x-axis</span></div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--curve); width: 2px;"></div> 函數曲線 f(x)<span class="en-sub">function curve f(x)</span></div>
                 </div>
             </div>
 
@@ -564,21 +593,21 @@
             <div class="controls">
                 <div class="control-group">
                     <label>
-                        <span>選擇函數 f(x)</span>
+                        <span>選擇函數 f(x)<span class="en-sub">Choose function f(x)</span></span>
                     </label>
                     <select id="funcSelect">
                         <option value="x2">f(x) = x² + 1</option>
                         <option value="x1">f(x) = x + 1</option>
                         <option value="sin_pos">f(x) = sin(x) + 2</option>
                         <option value="2x1">f(x) = 2x + 1</option>
-                        <option value="x_minus_2">f(x) = x - 2 (觀察負面積)</option>
-                        <option value="sin">f(x) = sin(x) (觀察正負抵消)</option>
+                        <option value="x_minus_2">f(x) = x - 2 (觀察負面積 / signed negative area)</option>
+                        <option value="sin">f(x) = sin(x) (觀察正負抵消 / cancellation)</option>
                     </select>
                 </div>
 
                 <div class="control-group">
                     <label>
-                        <span>下限 (a)</span>
+                        <span>下限 (a)<span class="en-sub">lower limit</span></span>
                         <span id="aValDisplay">0.0</span>
                     </label>
                     <input type="range" id="aSlider" min="-3" max="5" step="0.1" value="0">
@@ -586,7 +615,7 @@
 
                 <div class="control-group">
                     <label>
-                        <span>上限 (b)</span>
+                        <span>上限 (b)<span class="en-sub">upper limit</span></span>
                         <span id="bValDisplay">3.0</span>
                     </label>
                     <input type="range" id="bSlider" min="-3" max="5" step="0.1" value="3">
@@ -594,7 +623,7 @@
                 
                 <div class="control-group">
                     <label>
-                        <span>分割數 (n)</span>
+                        <span>分割數 (n)<span class="en-sub">number of subdivisions</span></span>
                         <span id="nValDisplay">8</span>
                     </label>
                     <input type="range" id="nSlider" min="1" max="80" step="1" value="8">
@@ -602,12 +631,12 @@
                 
                 <div class="control-group">
                     <label>
-                        <span>取樣方式</span>
+                        <span>取樣方式<span class="en-sub">sampling method</span></span>
                     </label>
                     <select id="methodSelect">
-                        <option value="left">起點端點近似</option>
-                        <option value="right">終點端點近似</option>
-                        <option value="mid" selected>中點近似</option>
+                        <option value="left">起點端點近似 / starting endpoint</option>
+                        <option value="right">終點端點近似 / ending endpoint</option>
+                        <option value="mid" selected>中點近似 / midpoint</option>
                     </select>
                 </div>
             </div>
@@ -616,31 +645,31 @@
         <!-- 數值卡片區 -->
         <div class="data-cards">
             <div class="card">
-                <div class="card-title">下限 a</div>
+                <div class="card-title">下限 a<span class="en-sub">lower limit</span></div>
                 <div class="card-value" id="val-a">0.0</div>
             </div>
             <div class="card">
-                <div class="card-title">上限 b</div>
+                <div class="card-title">上限 b<span class="en-sub">upper limit</span></div>
                 <div class="card-value" id="val-b">3.0</div>
             </div>
             <div class="card">
-                <div class="card-title">有向寬度 b-a</div>
+                <div class="card-title">有向寬度 b-a<span class="en-sub">directed width</span></div>
                 <div class="card-value" id="val-width">3.0</div>
             </div>
             <div class="card">
-                <div class="card-title">每段有向寬度 &Delta;x</div>
+                <div class="card-title">每段有向寬度 &Delta;x<span class="en-sub">directed width of each subinterval</span></div>
                 <div class="card-value" id="val-dx">0.375</div>
             </div>
             <div class="card highlight-card">
-                <div class="card-title">矩形近似總和</div>
+                <div class="card-title">矩形近似總和<span class="en-sub">rectangle approximation sum</span></div>
                 <div class="card-value" id="val-sum">0.000</div>
             </div>
             <div class="card highlight-card" style="background: #F8FAFC; border-color: var(--primary);">
-                <div class="card-title">高精度參考值</div>
+                <div class="card-title">高精度參考值<span class="en-sub">high-precision reference value</span></div>
                 <div class="card-value" id="val-ref" style="color: var(--primary);">0.000</div>
             </div>
             <div class="card">
-                <div class="card-title">近似誤差</div>
+                <div class="card-title">近似誤差<span class="en-sub">approximation error</span></div>
                 <div class="card-value" id="val-err" style="color: #DC2626;">0.000</div>
             </div>
         </div>
@@ -650,21 +679,21 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">二、觀察 n 越來越大</h3>
+        <h3 class="section-title">二、觀察 n 越來越大<span class="en-sub">As n Increases</span></h3>
         <p style="margin-bottom: 15px;">我們來看看，當分割數量 <span class="math">n</span> 不斷增加（代表每段長度 <span class="math">|&Delta;x|</span> 越來越小）時，矩形總和會發生什麼事？</p>
-        <button id="runTableBtn" class="btn">▶ 觀察 n 越來越大</button>
+        <button id="runTableBtn" class="btn">▶ 觀察 n 越來越大<span class="en-sub">Run n-increase table</span></button>
         
         <div class="table-container">
             <table id="nTable">
                 <thead>
                     <tr>
-                        <th>分割數 n</th>
-                        <th>有向 &Delta;x</th>
-                        <th>取樣方式</th>
-                        <th>矩形近似總和</th>
-                        <th>高精度參考值</th>
-                        <th>誤差</th>
-                        <th>觀察</th>
+                        <th>分割數 n<br><span class="en-sub">subdivisions</span></th>
+                        <th>有向 &Delta;x<br><span class="en-sub">directed width</span></th>
+                        <th>取樣方式<br><span class="en-sub">sampling method</span></th>
+                        <th>矩形近似總和<br><span class="en-sub">Riemann sum</span></th>
+                        <th>高精度參考值<br><span class="en-sub">reference value</span></th>
+                        <th>誤差<br><span class="en-sub">error</span></th>
+                        <th>觀察<br><span class="en-sub">observation</span></th>
                     </tr>
                 </thead>
                 <tbody id="nTableBody">
@@ -675,10 +704,10 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">三、定積分概念的 5 個步驟</h3>
+        <h3 class="section-title">三、定積分概念的 5 個步驟<span class="en-sub">Five Steps to the Definite Integral</span></h3>
         
         <div class="step">
-            <div class="step-num">Step 1：從一個矩形開始</div>
+            <div class="step-num">Step 1：從一個矩形開始<span class="en-sub">Start with one rectangle</span></div>
             <p>矩形面積 = 底 &times; 高。</p>
             <p>在函數圖形下，一個小矩形的底長是 <span class="math">|&Delta;x|</span>，高度大小大約是 <span class="math">|f(x<sub>i</sub><sup>*</sup>)|</span>。</p>
             <p>但定積分保留方向與正負號，所以第 i 塊對定積分的有向貢獻是 <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span>。</p>
@@ -686,14 +715,14 @@
         </div>
         
         <div class="step">
-            <div class="step-num">Step 2：把區間 [a, b] 切成很多小段</div>
+            <div class="step-num">Step 2：把區間 [a, b] 切成很多小段<span class="en-sub">Subdivide the interval [a, b]</span></div>
             <p>如果把從 a 到 b 的距離切成 <span class="math">n</span> 等分，每一小段的有向寬度是：</p>
             <p class="math-block">&Delta;x = (b - a) / n</p>
             <p>若 <span class="math">a &lt; b</span>，<span class="math">&Delta;x</span> 為正；若 <span class="math">a &gt; b</span>，<span class="math">&Delta;x</span> 為負，表示累積方向相反。</p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 3：把很多小矩形加起來</div>
+            <div class="step-num">Step 3：把很多小矩形加起來<span class="en-sub">Add the small rectangles</span></div>
             <p>把所有小矩形的有向貢獻加起來（稱為黎曼和），就可以得到近似的總累積量：</p>
             <div class="math-block formula-row">
                 <span class="big-op" style="font-size: 0.9rem;">
@@ -707,14 +736,14 @@
         </div>
 
         <div class="step">
-            <div class="step-num">Step 4：讓切割越來越細</div>
+            <div class="step-num">Step 4：讓切割越來越細<span class="en-sub">Make the subdivision finer</span></div>
             <p>當 <span class="math">n</span> 越來越大，每段長度 <span class="math">|&Delta;x|</span> 越來越小，小矩形的頂部就會越貼近函數曲線。</p>
             <p>當矩形總和越來越穩定，趨近於一個極限值時，我們就把這個極限值記為定積分符號：</p>
             <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx</p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 5：理解上下限與方向</div>
+            <div class="step-num">Step 5：理解上下限與方向<span class="en-sub">Interpret limits and direction</span></div>
             <p><span class="math">a</span> 是開始累積的位置，<span class="math">b</span> 是結束累積的位置。</p>
             <ul style="margin-left: 25px; margin-top: 10px;">
                 <li>若 <span class="math">a = b</span>，沒有寬度，所以：<span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx = 0</span></li>
@@ -725,7 +754,7 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">四、定積分是「帶符號的面積」</h3>
+        <h3 class="section-title">四、定積分是「帶符號的面積」<span class="en-sub">A Definite Integral as Signed Area</span></h3>
         <p>定積分不只是普通的幾何面積，而是<strong>帶符號的累積量</strong>。</p>
         <ul style="margin-left: 25px; margin-top: 15px; line-height: 1.8;">
             <li><strong>高度 f(x) &gt; 0 (圖形在 x 軸上方)：</strong>在向右累積 (a &lt; b) 時貢獻<strong>正值</strong>；若向左累積 (a &gt; b) 則貢獻<strong>負值</strong>。</li>
@@ -734,7 +763,7 @@
             <li>若正面積和負面積剛好互相抵消，定積分可能等於 0，但這不代表該區間內「沒有圖形面積」。</li>
         </ul>
         <p style="margin-top: 10px; color: var(--text-light);">
-            在一般從左到右累積，也就是 <span class="math">a &lt; b</span> 的情況下，x 軸上方貢獻正值，x 軸下方貢獻負值；若 <span class="math">a &gt; b</span>，累積方向反過來，定積分值會變號。
+            在一般從左到右累積，也就是 <span class="math">a &lt; b</span> 的情況下，x 軸上方貢獻正值，x 軸下方貢獻負值；若 <span class="math">a &gt; b</span>，累積方向反過來，定積分值會變號 / Reversing direction changes the sign of the definite integral。
         </p>
         <div style="background: #FFFBEB; padding: 15px; border-left: 4px solid #F59E0B; margin-top: 15px; border-radius: 0 8px 8px 0;">
             💡 <strong>試試看：</strong> 在上面的互動區，選擇函數 <span class="math">f(x) = sin(x)</span>，並將區間設為 a=-3, b=3，觀察正負面積如何接近抵消！
@@ -742,7 +771,7 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">五、定積分的基本性質</h3>
+        <h3 class="section-title">五、定積分的基本性質<span class="en-sub">Basic Properties of Definite Integrals</span></h3>
         
         <div class="step">
             <div class="step-num">1. 上下限相同，累積量為 0</div>
@@ -778,7 +807,7 @@
     </div>
 
     <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
-        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：讓上限動起來</h3>
+        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：讓上限動起來<span class="en-sub">Next: Let the Upper Limit Move</span></h3>
         <p style="text-align: center; margin-bottom: 20px;">這也是通往微積分基本定理的橋樑。</p>
         
         <p>如果下限 <span class="math">a</span> 固定，但上限不再是固定的數字 <span class="math">b</span>，而是會移動的位置 <span class="math">x</span>，我們可以定義一個新的面積函數：</p>
@@ -797,10 +826,10 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">七、自我小測驗</h3>
+        <h3 class="section-title">七、自我小測驗<span class="en-sub">Self-check Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
-            <p><strong>第 1 題：</strong>在定積分符號 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 中，下標 a 和上標 b 代表什麼？</p>
+            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>在定積分符號 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 中，下標 a 和上標 b 代表什麼？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. 函數的最大值與最小值</button>
                 <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. x 軸與 y 軸的交點</button>
@@ -811,7 +840,7 @@
         </div>
 
         <div class="quiz-item" id="q2">
-            <p><strong>第 2 題：</strong>當分割數 n 越來越大時，用小矩形計算的總和通常會怎樣？</p>
+            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>當分割數 n 越來越大時，用小矩形計算的總和通常會怎樣？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 變得無限大</button>
                 <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 越來越接近曲線下方的實際累積量</button>
@@ -822,7 +851,7 @@
         </div>
 
         <div class="quiz-item" id="q3">
-            <p><strong>第 3 題：</strong>若上下限相同 (a = b)，那麼 <span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx</span> 的值等於多少？</p>
+            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>若上下限相同 (a = b)，那麼 <span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx</span> 的值等於多少？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 0</button>
                 <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 1</button>
@@ -833,7 +862,7 @@
         </div>
 
         <div class="quiz-item" id="q4">
-            <p><strong>第 4 題：</strong>在一般從左到右累積，也就是 a &lt; b 的情況下，若函數圖形在 x 軸下方，這塊區域對定積分的貢獻是什麼？</p>
+            <p><strong>第 4 題：</strong><span class="en-inline">Question 4:</span>在一般從左到右累積，也就是 a &lt; b 的情況下，若函數圖形在 x 軸下方，這塊區域對定積分的貢獻是什麼？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(4, 'A')">A. 正的累積量</button>
                 <button class="quiz-btn" onclick="checkAnswer(4, 'B')">B. 負的累積量</button>
@@ -845,7 +874,7 @@
     </div>
 
     <div class="section" style="text-align: center; background: white; border: 1px solid #E2E8F0;">
-        <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨</h3>
+        <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨<span class="en-sub">Summary</span></h3>
         <p style="font-size: 1.1rem; margin-bottom: 20px;">定積分的核心不是先背公式，而是理解：</p>
         
         <ol style="text-align: left; max-width: 400px; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.8;">
@@ -884,10 +913,10 @@
 </div>
 
 <div class="trilogy-nav">
-    <div class="trilogy-nav-title">微積分三部曲｜第一站完成</div>
+    <div class="trilogy-nav-title">微積分三部曲｜第一站完成<span class="en-sub">Calculus Trilogy | Stage 1 Complete</span></div>
     <div class="trilogy-nav-buttons">
-        <a class="trilogy-nav-btn secondary" href="index.html">← 返回首頁</a>
-        <a class="trilogy-nav-btn" href="02-indefinite-integral.html">下一站：不定積分 →</a>
+        <a class="trilogy-nav-btn secondary" href="index.html">← 返回首頁<span class="en-sub">Back to Home</span></a>
+        <a class="trilogy-nav-btn" href="02-indefinite-integral.html">下一站：不定積分 →<span class="en-sub">Next: Indefinite Integrals</span></a>
     </div>
 </div>
 
@@ -1028,7 +1057,7 @@
             document.getElementById('val-ref').textContent = "0.000";
             document.getElementById('val-err').textContent = "0.000";
             alertBox.style.display = 'block';
-            alertBox.textContent = '上下限相同，累積量為 0';
+            alertBox.textContent = '上下限相同，累積量為 0 / Same limits give zero accumulation';
             alertBox.style.background = '#F1F5F9';
             alertBox.style.color = '#475569';
         } else {
@@ -1040,7 +1069,7 @@
             // 處理 a > b 的警告
             if (aVal > bVal) {
                 alertBox.style.display = 'block';
-                alertBox.textContent = '方向反過來，定積分值會變號 (Δx 為負)';
+                alertBox.textContent = '方向反過來，定積分值會變號 / Reversing direction changes the sign of the definite integral (Δx 為負)';
                 alertBox.style.background = 'var(--alert-bg)';
                 alertBox.style.color = 'var(--alert-text)';
             } else {
@@ -1333,19 +1362,19 @@
             let obColor = "";
             
             if (Math.abs(aVal - bVal) < 1e-9) {
-                obsText = "等於 0";
+                obsText = "等於 0 / equals 0";
                 obColor = "#64748B";
             } else if (err > 2) {
-                obsText = "還很粗略";
+                obsText = "還很粗略 / still rough";
                 obColor = "#94A3B8";
             } else if (err > 0.5) {
-                obsText = "越來越接近";
+                obsText = "越來越接近 / getting closer";
                 obColor = "#F59E0B";
             } else if (err > 0.05) {
-                obsText = "已經很接近";
+                obsText = "已經很接近 / close";
                 obColor = "#10B981";
             } else {
-                obsText = "幾乎穩定";
+                obsText = "幾乎穩定 / nearly stable";
                 obColor = "#059669";
             }
 
@@ -1407,10 +1436,10 @@
 
         if (selected === answers[qNum]) {
             feedbackDiv.classList.add('feedback-correct');
-            feedbackDiv.innerHTML = `<strong>✅ 正確！</strong> ${feedbacks[qNum].correct}`;
+            feedbackDiv.innerHTML = `<strong>✅ 正確！ Correct.</strong> ${feedbacks[qNum].correct}`;
         } else {
             feedbackDiv.classList.add('feedback-wrong');
-            feedbackDiv.innerHTML = `<strong>❌ 答錯了：</strong> ${feedbacks[qNum].wrong}`;
+            feedbackDiv.innerHTML = `<strong>❌ 答錯了 / Try again:</strong> ${feedbacks[qNum].wrong}`;
         }
     }
 

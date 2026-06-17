@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找不到這個頁面｜微積分三部曲</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+            --border-color: #E2E8F0;
+            --accent-bg: #EEF2FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .not-found-card {
+            width: min(100%, 720px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 48px 28px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .not-found-label {
+            display: inline-block;
+            background: var(--accent-bg);
+            color: var(--primary);
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 14px;
+        }
+
+        p {
+            color: var(--text-light);
+            font-size: 1.15rem;
+            margin: 0 auto 28px;
+            max-width: 520px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <main class="not-found-card">
+        <div class="not-found-label">404</div>
+        <h1>找不到這個頁面</h1>
+        <p>這個頁面可能不存在，或檔案名稱已經變更。</p>
+        <a class="btn" href="index.html">返回微積分三部曲首頁</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微積分三部曲：從累積量到反導函數</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+            --border-color: #E2E8F0;
+            --accent-bg: #EEF2FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 48px 28px;
+            text-align: center;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.3rem;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .intro {
+            max-width: 780px;
+            margin: 0 auto;
+            background: var(--accent-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 18px 24px;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+
+        .path-section {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+        }
+
+        .path-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 850px) {
+            .path-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .module-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 340px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+
+        .stage-label {
+            display: inline-block;
+            background: var(--accent-bg);
+            color: var(--primary);
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+
+        .module-card h3 {
+            font-size: 1.35rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .module-card p {
+            color: var(--text-light);
+            margin-bottom: 18px;
+        }
+
+        .key-points {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .key-points strong {
+            color: var(--primary);
+        }
+
+        .key-points ul {
+            margin-left: 20px;
+            margin-top: 8px;
+            color: var(--text-main);
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .teacher-note {
+            background: #ECFDF5;
+            border: 2px dashed var(--secondary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .teacher-note h3 {
+            color: #065F46;
+            margin-bottom: 12px;
+        }
+
+        .teacher-note ol {
+            margin-left: 22px;
+        }
+
+        .teacher-note li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            padding: 20px 0 10px;
+        }
+
+        .math {
+            font-family: "Cambria Math", "Times New Roman", serif;
+            background: #F1F5F9;
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: #0F172A;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>微積分三部曲</h1>
+        <div class="subtitle">從累積量到反導函數，再看懂微積分基本定理</div>
+        <div class="intro">
+            這套教材用三個互動模組，帶學生逐步理解：
+            <br><br>
+            <strong>定積分</strong>是累積量，<strong>不定積分</strong>是反導函數族，而<strong>微積分基本定理</strong>把兩者真正接起來。
+        </div>
+    </header>
+
+    <section class="path-section">
+        <h2 class="section-title">學習路徑</h2>
+
+        <div class="path-list">
+
+            <article class="module-card">
+                <div>
+                    <span class="stage-label">第一站</span>
+                    <h3>定積分：累積量與黎曼和</h3>
+                    <p>
+                        從很多小矩形開始，理解
+                        <span class="math">∫<sub>a</sub><sup>b</sup> f(x) dx</span>
+                        代表從 a 到 b 的帶符號累積量。
+                    </p>
+
+                    <div class="key-points">
+                        <strong>核心重點</strong>
+                        <ul>
+                            <li>小矩形近似</li>
+                            <li>有向貢獻</li>
+                            <li>黎曼和</li>
+                            <li>帶符號面積</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a class="btn" href="01-definite-integral.html">進入定積分模組</a>
+            </article>
+
+            <article class="module-card">
+                <div>
+                    <span class="stage-label">第二站</span>
+                    <h3>不定積分：從微分倒著走</h3>
+                    <p>
+                        從 <span class="math">F'(x)=f(x)</span> 反推
+                        <span class="math">F(x)</span>，理解
+                        <span class="math">∫f(x)dx=F(x)+C</span>
+                        是一整族反導函數。
+                    </p>
+
+                    <div class="key-points">
+                        <strong>核心重點</strong>
+                        <ul>
+                            <li>反導函數</li>
+                            <li>函數族</li>
+                            <li>常數 C</li>
+                            <li>微分檢查</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a class="btn" href="02-indefinite-integral.html">進入不定積分模組</a>
+            </article>
+
+            <article class="module-card">
+                <div>
+                    <span class="stage-label">第三站</span>
+                    <h3>微積分基本定理：把兩者接起來</h3>
+                    <p>
+                        觀察面積函數
+                        <span class="math">A(x)=∫<sub>a</sub><sup>x</sup> f(t)dt</span>
+                        的變化率，理解為什麼
+                        <span class="math">A'(x)=f(x)</span>。
+                    </p>
+
+                    <div class="key-points">
+                        <strong>核心重點</strong>
+                        <ul>
+                            <li>面積函數</li>
+                            <li>平均高度</li>
+                            <li>瞬間變化率</li>
+                            <li>F(b)-F(a)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a class="btn" href="03-fundamental-theorem.html">進入微積分基本定理模組</a>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="teacher-note">
+        <h3>教師使用建議</h3>
+        <ol>
+            <li>若學生尚未理解累積量，建議先從「定積分模組」開始。</li>
+            <li>若學生已熟悉微分，可以接著進入「不定積分模組」，理解反導函數族。</li>
+            <li>最後進入「微積分基本定理模組」，把累積量與反導函數連接起來。</li>
+            <li>三個模組可分三節課使用，也可作為一個完整的探究式學習活動。</li>
+        </ol>
+    </section>
+
+    <footer>
+        微積分三部曲｜定積分・不定積分・微積分基本定理
+    </footer>
+
+</div>
+
+</body>
+</html>

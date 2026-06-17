@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微積分基本定理：面積的變化率等於當下高度</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-light: #4B5563;
+            --border-color: #E5E7EB;
+            --area1: rgba(167, 139, 250, 0.4); /* 累積面積 A(x) */
+            --area2: rgba(251, 146, 60, 0.6);  /* 新增面積 */
+            --line-fx: #E11D48;               /* 當下高度 f(x) */
+            --curve: #1E3A8A;                 /* 函數曲線 */
+            --avg-height: #059669;            /* 平均高度 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--text-light);
+            font-size: 1.25rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            background-color: #EEF2FF;
+            padding: 15px 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* 互動區塊 Layout */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        canvas {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group {
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* 數據卡片 */
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .highlight-card {
+            background: #EEF2FF;
+            border-color: var(--primary);
+        }
+
+        .hint-text {
+            text-align: center;
+            color: var(--line-fx);
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* 表格區塊 */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #F3F4F6;
+            color: var(--text-light);
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        /* 證明步驟 */
+        .step {
+            background: #F9FAFB;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .step-num {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .math {
+            font-family: 'Courier New', Courier, monospace;
+            background: #E5E7EB;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .math-block {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            padding: 10px;
+            background: #fff;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+        }
+
+        .conclusion-box {
+            background: #ECFDF5;
+            border: 2px dashed var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #065F46;
+        }
+
+        /* 例題區 */
+        .example-box {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* 測驗區 */
+        .quiz-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .quiz-item:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-btn {
+            background: #F3F4F6;
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .quiz-btn:hover {
+            background: #E5E7EB;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 1px solid #34D399;
+        }
+
+        .feedback-wrong {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #F87171;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .color-box {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        
+        .dash-line {
+            width: 15px;
+            height: 2px;
+            border-top: 2px dashed var(--avg-height);
+        }
+        .trilogy-nav {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .trilogy-nav-title {
+            color: #4F46E5;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .trilogy-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trilogy-nav-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #4F46E5;
+            color: #FFFFFF;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .trilogy-nav-btn:hover {
+            background: #4338CA;
+            transform: translateY(-2px);
+        }
+
+        .trilogy-nav-btn.secondary {
+            background: #F1F5F9;
+            color: #1E293B;
+            border: 1px solid #CBD5E1;
+        }
+
+        .trilogy-nav-btn.secondary:hover {
+            background: #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>微積分基本定理：面積的變化率等於當下高度</h1>
+        <h2>從「累積面積」看懂微分與積分為什麼互相連接</h2>
+        <div class="intro-text">
+            我們先不要急著背公式。<br>
+            先想一件事：如果 <span class="math">A(x)</span> 代表從起點 <span class="math">a</span> 到 <span class="math">x</span> 的累積面積，那麼當 <span class="math">x</span> 稍微往右移一點點，面積增加的速度會跟什麼有關？
+        </div>
+    </header>
+
+    <div class="section">
+        <h3 class="section-title">一、互動探索區</h3>
+        <p style="margin-bottom: 15px; color: var(--text-light);">
+            請試著拖動 x 和 Δx 的滑桿，觀察圖形中面積的變化，以及下方數據的關係。<br>
+            <span style="font-size: 0.95rem; color: #6B7280;">(註：本模組先選擇 f(x)>0 的情況，讓我們先專注在累積面積與變化率的關係；之後若函數在 x 軸下方，定積分會被視為帶符號面積。)</span>
+        </p>
+        
+        <div class="interactive-grid">
+            <div class="canvas-container">
+                <canvas id="graphCanvas" width="600" height="400"></canvas>
+                <div class="legend">
+                    <div class="legend-item"><div class="color-box" style="background: var(--area1);"></div> 累積面積 A(x)</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--area2);"></div> 新增面積</div>
+                    <div class="legend-item"><div class="dash-line"></div> 平均高度長方形</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--line-fx); width: 2px;"></div> 當下高度 f(x)</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>
+                        <span>選擇函數 f(x)</span>
+                    </label>
+                    <select id="funcSelect">
+                        <option value="x2">f(x) = x² + 1</option>
+                        <option value="x1">f(x) = x + 1</option>
+                        <option value="sin">f(x) = sin(x) + 2</option>
+                        <option value="2x1">f(x) = 2x + 1</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        <span>目前位置 (x)</span>
+                        <span id="xValDisplay">2.00</span>
+                    </label>
+                    <input type="range" id="xSlider" min="0.1" max="4" step="0.1" value="2">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        <span>增加寬度 (Δx)</span>
+                        <span id="dxValDisplay">1.00</span>
+                    </label>
+                    <input type="range" id="dxSlider" min="0.01" max="2" step="0.01" value="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="data-cards">
+            <div class="card">
+                <div class="card-title">累積面積 A(x)</div>
+                <div class="card-value" id="val-Ax">0.0000</div>
+            </div>
+            <div class="card">
+                <div class="card-title">新增面積<br>A(x+Δx) - A(x)</div>
+                <div class="card-value" id="val-newArea">0.0000</div>
+            </div>
+            <div class="card highlight-card">
+                <div class="card-title">平均高度<br>[A(x+Δx)-A(x)] ÷ Δx</div>
+                <div class="card-value" id="val-avgHeight">0.0000</div>
+            </div>
+            <div class="card highlight-card">
+                <div class="card-title">當下高度<br>f(x)</div>
+                <div class="card-value" id="val-fx">0.0000</div>
+            </div>
+            <div class="card">
+                <div class="card-title">兩者差距</div>
+                <div class="card-value" id="val-diff">0.0000</div>
+            </div>
+        </div>
+
+        <div class="hint-text">
+            💡 當 Δx 越小，從 x 到 x+Δx 這段區間的「平均高度」會越接近「f(x)」。
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">二、讓寬度 Δx 越來越小</h3>
+        <p style="margin-bottom: 15px;">我們來看看，當寬度 <span class="math">Δx</span> 越來越接近 0 時，平均高度會發生什麼事？</p>
+        <button id="shrinkDxBtn" class="btn">▶ 自動讓 Δx 越來越小</button>
+        
+        <div class="table-container">
+            <table id="dxTable">
+                <thead>
+                    <tr>
+                        <th>寬度 Δx</th>
+                        <th>新增面積</th>
+                        <th>平均高度</th>
+                        <th>當下高度 f(x)</th>
+                        <th>兩者差距</th>
+                        <th>觀察</th>
+                    </tr>
+                </thead>
+                <tbody id="dxTableBody">
+                    <!-- Javascript will populate this -->
+                </tbody>
+            </table>
+        </div>
+        <p style="text-align: center; margin-top: 15px; color: var(--primary); font-weight: bold;">
+            🔍 觀察表格：當 Δx 越來越小時，平均高度是不是越來越接近 f(x)？
+        </p>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">三、用 4 個步驟理解證明</h3>
+        
+        <div class="step">
+            <div class="step-num">Step 1：定義面積函數</div>
+            <p><span class="math">A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt</span></p>
+            <p>意思是從起點 a 到位置 x 的累積面積。</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">Step 2：觀察新增面積</div>
+            <p>當位置從 x 變成 x+Δx，新增的面積是：</p>
+            <p><span class="math">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span></p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">Step 3：把新增面積除以 Δx (找出平均高度)</div>
+            <p><span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span></p>
+            <p>這個算式同時具有兩個重要意義：</p>
+            <ul style="margin-left: 20px; color: var(--text-light);">
+                <li>它是面積函數 A(x) 的<b>平均變化率</b>。</li>
+                <li>它也是從 x 到 x+Δx 這段區間內，圖形的<b>平均高度</b>。</li>
+            </ul>
+            <p style="margin-top: 10px; font-weight: bold; color: var(--primary);">也就是說，同一個式子，一邊連到「導數」，一邊連到「面積平均高度」。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">Step 4：讓 Δx 越來越小 (取極限)</div>
+            <p>加上極限符號，這就是面積函數 <span class="math">A(x)</span> 的導數定義：</p>
+            <div class="math-block">
+                <span class="math">A'(x) = lim<sub>&Delta;x&rarr;0</sub> [A(x+&Delta;x) - A(x)] / &Delta;x</span>
+            </div>
+            <p>因為函數是連續的，x 附近的函數高度不會突然跳動，所以當區間縮得很小時，這一段的平均高度會越來越接近 f(x)。</p>
+            <p style="color: #6B7280; font-size: 0.9rem; margin-top: 10px;">(註：目前的互動圖展示的是 Δx>0，也就是從右側逼近。完整的導數還需要考慮 Δx<0 從左側逼近。因為這裡的 f 是連續函數，所以不論從右邊小區間或左邊小區間取平均高度，當區間寬度趨近 0 時，都會逼近同一個高度 f(x)。)</p>
+            <p style="margin-top: 10px; font-weight:bold;">所以得到：<span class="math">A'(x) = f(x)</span></p>
+        </div>
+
+        <div class="conclusion-box" style="margin-top: 20px;">
+            🎉 面積函數的瞬間變化率，就是當下的函數高度！
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">四、從第一定理到第二定理</h3>
+        
+        <p style="margin-bottom: 15px; color: var(--text-light);">在高中階段，我們先討論 <span class="math">f</span> 在區間上連續的情況。</p>
+
+        <p style="margin-bottom: 15px;">第一部分我們已經知道面積函數的瞬間變化率就是當下高度：</p>
+        
+        <div class="step">
+            <p><span class="math">A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt</span></p>
+            <p>得到 <span class="math">A'(x) = f(x)</span></p>
+        </div>
+        
+        <p style="margin-bottom: 15px;">如果我們另外找到一個函數 <span class="math">F</span>，它微分後會變回 <span class="math">f</span>，也就是 <span class="math">F' = f</span>，那麼 <span class="math">F</span> 稱為 <span class="math">f</span> 的反導函數，也常稱為原函數。</p>
+        
+        <div class="step">
+            <p>因為 <span class="math">A(x)</span> 和 <span class="math">F(x)</span> 的微分結果一樣：</p>
+            <p>直覺上，如果兩個函數在每一點的變化速度都一樣，那它們的圖形形狀相同，只可能上下平移，所以只差一個常數。</p>
+            <div class="math-block" style="font-size: 1.1rem; padding: 10px;">
+                <span class="math">(A - F)' = A' - F' = f - f = 0</span>
+            </div>
+            <p>也就是說，A-F 的變化率一直是 0，所以 A-F 在這個區間上是一個常數。</p>
+            <p>所以：</p>
+            <p><span class="math">A - F = C</span></p>
+            <p>也就是：</p>
+            <p><span class="math">A(x) = F(x) + C</span></p>
+        </div>
+        
+        <div class="step">
+            <p>我們知道從起點到起點的累積面積一定是 0，也就是：</p>
+            <p><span class="math">A(a) = &int;<sub>a</sub><sup>a</sup> f(t) dt = 0</span></p>
+            <p>所以：</p>
+            <p><span class="math">0 = F(a) + C</span></p>
+            <p>因此：</p>
+            <p><span class="math">C = -F(a)</span></p>
+        </div>
+        
+        <div class="step">
+            <p>把 <span class="math">C</span> 代回去，所以：</p>
+            <p><span class="math">A(x) = F(x) - F(a)</span></p>
+        </div>
+        
+        <div class="step">
+            <p>最後代入 <span class="math">x = b</span>：</p>
+            <div class="math-block">
+                <span class="math">&int;<sub>a</sub><sup>b</sup> f(t) dt = F(b) - F(a)</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #6B7280; margin-top: 10px;">(註：若圖形在 x 軸下方，這裡的累積量會以帶符號面積理解。)</p>
+        </div>
+
+        <div class="conclusion-box" style="margin-top: 20px; text-align: left;">
+            💡 <strong>第一定理說明：</strong>累積面積函數微分後，會回到原本的高度函數。<br><br>
+            💡 <strong>第二定理說明：</strong>只要找到一個微分後會變成 f 的函數 F，就可以用 F(b)-F(a) 快速算出從 a 到 b 的總累積量。
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">五、觀察例題</h3>
+        
+        <div class="example-box">
+            <div class="example-title">例題 1：拋物線下的面積</div>
+            <p>設定 <span class="math">f(x) = x² + 1</span>，起點 <span class="math">a = 0</span></p>
+            <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (t² + 1) dt</span></p>
+            <p>經過計算（你可以先觀察圖形），真正的面積公式是：</p>
+            <p><span class="math">A(x) = x³/3 + x</span></p>
+            <p>現在我們對面積函數微分：</p>
+            <p><span class="math">A'(x) = 3x²/3 + 1 = x² + 1 = f(x)</span></p>
+            <div style="margin-top:10px; padding:10px; background:#FFFBEB; border-left:4px solid #F59E0B;">
+                <strong>💡 驗證成功：</strong> 先累積面積，再對面積函數微分，會回到原本的高度函數。
+            </div>
+        </div>
+
+        <div class="example-box">
+            <div class="example-title">例題 2：直線下的面積</div>
+            <p>設定 <span class="math">f(x) = 2x + 1</span>，起點 <span class="math">a = 0</span></p>
+            <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (2t + 1) dt</span></p>
+            <p>這個面積是一個梯形，算出來的結果是：</p>
+            <p><span class="math">A(x) = x² + x</span></p>
+            <p>對面積函數微分：</p>
+            <p><span class="math">A'(x) = 2x + 1 = f(x)</span></p>
+            <div style="margin-top:10px; padding:10px; background:#FFFBEB; border-left:4px solid #F59E0B;">
+                <strong>💡 再次強調：</strong> A'(x) = f(x) 的意思是，面積函數的變化率等於原本函數的高度。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">六、小測驗區</h3>
+
+        <div class="quiz-item" id="q1">
+            <p><strong>第 1 題：</strong>若 <span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> f(t) dt</span>，則 <span class="math">A'(x)</span> 等於什麼？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. f(0)</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. f(x)</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'C')">C. &int;f(x)dx</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'D')">D. x f(x)</button>
+            </div>
+            <div class="quiz-feedback" id="feedback1"></div>
+        </div>
+
+        <div class="quiz-item" id="q2">
+            <p><strong>第 2 題：</strong>算式 <span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span> 同時可以怎麼理解？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 它是從 0 到 x 的總面積，也是 f(x) 的極大值</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 它同時是 A(x) 的平均變化率，也是這段小區間的平均高度</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'C')">C. 它是原本函數 f(x) 圖形的斜率</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'D')">D. 它是微積分的基本常數</button>
+            </div>
+            <div class="quiz-feedback" id="feedback2"></div>
+        </div>
+
+        <div class="quiz-item" id="q3">
+            <p><strong>第 3 題：</strong>為什麼當 Δx 越來越小時，平均高度會接近 f(x)？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 因為 Δx 變小，所以面積一定變大</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 因為函數連續，x 附近的高度都接近 f(x)</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'C')">C. 因為所有函數都是直線</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'D')">D. 因為積分和微分完全一樣</button>
+            </div>
+            <div class="quiz-feedback" id="feedback3"></div>
+        </div>
+    </div>
+
+    <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
+        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 10px;">✨ 總結 ✨</h3>
+        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">
+            微積分基本定理不是單純背公式，而是在說：<br><br>
+            <strong>積分負責累積，微分負責看瞬間變化。</strong><br>
+            當我們累積的是曲線下面積時，面積增加的瞬間速度，就是當下的函數高度。
+        </p>
+        
+        <div style="background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <p style="font-weight: bold; color: var(--primary); text-align: center;">第一定理</p>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">
+                <span class="math">d/dx &int;<sub>a</sub><sup>x</sup> f(t)dt = f(x)</span>
+            </p>
+            <hr style="border: 0; border-top: 1px solid #E5E7EB; margin-bottom: 20px;">
+            <p style="font-weight: bold; color: var(--primary); text-align: center;">第二定理</p>
+            <p style="text-align: center; font-size: 1.2rem;">
+                <span class="math">&int;<sub>a</sub><sup>b</sup> f(t)dt = F(b) - F(a)</span>，其中 <span class="math">F' = f</span>
+            </p>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.95rem;">
+            不同教材對第一定理、第二定理的命名可能略有不同；本模組把『累積面積微分回到原本函數』稱為第一部分，把『用反導函數端點差計算定積分』稱為第二部分。
+        </p>
+    </div>
+
+</div>
+
+<div class="trilogy-nav">
+    <div class="trilogy-nav-title">微積分三部曲｜完整學習路徑完成</div>
+    <div class="trilogy-nav-buttons">
+        <a class="trilogy-nav-btn secondary" href="02-indefinite-integral.html">← 上一站：不定積分</a>
+        <a class="trilogy-nav-btn" href="index.html">返回首頁</a>
+    </div>
+</div>
+
+<script>
+    // 函數庫定義 (包含原本函數 f 與積分後的函數 F)
+    // baseMaxY 用來作為動態縮放的最基本下限
+    const functions = {
+        'x2': { f: x => x*x + 1, F: x => (x*x*x)/3 + x, baseMaxY: 10 },
+        'x1': { f: x => x + 1, F: x => (x*x)/2 + x, baseMaxY: 5 },
+        'sin': { f: x => Math.sin(x) + 2, F: x => -Math.cos(x) + 2*x, baseMaxY: 4 },
+        '2x1': { f: x => 2*x + 1, F: x => x*x + x, baseMaxY: 8 }
+    };
+
+    // 狀態變數
+    let currentFuncId = 'x2';
+    let xVal = 2.0;
+    let dxVal = 1.0;
+    const aVal = 0.0; // 起點固定為 0
+
+    // DOM 元素
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    const funcSelect = document.getElementById('funcSelect');
+    const xSlider = document.getElementById('xSlider');
+    const dxSlider = document.getElementById('dxSlider');
+    const xDisplay = document.getElementById('xValDisplay');
+    const dxDisplay = document.getElementById('dxValDisplay');
+    
+    // 繪圖範圍參數
+    const minX = -0.5, maxX = 6.5;
+    let minY = -2, maxY = 15; // minY 下調一點預留標籤空間，maxY 將會動態更新
+
+    // 初始化事件監聽
+    function init() {
+        funcSelect.addEventListener('change', (e) => {
+            currentFuncId = e.target.value;
+            updateAll();
+        });
+
+        xSlider.addEventListener('input', (e) => {
+            xVal = parseFloat(e.target.value);
+            updateAll();
+        });
+
+        dxSlider.addEventListener('input', (e) => {
+            dxVal = parseFloat(e.target.value);
+            updateAll();
+        });
+
+        document.getElementById('shrinkDxBtn').addEventListener('click', runShrinkAnimation);
+
+        // 初次繪製
+        updateAll();
+    }
+
+    // 更新數值與圖形
+    function updateAll() {
+        xDisplay.textContent = xVal.toFixed(2);
+        dxDisplay.textContent = dxVal.toFixed(4);
+
+        const func = functions[currentFuncId];
+        
+        // 動態調整 maxY，避免過度扁平或被截掉
+        if (currentFuncId === 'sin') {
+            maxY = 4; // sin 固定即可
+        } else {
+            // 根據目前的 x+Δx 最高點動態調整，並加上 20% 的上方緩衝
+            let currentVisibleMaxY = func.f(xVal + dxVal);
+            maxY = Math.max(func.baseMaxY, currentVisibleMaxY * 1.2);
+        }
+        
+        // 計算數值
+        const areaX = func.F(xVal) - func.F(aVal);
+        const areaXDX = func.F(xVal + dxVal) - func.F(aVal);
+        const newArea = areaXDX - areaX;
+        const avgHeight = newArea / dxVal;
+        const currentHeight = func.f(xVal);
+        const diff = Math.abs(avgHeight - currentHeight);
+
+        // 更新卡片
+        document.getElementById('val-Ax').textContent = areaX.toFixed(4);
+        document.getElementById('val-newArea').textContent = newArea.toFixed(4);
+        document.getElementById('val-avgHeight').textContent = avgHeight.toFixed(4);
+        document.getElementById('val-fx').textContent = currentHeight.toFixed(4);
+        document.getElementById('val-diff').textContent = diff.toFixed(4);
+
+        drawGraph(avgHeight);
+    }
+
+    // 座標轉換函數 (數學座標轉為 Canvas 像素座標)
+    function toPx(mathX, mathY) {
+        const px = ((mathX - minX) / (maxX - minX)) * canvas.width;
+        const py = canvas.height - ((mathY - minY) / (maxY - minY)) * canvas.height;
+        return { x: px, y: py };
+    }
+
+    // 畫圖主函數
+    function drawGraph(avgHeight) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const func = functions[currentFuncId].f;
+
+        // 畫網格與座標軸
+        drawAxes();
+
+        const numSegments = 60; // 動態切割等份，確保 Δx 極小時依然精準
+
+        // 1. 畫累積面積 A(x) (淺紫色)
+        if (xVal > aVal) {
+            ctx.beginPath();
+            let startPt = toPx(aVal, 0);
+            ctx.moveTo(startPt.x, startPt.y);
+            let stepAx = (xVal - aVal) / numSegments;
+            for (let i = 0; i <= numSegments; i++) {
+                let cx = aVal + i * stepAx;
+                let pt = toPx(cx, func(cx));
+                ctx.lineTo(pt.x, pt.y);
+            }
+            let bottomPt = toPx(xVal, 0);
+            ctx.lineTo(bottomPt.x, bottomPt.y);
+            ctx.fillStyle = 'rgba(167, 139, 250, 0.4)'; // var(--area1)
+            ctx.fill();
+        }
+
+        // 2. 畫新增面積 (淺橘色)
+        if (dxVal > 0) {
+            ctx.beginPath();
+            let startPt = toPx(xVal, 0);
+            ctx.moveTo(startPt.x, startPt.y);
+            let stepDX = dxVal / numSegments;
+            for (let i = 0; i <= numSegments; i++) {
+                let cx = xVal + i * stepDX;
+                let pt = toPx(cx, func(cx));
+                ctx.lineTo(pt.x, pt.y);
+            }
+            let bottomPt = toPx(xVal + dxVal, 0);
+            ctx.lineTo(bottomPt.x, bottomPt.y);
+            ctx.fillStyle = 'rgba(251, 146, 60, 0.6)'; // var(--area2)
+            ctx.fill();
+        }
+
+        // 3. 畫平均高度長方形 (先填色，後畫線)
+        if (dxVal > 0) {
+            let rectTopLeft = toPx(xVal, avgHeight);
+            let rectBottomRight = toPx(xVal + dxVal, 0);
+            let rectWidth = rectBottomRight.x - rectTopLeft.x;
+            let rectHeight = rectBottomRight.y - rectTopLeft.y;
+
+            // 填上一點點極淡的綠色以便辨識
+            ctx.beginPath();
+            ctx.rect(rectTopLeft.x, rectTopLeft.y, rectWidth, rectHeight);
+            ctx.fillStyle = 'rgba(5, 150, 105, 0.05)';
+            ctx.fill();
+
+            // 畫框線
+            ctx.beginPath();
+            ctx.rect(rectTopLeft.x, rectTopLeft.y, rectWidth, rectHeight);
+            ctx.strokeStyle = '#059669'; // var(--avg-height)
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]); // reset
+        }
+
+        // 4. 畫函數曲線 f(x) (只畫到目前觀察範圍附近，避免圖形右側被截掉)
+        ctx.beginPath();
+        let curveLeftX = Math.max(0, minX);
+        let curveRightX = Math.min(maxX, xVal + dxVal + 0.8);
+        let curveStep = (curveRightX - curveLeftX) / 100;
+
+        for (let i = 0; i <= 100; i++) {
+            let cx = curveLeftX + i * curveStep;
+            let pt = toPx(cx, func(cx));
+            if (i === 0) ctx.moveTo(pt.x, pt.y);
+            else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.strokeStyle = '#1E3A8A'; // var(--curve)
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // 5. 畫當下高度 f(x) 垂直線
+        let fxPtTop = toPx(xVal, func(xVal));
+        let fxPtBottom = toPx(xVal, 0);
+        ctx.beginPath();
+        ctx.moveTo(fxPtBottom.x, fxPtBottom.y);
+        ctx.lineTo(fxPtTop.x, fxPtTop.y);
+        ctx.strokeStyle = '#E11D48'; // var(--line-fx)
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]); // reset
+
+        // ================= 標示文字區 =================
+        ctx.fillStyle = '#1F2937';
+        ctx.font = '16px sans-serif';
+        ctx.textAlign = 'center';
+        
+        // 標示 x 軸位置
+        let aPt = toPx(aVal, 0);
+        ctx.fillText('a=0', aPt.x, aPt.y + 20);
+
+        let xPt = toPx(xVal, 0);
+        ctx.fillText('x', xPt.x, xPt.y + 20);
+
+        if (dxVal >= 0.1) {
+            let xhPt = toPx(xVal + dxVal, 0);
+            ctx.fillText('x+Δx', xhPt.x, xhPt.y + 20);
+        }
+
+        // 標示 A(x) (在紫色區域中間)
+        if (xVal > 0.5) {
+            ctx.fillStyle = '#4C1D95';
+            let axMid = toPx(xVal / 2, func(xVal / 2) * 0.3);
+            ctx.fillText('A(x)', axMid.x, axMid.y);
+        }
+
+        // 標示 新增面積 與 Δx
+        if (dxVal >= 0.2) {
+            ctx.fillStyle = '#C2410C';
+            let newAreaMid = toPx(xVal + dxVal / 2, avgHeight * 0.5);
+            ctx.fillText('新增面積', newAreaMid.x, newAreaMid.y);
+            
+            // 標示 Δx 寬度 (在 x 軸下方，控制不超出 canvas 底部)
+            ctx.fillStyle = '#1F2937';
+            let dxLabelPt = toPx(xVal + dxVal / 2, 0);
+            let arrowY = Math.min(dxLabelPt.y + 35, canvas.height - 25);
+            let textY = Math.min(dxLabelPt.y + 50, canvas.height - 10);
+            
+            ctx.fillText('Δx', dxLabelPt.x, textY);
+            
+            // 畫個小箭頭輔助表示 Δx 的區間
+            ctx.beginPath();
+            ctx.moveTo(toPx(xVal, 0).x + 5, arrowY);
+            ctx.lineTo(toPx(xVal + dxVal, 0).x - 5, arrowY);
+            ctx.strokeStyle = '#6B7280';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // 標示 平均高度 (在綠色虛線上，且 Δx >= 0.25 避免擁擠)
+        if (dxVal >= 0.25) {
+            ctx.fillStyle = '#065F46';
+            let avgRectTopMid = toPx(xVal + dxVal / 2, avgHeight);
+            ctx.fillText('平均高度', avgRectTopMid.x, avgRectTopMid.y - 10);
+        }
+
+        // 標示 f(x) (在紅色虛線旁)
+        ctx.fillStyle = '#E11D48';
+        ctx.textAlign = 'right';
+        ctx.fillText('f(x)', fxPtTop.x - 10, fxPtTop.y + 10);
+    }
+
+    function drawAxes() {
+        ctx.strokeStyle = '#9CA3AF';
+        ctx.lineWidth = 1;
+        
+        // X 軸
+        let yZero = toPx(0, 0).y;
+        ctx.beginPath();
+        ctx.moveTo(0, yZero);
+        ctx.lineTo(canvas.width, yZero);
+        ctx.stroke();
+
+        // Y 軸
+        let xZero = toPx(0, 0).x;
+        ctx.beginPath();
+        ctx.moveTo(xZero, 0);
+        ctx.lineTo(xZero, canvas.height);
+        ctx.stroke();
+    }
+
+    // 讓 Δx 越來越小的動畫與表格生成
+    async function runShrinkAnimation() {
+        const btn = document.getElementById('shrinkDxBtn');
+        const tbody = document.getElementById('dxTableBody');
+        
+        btn.disabled = true;
+        xSlider.disabled = true;
+        dxSlider.disabled = true;
+        funcSelect.disabled = true;
+        
+        tbody.innerHTML = ''; // 清空表格
+        
+        const testDxValues = [1, 0.5, 0.2, 0.1, 0.05, 0.01];
+        
+        for (let dx of testDxValues) {
+            dxVal = dx;
+            dxSlider.value = dx;
+            updateAll();
+            
+            // 抓取當前計算的數值加入表格
+            const func = functions[currentFuncId];
+            const areaX = func.F(xVal) - func.F(aVal);
+            const areaXDX = func.F(xVal + dxVal) - func.F(aVal);
+            const newArea = areaXDX - areaX;
+            const avgHeight = newArea / dxVal;
+            const currentHeight = func.f(xVal);
+            const diff = Math.abs(avgHeight - currentHeight);
+
+            // 判斷觀察文字
+            let observationText = "";
+            let obColor = "";
+            if (diff > 0.5) {
+                observationText = "還有明顯差距";
+                obColor = "#9CA3AF"; // 灰色
+            } else if (diff > 0.05) {
+                observationText = "越來越接近";
+                obColor = "#F59E0B"; // 橘色
+            } else {
+                observationText = "幾乎重合！";
+                obColor = "#10B981"; // 綠色
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${dx}</td>
+                <td>${newArea.toFixed(4)}</td>
+                <td style="color: var(--avg-height); font-weight: bold;">${avgHeight.toFixed(4)}</td>
+                <td style="color: var(--line-fx); font-weight: bold;">${currentHeight.toFixed(4)}</td>
+                <td>${diff.toFixed(4)}</td>
+                <td style="color: ${obColor}; font-weight: bold;">${observationText}</td>
+            `;
+            tbody.appendChild(tr);
+
+            await new Promise(r => setTimeout(r, 800)); // 暫停 800ms
+        }
+
+        btn.disabled = false;
+        xSlider.disabled = false;
+        dxSlider.disabled = false;
+        funcSelect.disabled = false;
+    }
+
+    // 小測驗邏輯
+    const answers = {
+        1: 'B',
+        2: 'B',
+        3: 'B'
+    };
+
+    const feedbacks = {
+        1: {
+            correct: "答對了！因為 A(x) 是從 0 到 x 的累積面積，A'(x) 表示面積增加的瞬間速度，也就是當下的函數高度 f(x)。",
+            wrong: "不對喔！想一想，微積分基本定理說：面積函數的瞬間變化率就是當下的「函數高度」。"
+        },
+        2: {
+            correct: "完全正確！這是這個分數的雙重意義，它把抽象的「函數變化率」跟具體的「圖形平均高度」完美連結起來了。",
+            wrong: "再看清楚一點喔！分子是「新增面積」，分母是「寬度」，除起來在幾何上代表什麼形狀的特徵呢？"
+        },
+        3: {
+            correct: "非常棒！當函數連續時，x 附近的高度不會突然跳動。區間越小，這段區間的平均高度就越接近起點的真正高度 f(x)。",
+            wrong: "不太對喔！這跟函數是否連續有關。因為連續，所以切得很薄時，那一小塊的頂部幾乎可以看成平的 f(x)。"
+        }
+    };
+
+    function checkAnswer(qNum, selected) {
+        const feedbackDiv = document.getElementById(`feedback${qNum}`);
+        feedbackDiv.style.display = 'block';
+        
+        // 移除先前的顏色狀態
+        feedbackDiv.className = 'quiz-feedback';
+
+        if (selected === answers[qNum]) {
+            feedbackDiv.classList.add('feedback-correct');
+            feedbackDiv.innerHTML = `<strong>✅ 正確！</strong> ${feedbacks[qNum].correct}`;
+        } else {
+            feedbackDiv.classList.add('feedback-wrong');
+            feedbackDiv.innerHTML = `<strong>❌ 答錯了：</strong> ${feedbacks[qNum].wrong}`;
+        }
+    }
+
+    // 啟動程式
+    window.onload = init;
+</script>
+
+</body>
+</html>

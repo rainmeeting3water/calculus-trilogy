@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定積分：把很多小面積加起來</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+            --border-color: #E2E8F0;
+            --pos-area: rgba(52, 211, 153, 0.4); /* 綠色，正面積 */
+            --pos-border: #059669;
+            --neg-area: rgba(248, 113, 113, 0.4); /* 紅色，負面積 */
+            --neg-border: #DC2626;
+            --curve: #1E3A8A;
+            --alert-bg: #FEF2F2;
+            --alert-text: #B91C1C;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--text-light);
+            font-size: 1.25rem;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            background-color: #EEF2FF;
+            padding: 15px 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* 互動區塊 Layout */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-container {
+            position: relative;
+        }
+
+        canvas {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .alert-box {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--alert-bg);
+            color: var(--alert-text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none; /* 預設隱藏 */
+            z-index: 10;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .control-group {
+            background: #F8FAFC;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        select:focus {
+            border-color: var(--primary);
+        }
+
+        /* 數據卡片 */
+        .data-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .card-value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .highlight-card {
+            background: #F0FDF4;
+            border-color: var(--secondary);
+        }
+        
+        .highlight-card .card-value {
+            color: var(--pos-border);
+        }
+
+        /* 矩形總和拆解區樣式 */
+        .riemann-expansion {
+            margin-top: 25px;
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+        }
+
+        .term-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .term-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .term-positive {
+            border-left: 4px solid var(--pos-border);
+        }
+
+        .term-negative {
+            border-left: 4px solid var(--neg-border);
+        }
+
+        .ellipsis-term {
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-light);
+            padding: 10px;
+        }
+
+        /* 表格區塊 */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #F1F5F9;
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn:disabled {
+            background-color: #94A3B8;
+            cursor: not-allowed;
+        }
+
+        /* 證明/概念步驟 */
+        .step {
+            background: #F8FAFC;
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .step-num {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .math {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            background: #F1F5F9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #0F172A;
+        }
+        
+        .math-block {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 15px 0;
+            padding: 15px;
+            background: #fff;
+            border: 1px dashed #CBD5E1;
+            border-radius: 8px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+
+        /* 數學公式專用樣式 */
+        .formula {
+            font-family: "Cambria Math", "STIX Two Text", "Times New Roman", serif;
+            font-style: normal;
+            line-height: 1.8;
+        }
+
+        .big-op {
+            display: inline-grid;
+            grid-template-rows: auto auto auto;
+            justify-items: center;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 0.15em;
+        }
+
+        .big-op .op-top,
+        .big-op .op-bottom {
+            font-size: 0.7em;
+            line-height: 1;
+        }
+
+        .big-op .op-symbol {
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        .lim-op {
+            display: inline-grid;
+            grid-template-rows: auto auto;
+            justify-items: center;
+            vertical-align: middle;
+            margin: 0 0.2em;
+        }
+
+        .lim-op .lim-symbol {
+            font-size: 1em;
+            line-height: 1;
+        }
+
+        .lim-op .lim-bottom {
+            font-size: 0.7em;
+            line-height: 1;
+        }
+
+        .formula-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        /* 測驗區 */
+        .quiz-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .quiz-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-btn {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .quiz-btn:hover {
+            background: #E2E8F0;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .feedback-correct {
+            background: #DCFCE7;
+            color: #166534;
+            border: 1px solid #86EFAC;
+        }
+
+        .feedback-wrong {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #FCA5A5;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .trilogy-nav {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .trilogy-nav-title {
+            color: #4F46E5;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .trilogy-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .trilogy-nav-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #4F46E5;
+            color: #FFFFFF;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .trilogy-nav-btn:hover {
+            background: #4338CA;
+            transform: translateY(-2px);
+        }
+
+        .trilogy-nav-btn.secondary {
+            background: #F1F5F9;
+            color: #1E293B;
+            border: 1px solid #CBD5E1;
+        }
+
+        .trilogy-nav-btn.secondary:hover {
+            background: #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>定積分：把很多小面積加起來</h1>
+        <h2>從矩形近似理解 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 的意義</h2>
+        <div class="intro-text">
+            我們先不要急著背公式。<br>
+            先想一件事：如果想知道曲線從 <span class="math">a</span> 到 <span class="math">b</span> 累積了多少，可以怎麼用很多個小矩形慢慢逼近？
+        </div>
+    </header>
+
+    <div class="section">
+        <h3 class="section-title">一、互動圖形區</h3>
+        <p style="margin-bottom: 15px; color: var(--text-light);">
+            請調整下限 a、上限 b 以及分割數 n，觀察矩形面積總和如何變化。
+        </p>
+        
+        <div class="interactive-grid">
+            <!-- 畫布區 -->
+            <div>
+                <div class="canvas-container">
+                    <div id="alertMsg" class="alert-box">方向反過來，定積分值會變號</div>
+                    <canvas id="graphCanvas" width="600" height="400"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><div class="color-box" style="background: var(--pos-area); border-color: var(--pos-border);"></div> f(x)&gt;0：圖形在 x 軸上方</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--neg-area); border-color: var(--neg-border);"></div> f(x)&lt;0：圖形在 x 軸下方</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--curve); width: 2px;"></div> 函數曲線 f(x)</div>
+                </div>
+            </div>
+
+            <!-- 控制區 -->
+            <div class="controls">
+                <div class="control-group">
+                    <label>
+                        <span>選擇函數 f(x)</span>
+                    </label>
+                    <select id="funcSelect">
+                        <option value="x2">f(x) = x² + 1</option>
+                        <option value="x1">f(x) = x + 1</option>
+                        <option value="sin_pos">f(x) = sin(x) + 2</option>
+                        <option value="2x1">f(x) = 2x + 1</option>
+                        <option value="x_minus_2">f(x) = x - 2 (觀察負面積)</option>
+                        <option value="sin">f(x) = sin(x) (觀察正負抵消)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        <span>下限 (a)</span>
+                        <span id="aValDisplay">0.0</span>
+                    </label>
+                    <input type="range" id="aSlider" min="-3" max="5" step="0.1" value="0">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        <span>上限 (b)</span>
+                        <span id="bValDisplay">3.0</span>
+                    </label>
+                    <input type="range" id="bSlider" min="-3" max="5" step="0.1" value="3">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <span>分割數 (n)</span>
+                        <span id="nValDisplay">8</span>
+                    </label>
+                    <input type="range" id="nSlider" min="1" max="80" step="1" value="8">
+                </div>
+                
+                <div class="control-group">
+                    <label>
+                        <span>取樣方式</span>
+                    </label>
+                    <select id="methodSelect">
+                        <option value="left">起點端點近似</option>
+                        <option value="right">終點端點近似</option>
+                        <option value="mid" selected>中點近似</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 數值卡片區 -->
+        <div class="data-cards">
+            <div class="card">
+                <div class="card-title">下限 a</div>
+                <div class="card-value" id="val-a">0.0</div>
+            </div>
+            <div class="card">
+                <div class="card-title">上限 b</div>
+                <div class="card-value" id="val-b">3.0</div>
+            </div>
+            <div class="card">
+                <div class="card-title">有向寬度 b-a</div>
+                <div class="card-value" id="val-width">3.0</div>
+            </div>
+            <div class="card">
+                <div class="card-title">每段有向寬度 &Delta;x</div>
+                <div class="card-value" id="val-dx">0.375</div>
+            </div>
+            <div class="card highlight-card">
+                <div class="card-title">矩形近似總和</div>
+                <div class="card-value" id="val-sum">0.000</div>
+            </div>
+            <div class="card highlight-card" style="background: #F8FAFC; border-color: var(--primary);">
+                <div class="card-title">高精度參考值</div>
+                <div class="card-value" id="val-ref" style="color: var(--primary);">0.000</div>
+            </div>
+            <div class="card">
+                <div class="card-title">近似誤差</div>
+                <div class="card-value" id="val-err" style="color: #DC2626;">0.000</div>
+            </div>
+        </div>
+
+        <!-- 矩形總和拆解區容器 -->
+        <div id="riemannExpansionContainer"></div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">二、觀察 n 越來越大</h3>
+        <p style="margin-bottom: 15px;">我們來看看，當分割數量 <span class="math">n</span> 不斷增加（代表每段長度 <span class="math">|&Delta;x|</span> 越來越小）時，矩形總和會發生什麼事？</p>
+        <button id="runTableBtn" class="btn">▶ 觀察 n 越來越大</button>
+        
+        <div class="table-container">
+            <table id="nTable">
+                <thead>
+                    <tr>
+                        <th>分割數 n</th>
+                        <th>有向 &Delta;x</th>
+                        <th>取樣方式</th>
+                        <th>矩形近似總和</th>
+                        <th>高精度參考值</th>
+                        <th>誤差</th>
+                        <th>觀察</th>
+                    </tr>
+                </thead>
+                <tbody id="nTableBody">
+                    <!-- Javascript 自動生成 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">三、定積分概念的 5 個步驟</h3>
+        
+        <div class="step">
+            <div class="step-num">Step 1：從一個矩形開始</div>
+            <p>矩形面積 = 底 &times; 高。</p>
+            <p>在函數圖形下，一個小矩形的底長是 <span class="math">|&Delta;x|</span>，高度大小大約是 <span class="math">|f(x<sub>i</sub><sup>*</sup>)|</span>。</p>
+            <p>但定積分保留方向與正負號，所以第 i 塊對定積分的有向貢獻是 <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span>。</p>
+            <p style="margin-top: 5px;">公式：<span class="math">第 i 塊有向貢獻 = f(x<sub>i</sub><sup>*</sup>)&Delta;x</span></p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">Step 2：把區間 [a, b] 切成很多小段</div>
+            <p>如果把從 a 到 b 的距離切成 <span class="math">n</span> 等分，每一小段的有向寬度是：</p>
+            <p class="math-block">&Delta;x = (b - a) / n</p>
+            <p>若 <span class="math">a &lt; b</span>，<span class="math">&Delta;x</span> 為正；若 <span class="math">a &gt; b</span>，<span class="math">&Delta;x</span> 為負，表示累積方向相反。</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">Step 3：把很多小矩形加起來</div>
+            <p>把所有小矩形的有向貢獻加起來（稱為黎曼和），就可以得到近似的總累積量：</p>
+            <div class="math-block formula-row">
+                <span class="big-op" style="font-size: 0.9rem;">
+                    <span class="op-top">n</span>
+                    <span class="op-symbol">&Sigma;</span>
+                    <span class="op-bottom">i=1</span>
+                </span>
+                <span>f(x<sub>i</sub><sup>*</sup>) &Delta;x</span>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--text-light);">（其中 <span class="math">x<sub>i</sub><sup>*</sup></span> 可以選起點端點、終點端點或中點。若 <span class="math">a &lt; b</span>，起點端點就是左端點；若 <span class="math">a &gt; b</span>，起點端點會在右側，表示累積方向已經反過來。）</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">Step 4：讓切割越來越細</div>
+            <p>當 <span class="math">n</span> 越來越大，每段長度 <span class="math">|&Delta;x|</span> 越來越小，小矩形的頂部就會越貼近函數曲線。</p>
+            <p>當矩形總和越來越穩定，趨近於一個極限值時，我們就把這個極限值記為定積分符號：</p>
+            <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx</p>
+        </div>
+
+        <div class="step">
+            <div class="step-num">Step 5：理解上下限與方向</div>
+            <p><span class="math">a</span> 是開始累積的位置，<span class="math">b</span> 是結束累積的位置。</p>
+            <ul style="margin-left: 25px; margin-top: 10px;">
+                <li>若 <span class="math">a = b</span>，沒有寬度，所以：<span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx = 0</span></li>
+                <li style="margin-top: 8px;">若 <span class="math">a &gt; b</span>，代表累積的方向反過來（<span class="math">&Delta;x</span> 變為負），所以定積分的值會變號：<br>
+                <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx = - &int;<sub>b</sub><sup>a</sup> f(x) dx</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">四、定積分是「帶符號的面積」</h3>
+        <p>定積分不只是普通的幾何面積，而是<strong>帶符號的累積量</strong>。</p>
+        <ul style="margin-left: 25px; margin-top: 15px; line-height: 1.8;">
+            <li><strong>高度 f(x) &gt; 0 (圖形在 x 軸上方)：</strong>在向右累積 (a &lt; b) 時貢獻<strong>正值</strong>；若向左累積 (a &gt; b) 則貢獻<strong>負值</strong>。</li>
+            <li><strong>高度 f(x) &lt; 0 (圖形在 x 軸下方)：</strong>在向右累積 (a &lt; b) 時貢獻<strong>負值</strong>；若向左累積 (a &gt; b) 則貢獻<strong>正值</strong>。</li>
+            <li>所以定積分算出來的結果可能是正的、負的，也可能是 0。</li>
+            <li>若正面積和負面積剛好互相抵消，定積分可能等於 0，但這不代表該區間內「沒有圖形面積」。</li>
+        </ul>
+        <p style="margin-top: 10px; color: var(--text-light);">
+            在一般從左到右累積，也就是 <span class="math">a &lt; b</span> 的情況下，x 軸上方貢獻正值，x 軸下方貢獻負值；若 <span class="math">a &gt; b</span>，累積方向反過來，定積分值會變號。
+        </p>
+        <div style="background: #FFFBEB; padding: 15px; border-left: 4px solid #F59E0B; margin-top: 15px; border-radius: 0 8px 8px 0;">
+            💡 <strong>試試看：</strong> 在上面的互動區，選擇函數 <span class="math">f(x) = sin(x)</span>，並將區間設為 a=-3, b=3，觀察正負面積如何接近抵消！
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">五、定積分的基本性質</h3>
+        
+        <div class="step">
+            <div class="step-num">1. 上下限相同，累積量為 0</div>
+            <p class="math-block">&int;<sub>a</sub><sup>a</sup> f(x) dx = 0</p>
+            <p>說明：從 a 累積到 a，沒有寬度，所以累積量為 0。</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">2. 上下限交換，符號改變</div>
+            <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx = - &int;<sub>b</sub><sup>a</sup> f(x) dx</p>
+            <p>說明：累積方向反過來，總量會變號。</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">3. 區間可加性</div>
+            <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx = &int;<sub>a</sub><sup>c</sup> f(x) dx + &int;<sub>c</sub><sup>b</sup> f(x) dx</p>
+            <p>說明：從 a 到 b 的累積量，可以拆成從 a 到 c 加上從 c 到 b。</p>
+            <p style="margin-top: 10px; font-weight: bold; color: var(--primary);">這個性質之後會幫助我們理解：<br>
+            <span class="math" style="display:inline-block; margin-top: 8px;">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span></p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">4. 常數倍可以提出來</div>
+            <p class="math-block">&int;<sub>a</sub><sup>b</sup> k f(x) dx = k &int;<sub>a</sub><sup>b</sup> f(x) dx</p>
+            <p>說明：如果每一點的高度都變成 k 倍，總累積量也會變成 k倍。</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-num">5. 和可以拆開</div>
+            <p class="math-block">&int;<sub>a</sub><sup>b</sup> [f(x) + g(x)] dx = &int;<sub>a</sub><sup>b</sup> f(x) dx + &int;<sub>a</sub><sup>b</sup> g(x) dx</p>
+            <p>說明：兩個函數相加後的累積量，可以分開累積再相加。</p>
+        </div>
+    </div>
+
+    <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
+        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：讓上限動起來</h3>
+        <p style="text-align: center; margin-bottom: 20px;">這也是通往微積分基本定理的橋樑。</p>
+        
+        <p>如果下限 <span class="math">a</span> 固定，但上限不再是固定的數字 <span class="math">b</span>，而是會移動的位置 <span class="math">x</span>，我們可以定義一個新的面積函數：</p>
+        
+        <div class="math-block" style="background: white;">
+            A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-light);">這裡用 t 當積分變數，是為了避免和上限 x 混淆。</p>
+        <p>這個 <span class="math">A(x)</span> 代表從 <span class="math">a</span> 累積到 <span class="math">x</span> 的總量。</p>
+        
+        <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">思考問題（下個模組的重點）：</p>
+        <div class="math-block" style="background: white;">
+            A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt
+        </div>
+        <p>下一個模組會研究這段新增累積量除以 <span class="math">&Delta;x</span> 後，當 <span class="math">&Delta;x</span> 越來越小時會接近什麼。</p>
+    </div>
+
+    <div class="section">
+        <h3 class="section-title">七、自我小測驗</h3>
+
+        <div class="quiz-item" id="q1">
+            <p><strong>第 1 題：</strong>在定積分符號 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 中，下標 a 和上標 b 代表什麼？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. 函數的最大值與最小值</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. x 軸與 y 軸的交點</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'C')">C. 開始累積的位置與結束累積的位置</button>
+                <button class="quiz-btn" onclick="checkAnswer(1, 'D')">D. 矩形的寬度與高度</button>
+            </div>
+            <div class="quiz-feedback" id="feedback1"></div>
+        </div>
+
+        <div class="quiz-item" id="q2">
+            <p><strong>第 2 題：</strong>當分割數 n 越來越大時，用小矩形計算的總和通常會怎樣？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 變得無限大</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 越來越接近曲線下方的實際累積量</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'C')">C. 總是等於零</button>
+                <button class="quiz-btn" onclick="checkAnswer(2, 'D')">D. 誤差會越來越大</button>
+            </div>
+            <div class="quiz-feedback" id="feedback2"></div>
+        </div>
+
+        <div class="quiz-item" id="q3">
+            <p><strong>第 3 題：</strong>若上下限相同 (a = b)，那麼 <span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx</span> 的值等於多少？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 0</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 1</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'C')">C. f(a)</button>
+                <button class="quiz-btn" onclick="checkAnswer(3, 'D')">D. 無法計算</button>
+            </div>
+            <div class="quiz-feedback" id="feedback3"></div>
+        </div>
+
+        <div class="quiz-item" id="q4">
+            <p><strong>第 4 題：</strong>在一般從左到右累積，也就是 a &lt; b 的情況下，若函數圖形在 x 軸下方，這塊區域對定積分的貢獻是什麼？</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(4, 'A')">A. 正的累積量</button>
+                <button class="quiz-btn" onclick="checkAnswer(4, 'B')">B. 負的累積量</button>
+                <button class="quiz-btn" onclick="checkAnswer(4, 'C')">C. 0，因為面積不能為負</button>
+                <button class="quiz-btn" onclick="checkAnswer(4, 'D')">D. 需要取絕對值變成正的</button>
+            </div>
+            <div class="quiz-feedback" id="feedback4"></div>
+        </div>
+    </div>
+
+    <div class="section" style="text-align: center; background: white; border: 1px solid #E2E8F0;">
+        <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">定積分的核心不是先背公式，而是理解：</p>
+        
+        <ol style="text-align: left; max-width: 400px; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.8;">
+            <li>把區間切成很多小段。</li>
+            <li>每段用小矩形近似。</li>
+            <li>把每塊小矩形的有向貢獻加起來。</li>
+            <li>當切割越來越細，總和趨近一個穩定值。</li>
+            <li>這個穩定值就是定積分。</li>
+        </ol>
+
+        <div class="math-block formula formula-row" style="background: #F8FAFC; max-width: 600px; margin: 0 auto;">
+            <span class="big-op">
+                <span class="op-top">b</span>
+                <span class="op-symbol">&int;</span>
+                <span class="op-bottom">a</span>
+            </span>
+            <i style="margin: 0 6px;">f(x) dx</i> = 
+            <span class="lim-op">
+                <span class="lim-symbol">lim</span>
+                <span class="lim-bottom">n&rarr;&infin;</span>
+            </span>
+            <span class="big-op" style="margin-left: 8px;">
+                <span class="op-top">n</span>
+                <span class="op-symbol">&Sigma;</span>
+                <span class="op-bottom">i=1</span>
+            </span>
+            <i style="margin: 0 6px;">f(x<sub>i</sub><sup>*</sup>) &Delta;x</i>
+        </div>
+        
+        <p style="margin-top: 25px; color: var(--text-light);">
+            這個模組先幫我們建立「定積分是累積量」的直觀概念。<br>
+            之後的「微積分基本定理」會進一步研究：當上限變成會移動的 x 時，累積量 <span class="math">A(x)</span> 的變化率會等於什麼。
+        </p>
+    </div>
+
+</div>
+
+<div class="trilogy-nav">
+    <div class="trilogy-nav-title">微積分三部曲｜第一站完成</div>
+    <div class="trilogy-nav-buttons">
+        <a class="trilogy-nav-btn secondary" href="index.html">← 返回首頁</a>
+        <a class="trilogy-nav-btn" href="02-indefinite-integral.html">下一站：不定積分 →</a>
+    </div>
+</div>
+
+<script>
+    // 函數字典
+    const functions = {
+        'x2': { f: x => x*x + 1 },
+        'x1': { f: x => x + 1 },
+        'sin_pos': { f: x => Math.sin(x) + 2 },
+        '2x1': { f: x => 2*x + 1 },
+        'x_minus_2': { f: x => x - 2 },
+        'sin': { f: x => Math.sin(x) }
+    };
+
+    // DOM 元素
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    const funcSelect = document.getElementById('funcSelect');
+    const aSlider = document.getElementById('aSlider');
+    const bSlider = document.getElementById('bSlider');
+    const nSlider = document.getElementById('nSlider');
+    const methodSelect = document.getElementById('methodSelect');
+    
+    const alertBox = document.getElementById('alertMsg');
+
+    // 狀態變數
+    let currentFuncId = 'x2';
+    let aVal = 0.0;
+    let bVal = 3.0;
+    let nVal = 8;
+    let method = 'mid'; // left, right, mid
+
+    // 畫布座標範圍
+    const minX = -3.5;
+    const maxX = 5.5;
+    let minY = -2;
+    let maxY = 10;
+
+    // 高精度參考值計算 (使用中點法，切割 3000 等分)
+    function getHighPrecisionSum(func, a, b) {
+        if (Math.abs(a - b) < 1e-9) return 0;
+        const n = 3000;
+        const dx = (b - a) / n;
+        let sum = 0;
+        for (let i = 0; i < n; i++) {
+            let xMid = a + (i + 0.5) * dx;
+            sum += func(xMid) * dx;
+        }
+        return sum;
+    }
+
+    // 新增：計算並回傳每一塊小矩形的細部資料陣列
+    function getRiemannTerms(func, a, b, n, methodStr) {
+        const terms = [];
+        if (Math.abs(a - b) < 1e-9) return terms;
+        const dx = (b - a) / n;
+        for (let i = 0; i < n; i++) {
+            let xLeft = a + i * dx;
+            let xRight = a + (i + 1) * dx;
+            let xSample;
+            
+            if (methodStr === 'left') xSample = xLeft;
+            else if (methodStr === 'right') xSample = xRight;
+            else xSample = (xLeft + xRight) / 2; // mid
+            
+            let height = func(xSample);
+            let contribution = height * dx;
+            
+            terms.push({
+                i: i + 1,
+                xLeft: xLeft,
+                xRight: xRight,
+                xSample: xSample,
+                height: height,
+                dx: dx,
+                contribution: contribution
+            });
+        }
+        return terms;
+    }
+
+    // 計算矩形近似總和 (重構以呼叫 getRiemannTerms，確保核心邏輯單一化)
+    function getRiemannSum(func, a, b, n, methodStr) {
+        const terms = getRiemannTerms(func, a, b, n, methodStr);
+        let sum = 0;
+        for (let i = 0; i < terms.length; i++) {
+            sum += terms[i].contribution;
+        }
+        return sum;
+    }
+
+    // 座標轉換
+    function toPx(mathX, mathY) {
+        const px = ((mathX - minX) / (maxX - minX)) * canvas.width;
+        const py = canvas.height - ((mathY - minY) / (maxY - minY)) * canvas.height;
+        return { x: px, y: py };
+    }
+
+    function init() {
+        // 綁定事件
+        funcSelect.addEventListener('change', (e) => { currentFuncId = e.target.value; updateAll(); });
+        aSlider.addEventListener('input', (e) => { aVal = parseFloat(e.target.value); updateAll(); });
+        bSlider.addEventListener('input', (e) => { bVal = parseFloat(e.target.value); updateAll(); });
+        nSlider.addEventListener('input', (e) => { nVal = parseInt(e.target.value); updateAll(); });
+        methodSelect.addEventListener('change', (e) => { method = e.target.value; updateAll(); });
+        
+        document.getElementById('runTableBtn').addEventListener('click', runTableAnimation);
+
+        updateAll();
+    }
+
+    function updateAll() {
+        // 更新顯示文字
+        document.getElementById('aValDisplay').textContent = aVal.toFixed(1);
+        document.getElementById('bValDisplay').textContent = bVal.toFixed(1);
+        document.getElementById('nValDisplay').textContent = nVal;
+
+        const func = functions[currentFuncId];
+        
+        // 動態調整 Y 軸範圍
+        calcYBounds(func.f);
+
+        // 計算數值
+        const dx = (bVal - aVal) / nVal;
+        const sum = getRiemannSum(func.f, aVal, bVal, nVal, method);
+        const refSum = getHighPrecisionSum(func.f, aVal, bVal);
+        const err = Math.abs(sum - refSum);
+
+        // 更新卡片
+        document.getElementById('val-a').textContent = aVal.toFixed(1);
+        document.getElementById('val-b').textContent = bVal.toFixed(1);
+        document.getElementById('val-width').textContent = (bVal - aVal).toFixed(1);
+        
+        if (Math.abs(aVal - bVal) < 1e-9) {
+            document.getElementById('val-dx').textContent = "0.000";
+            document.getElementById('val-sum').textContent = "0.000";
+            document.getElementById('val-ref').textContent = "0.000";
+            document.getElementById('val-err').textContent = "0.000";
+            alertBox.style.display = 'block';
+            alertBox.textContent = '上下限相同，累積量為 0';
+            alertBox.style.background = '#F1F5F9';
+            alertBox.style.color = '#475569';
+        } else {
+            document.getElementById('val-dx').textContent = dx.toFixed(3);
+            document.getElementById('val-sum').textContent = sum.toFixed(3);
+            document.getElementById('val-ref').textContent = refSum.toFixed(3);
+            document.getElementById('val-err').textContent = err.toFixed(3);
+            
+            // 處理 a > b 的警告
+            if (aVal > bVal) {
+                alertBox.style.display = 'block';
+                alertBox.textContent = '方向反過來，定積分值會變號 (Δx 為負)';
+                alertBox.style.background = 'var(--alert-bg)';
+                alertBox.style.color = 'var(--alert-text)';
+            } else {
+                alertBox.style.display = 'none';
+            }
+        }
+
+        drawGraph();
+        renderRiemannExpansion();
+    }
+
+    // 渲染「矩形總和拆解區」
+    function renderRiemannExpansion() {
+        const container = document.getElementById('riemannExpansionContainer');
+        if (!container) return;
+
+        const func = functions[currentFuncId].f;
+
+        if (Math.abs(aVal - bVal) < 1e-9) {
+            container.innerHTML = `
+                <div class="riemann-expansion">
+                    <h4 style="font-weight: bold; color: var(--primary);">矩形總和拆解：每一塊小矩形貢獻了多少？</h4>
+                    <p style="margin-top: 10px; color: var(--text-light); font-size: 0.95rem;">
+                        上下限相同，沒有寬度，也沒有小矩形需要加總，因此定積分為 0。
+                    </p>
+                </div>
+            `;
+            return;
+        }
+
+        const terms = getRiemannTerms(func, aVal, bVal, nVal, method);
+        const sum = getRiemannSum(func, aVal, bVal, nVal, method);
+
+        let html = `
+            <div class="riemann-expansion">
+                <h4 style="font-weight: bold; color: var(--primary);">矩形總和拆解：每一塊小矩形貢獻了多少？</h4>
+                
+                <div class="formula-row" style="margin-top: 10px; font-size: 1.15rem; justify-content: flex-start;">
+                    <span class="math">S<sub>${nVal}</sub> = </span>
+                    <span class="big-op formula" style="font-size: 0.85rem; margin-top: -4px;">
+                        <span class="op-top">${nVal}</span>
+                        <span class="op-symbol" style="font-size: 1.3em;">&Sigma;</span>
+                        <span class="op-bottom">i=1</span>
+                    </span>
+                    <span class="math">f(x<sub>i</sub><sup>*</sup>) &Delta;x</span>
+                </div>
+
+                <p style="margin-top: 8px; font-size: 0.95rem; color: var(--text-light);">
+                    每一項 <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span> 代表第 i 個小矩形對定積分的<b>「有向貢獻」</b>（當高度為負或方向相反時可能為負數）。<br>
+                    圖上的顏色表示函數值 f(x) 在 x 軸上方或下方；下方每一塊卡片的顏色則表示該項 f(x<sub>i</sub><sup>*</sup>)&Delta;x 對定積分的實際正負貢獻。
+                </p>
+
+                <div class="term-list">
+        `;
+
+        function buildTermCardHTML(term) {
+            const isPositive = term.contribution >= 0;
+            const cardClass = isPositive ? 'term-positive' : 'term-negative';
+            const valueColor = isPositive ? 'var(--pos-border)' : 'var(--neg-border)';
+            return `
+                <div class="term-card ${cardClass}">
+                    <div style="font-weight: bold; margin-bottom: 4px; color: var(--text-main);">第 ${term.i} 塊</div>
+                    <div class="math" style="background: transparent; padding: 0; font-size: 0.9rem; color: var(--text-light);">
+                        f(${term.xSample.toFixed(2)}) &times; &Delta;x
+                    </div>
+                    <div style="margin-top: 2px; font-size: 0.9rem;">
+                        = ${term.height.toFixed(2)} &times; ${term.dx.toFixed(3)}
+                    </div>
+                    <div style="margin-top: 2px; font-size: 0.95rem; font-weight: bold; color: ${valueColor};">
+                        = ${term.contribution.toFixed(3)}
+                    </div>
+                </div>
+            `;
+        }
+
+        if (nVal <= 10) {
+            // 完整列出
+            for (let i = 0; i < terms.length; i++) {
+                html += buildTermCardHTML(terms[i]);
+            }
+        } else {
+            // 前 3 塊
+            for (let i = 0; i < 3; i++) {
+                html += buildTermCardHTML(terms[i]);
+            }
+            // 省略號
+            html += `
+                <div class="ellipsis-term" style="grid-column: 1 / -1;">
+                    ⋯ 中間省略了 ${nVal - 6} 項 ⋯
+                </div>
+            `;
+            // 後 3 塊
+            for (let i = terms.length - 3; i < terms.length; i++) {
+                html += buildTermCardHTML(terms[i]);
+            }
+        }
+
+        html += `
+                </div>
+        `;
+
+        if (nVal > 10) {
+            html += `
+                <p style="margin-top: 12px; font-size: 0.9rem; color: var(--text-light); font-style: italic;">
+                    💡 當 n 變大時，項數會非常多，所以我們用 &Sigma; 符號表示這一長串加法。
+                </p>
+            `;
+        }
+
+        html += `
+                <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--border-color); font-weight: bold; font-size: 1.05rem;">
+                    矩形近似總和 <span class="math">S<sub>${nVal}</sub> = ${sum.toFixed(3)}</span>
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    function calcYBounds(func) {
+        let maxF = -Infinity;
+        let minF = Infinity;
+        // 在可見範圍內找極值
+        for (let x = minX; x <= maxX; x += 0.1) {
+            let y = func(x);
+            if (y > maxF) maxF = y;
+            if (y < minF) minF = y;
+        }
+        
+        // 加入 padding
+        let range = maxF - minF;
+        if (range === 0) range = 2; // 避免常數函數錯誤
+        
+        maxY = maxF + range * 0.15;
+        minY = minF - range * 0.15;
+        
+        // 確保 x 軸在合理位置
+        if (minY > -1) minY = -1;
+        if (maxY < 1) maxY = 1;
+    }
+
+    function drawGraph() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const func = functions[currentFuncId].f;
+
+        drawAxes();
+
+        // 畫矩形 (如果 a != b)
+        if (Math.abs(aVal - bVal) >= 1e-9) {
+            const dx = (bVal - aVal) / nVal;
+            const absDx = Math.abs(dx); // 繪圖用的物理寬度
+            
+            for (let i = 0; i < nVal; i++) {
+                let xLeft = aVal + i * dx;
+                let xRight = aVal + (i + 1) * dx;
+                let xSample;
+                
+                if (method === 'left') xSample = xLeft;
+                else if (method === 'right') xSample = xRight;
+                else xSample = (xLeft + xRight) / 2;
+                
+                let yVal = func(xSample);
+                
+                // 決定繪圖起點 (X 必須是兩者中較小的值，才能在 canvas 正確往右畫)
+                let drawX = Math.min(xLeft, xRight);
+                
+                let ptTopLeft = toPx(drawX, Math.max(0, yVal));
+                let ptBottomRight = toPx(drawX + absDx, Math.min(0, yVal));
+                
+                let rectW = ptBottomRight.x - ptTopLeft.x;
+                let rectH = ptBottomRight.y - ptTopLeft.y;
+                
+                ctx.beginPath();
+                ctx.rect(ptTopLeft.x, ptTopLeft.y, rectW, rectH);
+                
+                // 依據函數值正負決定顏色
+                if (yVal >= 0) {
+                    ctx.fillStyle = 'rgba(52, 211, 153, 0.4)'; // pos-area
+                    ctx.fill();
+                    ctx.strokeStyle = '#059669'; // pos-border
+                } else {
+                    ctx.fillStyle = 'rgba(248, 113, 113, 0.4)'; // neg-area
+                    ctx.fill();
+                    ctx.strokeStyle = '#DC2626'; // neg-border
+                }
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+        }
+
+        // 畫函數曲線 f(x)
+        ctx.beginPath();
+        let curveStep = (maxX - minX) / 200;
+        for (let i = 0; i <= 200; i++) {
+            let cx = minX + i * curveStep;
+            let pt = toPx(cx, func(cx));
+            if (i === 0) ctx.moveTo(pt.x, pt.y);
+            else ctx.lineTo(pt.x, pt.y);
+        }
+        ctx.strokeStyle = '#1E3A8A'; // curve
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // 畫 a 和 b 的標線
+        if (Math.abs(aVal - bVal) < 1e-9) {
+            drawLineLabel(aVal, 'a=b', '#4F46E5');
+        } else {
+            drawLineLabel(aVal, 'a', '#4F46E5');
+            drawLineLabel(bVal, 'b', '#4F46E5');
+        }
+    }
+
+    function drawLineLabel(mathX, label, color) {
+        let ptTop = toPx(mathX, maxY);
+        let ptBottom = toPx(mathX, 0); // 畫到 X 軸
+        
+        ctx.beginPath();
+        ctx.moveTo(ptBottom.x, ptTop.y);
+        ctx.lineTo(ptBottom.x, ptBottom.y);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // 標籤文字
+        ctx.fillStyle = color;
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        
+        // 確保字不會被 X 軸切掉
+        let textY = ptBottom.y + 20; 
+        if (textY > canvas.height - 5) textY = canvas.height - 5;
+        
+        // 畫個小圓點在 X 軸上
+        ctx.beginPath();
+        ctx.arc(ptBottom.x, ptBottom.y, 4, 0, Math.PI*2);
+        ctx.fill();
+        
+        ctx.fillText(`${label}`, ptBottom.x, textY);
+    }
+
+    function drawAxes() {
+        ctx.strokeStyle = '#94A3B8';
+        ctx.lineWidth = 1.5;
+        
+        // X 軸
+        let ptOrigin = toPx(0, 0);
+        ctx.beginPath();
+        ctx.moveTo(0, ptOrigin.y);
+        ctx.lineTo(canvas.width, ptOrigin.y);
+        ctx.stroke();
+
+        // Y 軸
+        ctx.beginPath();
+        ctx.moveTo(ptOrigin.x, 0);
+        ctx.lineTo(ptOrigin.x, canvas.height);
+        ctx.stroke();
+    }
+
+    // 自動觀察表格
+    async function runTableAnimation() {
+        const btn = document.getElementById('runTableBtn');
+        const tbody = document.getElementById('nTableBody');
+        const methodStrText = methodSelect.options[methodSelect.selectedIndex].text;
+        
+        // 鎖定 UI
+        btn.disabled = true;
+        funcSelect.disabled = true;
+        aSlider.disabled = true;
+        bSlider.disabled = true;
+        nSlider.disabled = true;
+        methodSelect.disabled = true;
+        
+        tbody.innerHTML = '';
+        const testNValues = [2, 4, 8, 16, 32, 64];
+        const func = functions[currentFuncId].f;
+        const refSum = getHighPrecisionSum(func, aVal, bVal);
+        
+        for (let n of testNValues) {
+            nVal = n;
+            nSlider.value = n;
+            updateAll(); // 會連帶更新上方畫布及拆解區
+            
+            const dx = (bVal - aVal) / n;
+            const sum = getRiemannSum(func, aVal, bVal, n, method);
+            const err = Math.abs(sum - refSum);
+            
+            let obsText = "";
+            let obColor = "";
+            
+            if (Math.abs(aVal - bVal) < 1e-9) {
+                obsText = "等於 0";
+                obColor = "#64748B";
+            } else if (err > 2) {
+                obsText = "還很粗略";
+                obColor = "#94A3B8";
+            } else if (err > 0.5) {
+                obsText = "越來越接近";
+                obColor = "#F59E0B";
+            } else if (err > 0.05) {
+                obsText = "已經很接近";
+                obColor = "#10B981";
+            } else {
+                obsText = "幾乎穩定";
+                obColor = "#059669";
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-weight:bold;">${n}</td>
+                <td>${dx.toFixed(4)}</td>
+                <td>${methodStrText}</td>
+                <td style="color: var(--primary); font-weight: bold;">${sum.toFixed(4)}</td>
+                <td>${refSum.toFixed(4)}</td>
+                <td style="color: #DC2626;">${err.toFixed(4)}</td>
+                <td style="color: ${obColor}; font-weight: bold;">${obsText}</td>
+            `;
+            tbody.appendChild(tr);
+
+            await new Promise(r => setTimeout(r, 600)); // 暫停看動畫
+        }
+
+        // 解鎖 UI
+        btn.disabled = false;
+        funcSelect.disabled = false;
+        aSlider.disabled = false;
+        bSlider.disabled = false;
+        nSlider.disabled = false;
+        methodSelect.disabled = false;
+    }
+
+    // 測驗系統
+    const answers = {
+        1: 'C',
+        2: 'B',
+        3: 'A',
+        4: 'B'
+    };
+
+    const feedbacks = {
+        1: {
+            correct: "答對了！a 是積分下限（開始位置），b 是積分上限（結束位置）。",
+            wrong: "再看清楚一點喔！定積分代表一段區間內的累積，所以 a 和 b 是用來標定這段區間的頭尾。"
+        },
+        2: {
+            correct: "完全正確！切割越細，小矩形頂部越貼近真實曲線，總和就會趨近定積分的值。",
+            wrong: "想一想，矩形切得越細，上面的鋸齒狀是不是就越小，變得更貼合曲線呢？"
+        },
+        3: {
+            correct: "答對了！因為起點和終點一樣，區間寬度 &Delta;x 為 0，所以沒有面積可以累積。",
+            wrong: "如果從位置 3 走到位置 3，你前進了多少距離？面積也是一樣的道理喔，寬度為 0 累積量就是 0。"
+        },
+        4: {
+            correct: "非常棒！定積分是「帶符號的累積」，因為是在 a &lt; b 的前提下，&Delta;x 是正的，而 x 軸下方代表函數值 f(x) 為負，乘上正的 &Delta;x 後，貢獻的就是負值。",
+            wrong: "注意喔，定積分跟一般我們說的「幾何面積」不同。當函數在 x 軸下方時，它的高度 f(x) 算出來是負的！"
+        }
+    };
+
+    function checkAnswer(qNum, selected) {
+        const feedbackDiv = document.getElementById(`feedback${qNum}`);
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.className = 'quiz-feedback';
+
+        if (selected === answers[qNum]) {
+            feedbackDiv.classList.add('feedback-correct');
+            feedbackDiv.innerHTML = `<strong>✅ 正確！</strong> ${feedbacks[qNum].correct}`;
+        } else {
+            feedbackDiv.classList.add('feedback-wrong');
+            feedbackDiv.innerHTML = `<strong>❌ 答錯了：</strong> ${feedbacks[qNum].wrong}`;
+        }
+    }
+
+    // 啟動
+    window.onload = init;
+</script>
+
+</body>
+</html>

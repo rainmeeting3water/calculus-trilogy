@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>微積分基本定理：面積的變化率等於當下高度</title>
+    <title>微積分基本定理 Fundamental Theorem of Calculus：面積的變化率等於當下高度</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -424,24 +424,53 @@
         .trilogy-nav-btn.secondary:hover {
             background: #E2E8F0;
         }
+
+        .en-sub {
+            display: block;
+            margin-top: 4px;
+            color: #64748B;
+            font-size: 0.92em;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .en-inline {
+            color: #64748B;
+            font-size: 0.95em;
+            margin-left: 4px;
+        }
+
+        .bilingual-term {
+            display: inline-block;
+            margin-left: 4px;
+            color: #4F46E5;
+            font-size: 0.92em;
+            font-weight: 600;
+        }
+
+        .bilingual-note {
+            color: #64748B;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>微積分基本定理：面積的變化率等於當下高度</h1>
-        <h2>從「累積面積」看懂微分與積分為什麼互相連接</h2>
+        <h1>微積分基本定理：面積的變化率等於當下高度<span class="en-sub">The Fundamental Theorem of Calculus: Connecting Accumulation and Anti-derivatives</span></h1>
+        <h2>從「累積面積」看懂微分與積分為什麼互相連接<span class="en-sub">Use accumulation to see why differentiation and integration are connected.</span></h2>
         <div class="intro-text">
             我們先不要急著背公式。<br>
-            先想一件事：如果 <span class="math">A(x)</span> 代表從起點 <span class="math">a</span> 到 <span class="math">x</span> 的累積面積，那麼當 <span class="math">x</span> 稍微往右移一點點，面積增加的速度會跟什麼有關？
+            先想一件事：如果 <span class="math">A(x)</span> 代表從起點 <span class="math">a</span> 到 <span class="math">x</span> 的累積面積 <span class="bilingual-term">accumulation function</span>，那麼當 <span class="math">x</span> 稍微往右移一點點，面積增加的速度會跟什麼有關？
         </div>
     </header>
 
     <div class="section">
-        <h3 class="section-title">一、互動探索區</h3>
+        <h3 class="section-title">一、互動探索區<span class="en-sub">Interactive Exploration</span></h3>
         <p style="margin-bottom: 15px; color: var(--text-light);">
-            請試著拖動 x 和 Δx 的滑桿，觀察圖形中面積的變化，以及下方數據的關係。<br>
+            請試著拖動 x 和 Δx 的滑桿，觀察圖形中面積的變化，以及下方數據的關係。<span class="en-sub">Move the x and Δx sliders to compare newly added area, average height, and current height.</span><br>
             <span style="font-size: 0.95rem; color: #6B7280;">(註：本模組先選擇 f(x)>0 的情況，讓我們先專注在累積面積與變化率的關係；之後若函數在 x 軸下方，定積分會被視為帶符號面積。)</span>
         </p>
         
@@ -449,17 +478,17 @@
             <div class="canvas-container">
                 <canvas id="graphCanvas" width="600" height="400"></canvas>
                 <div class="legend">
-                    <div class="legend-item"><div class="color-box" style="background: var(--area1);"></div> 累積面積 A(x)</div>
-                    <div class="legend-item"><div class="color-box" style="background: var(--area2);"></div> 新增面積</div>
-                    <div class="legend-item"><div class="dash-line"></div> 平均高度長方形</div>
-                    <div class="legend-item"><div class="color-box" style="background: var(--line-fx); width: 2px;"></div> 當下高度 f(x)</div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--area1);"></div> 累積面積 A(x)<span class="en-sub">accumulated area</span></div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--area2);"></div> 新增面積<span class="en-sub">newly added area</span></div>
+                    <div class="legend-item"><div class="dash-line"></div> 平均高度長方形<span class="en-sub">average-height rectangle</span></div>
+                    <div class="legend-item"><div class="color-box" style="background: var(--line-fx); width: 2px;"></div> 當下高度 f(x)<span class="en-sub">current height f(x)</span></div>
                 </div>
             </div>
 
             <div class="controls">
                 <div class="control-group">
                     <label>
-                        <span>選擇函數 f(x)</span>
+                        <span>選擇函數 f(x)<span class="en-sub">Choose function f(x)</span></span>
                     </label>
                     <select id="funcSelect">
                         <option value="x2">f(x) = x² + 1</option>
@@ -471,7 +500,7 @@
 
                 <div class="control-group">
                     <label>
-                        <span>目前位置 (x)</span>
+                        <span>目前位置 (x)<span class="en-sub">current position</span></span>
                         <span id="xValDisplay">2.00</span>
                     </label>
                     <input type="range" id="xSlider" min="0.1" max="4" step="0.1" value="2">
@@ -479,7 +508,7 @@
 
                 <div class="control-group">
                     <label>
-                        <span>增加寬度 (Δx)</span>
+                        <span>增加寬度 (Δx)<span class="en-sub">increment width</span></span>
                         <span id="dxValDisplay">1.00</span>
                     </label>
                     <input type="range" id="dxSlider" min="0.01" max="2" step="0.01" value="1">
@@ -489,15 +518,15 @@
 
         <div class="data-cards">
             <div class="card">
-                <div class="card-title">累積面積 A(x)</div>
+                <div class="card-title">累積面積 A(x)<span class="en-sub">accumulated area</span></div>
                 <div class="card-value" id="val-Ax">0.0000</div>
             </div>
             <div class="card">
-                <div class="card-title">新增面積<br>A(x+Δx) - A(x)</div>
+                <div class="card-title">新增面積<span class="en-sub">newly added area</span><br>A(x+Δx) - A(x)</div>
                 <div class="card-value" id="val-newArea">0.0000</div>
             </div>
             <div class="card highlight-card">
-                <div class="card-title">平均高度<br>[A(x+Δx)-A(x)] ÷ Δx</div>
+                <div class="card-title">平均高度<br><span class="en-sub">average height</span>[A(x+Δx)-A(x)] ÷ Δx</div>
                 <div class="card-value" id="val-avgHeight">0.0000</div>
             </div>
             <div class="card highlight-card">
@@ -511,25 +540,25 @@
         </div>
 
         <div class="hint-text">
-            💡 當 Δx 越小，從 x 到 x+Δx 這段區間的「平均高度」會越接近「f(x)」。
+            💡 當 Δx 越小，從 x 到 x+Δx 這段區間的「平均高度」會越接近「f(x)」。<span class="en-sub">As Δx gets smaller, the average height approaches the current height f(x).</span>
         </div>
     </div>
 
     <div class="section">
-        <h3 class="section-title">二、讓寬度 Δx 越來越小</h3>
+        <h3 class="section-title">二、讓寬度 Δx 越來越小<span class="en-sub">Let Δx Approach 0</span></h3>
         <p style="margin-bottom: 15px;">我們來看看，當寬度 <span class="math">Δx</span> 越來越接近 0 時，平均高度會發生什麼事？</p>
-        <button id="shrinkDxBtn" class="btn">▶ 自動讓 Δx 越來越小</button>
+        <button id="shrinkDxBtn" class="btn">▶ 自動讓 Δx 越來越小<span class="en-sub">Run Δx-shrink table</span></button>
         
         <div class="table-container">
             <table id="dxTable">
                 <thead>
                     <tr>
-                        <th>寬度 Δx</th>
-                        <th>新增面積</th>
-                        <th>平均高度</th>
-                        <th>當下高度 f(x)</th>
-                        <th>兩者差距</th>
-                        <th>觀察</th>
+                        <th>寬度 Δx<br><span class="en-sub">width</span></th>
+                        <th>新增面積<br><span class="en-sub">newly added area</span></th>
+                        <th>平均高度<br><span class="en-sub">average height</span></th>
+                        <th>當下高度 f(x)<br><span class="en-sub">current height f(x)</span></th>
+                        <th>兩者差距<br><span class="en-sub">difference</span></th>
+                        <th>觀察<br><span class="en-sub">observation</span></th>
                     </tr>
                 </thead>
                 <tbody id="dxTableBody">
@@ -543,22 +572,22 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">三、用 4 個步驟理解證明</h3>
+        <h3 class="section-title">三、用 4 個步驟理解證明<span class="en-sub">Four Steps to the Argument</span></h3>
         
         <div class="step">
-            <div class="step-num">Step 1：定義面積函數</div>
+            <div class="step-num">Step 1：定義面積函數<span class="en-sub">Define the accumulation function</span></div>
             <p><span class="math">A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt</span></p>
             <p>意思是從起點 a 到位置 x 的累積面積。</p>
         </div>
         
         <div class="step">
-            <div class="step-num">Step 2：觀察新增面積</div>
+            <div class="step-num">Step 2：觀察新增面積<span class="en-sub">Observe the newly added area</span></div>
             <p>當位置從 x 變成 x+Δx，新增的面積是：</p>
             <p><span class="math">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span></p>
         </div>
 
         <div class="step">
-            <div class="step-num">Step 3：把新增面積除以 Δx (找出平均高度)</div>
+            <div class="step-num">Step 3：把新增面積除以 Δx (找出平均高度)<span class="en-sub">Divide the newly added area by Δx to find the average height</span></div>
             <p><span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span></p>
             <p>這個算式同時具有兩個重要意義：</p>
             <ul style="margin-left: 20px; color: var(--text-light);">
@@ -569,7 +598,7 @@
         </div>
 
         <div class="step">
-            <div class="step-num">Step 4：讓 Δx 越來越小 (取極限)</div>
+            <div class="step-num">Step 4：讓 Δx 越來越小 (取極限)<span class="en-sub">Let Δx approach 0</span></div>
             <p>加上極限符號，這就是面積函數 <span class="math">A(x)</span> 的導數定義：</p>
             <div class="math-block">
                 <span class="math">A'(x) = lim<sub>&Delta;x&rarr;0</sub> [A(x+&Delta;x) - A(x)] / &Delta;x</span>
@@ -580,12 +609,12 @@
         </div>
 
         <div class="conclusion-box" style="margin-top: 20px;">
-            🎉 面積函數的瞬間變化率，就是當下的函數高度！
+            🎉 面積函數的瞬間變化率，就是當下的函數高度！<span class="en-sub">The instantaneous rate of change of the accumulation function is the current height f(x).</span>
         </div>
     </div>
 
     <div class="section">
-        <h3 class="section-title">四、從第一定理到第二定理</h3>
+        <h3 class="section-title">四、從第一定理到第二定理<span class="en-sub">From Part 1 to Part 2 of the Theorem</span></h3>
         
         <p style="margin-bottom: 15px; color: var(--text-light);">在高中階段，我們先討論 <span class="math">f</span> 在區間上連續的情況。</p>
 
@@ -634,16 +663,16 @@
         </div>
 
         <div class="conclusion-box" style="margin-top: 20px; text-align: left;">
-            💡 <strong>第一定理說明：</strong>累積面積函數微分後，會回到原本的高度函數。<br><br>
-            💡 <strong>第二定理說明：</strong>只要找到一個微分後會變成 f 的函數 F，就可以用 F(b)-F(a) 快速算出從 a 到 b 的總累積量。
+            💡 <strong>第一定理說明：</strong>累積面積函數微分後，會回到原本的高度函數。<span class="en-sub">Part 1: differentiating an accumulation function gives back the original height function.</span><br><br>
+            💡 <strong>第二定理說明：</strong>只要找到一個微分後會變成 f 的函數 F，就可以用 F(b)-F(a) 快速算出從 a 到 b 的總累積量。<span class="en-sub">Part 2: if F is an anti-derivative of f, then the definite integral is F(b)-F(a).</span>
         </div>
     </div>
 
     <div class="section">
-        <h3 class="section-title">五、觀察例題</h3>
+        <h3 class="section-title">五、觀察例題<span class="en-sub">Worked Examples</span></h3>
         
         <div class="example-box">
-            <div class="example-title">例題 1：拋物線下的面積</div>
+            <div class="example-title">例題 1：拋物線下的面積<span class="en-sub">Example 1: Area under a parabola</span></div>
             <p>設定 <span class="math">f(x) = x² + 1</span>，起點 <span class="math">a = 0</span></p>
             <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (t² + 1) dt</span></p>
             <p>經過計算（你可以先觀察圖形），真正的面積公式是：</p>
@@ -656,7 +685,7 @@
         </div>
 
         <div class="example-box">
-            <div class="example-title">例題 2：直線下的面積</div>
+            <div class="example-title">例題 2：直線下的面積<span class="en-sub">Example 2: Area under a straight line</span></div>
             <p>設定 <span class="math">f(x) = 2x + 1</span>，起點 <span class="math">a = 0</span></p>
             <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (2t + 1) dt</span></p>
             <p>這個面積是一個梯形，算出來的結果是：</p>
@@ -670,10 +699,10 @@
     </div>
 
     <div class="section">
-        <h3 class="section-title">六、小測驗區</h3>
+        <h3 class="section-title">六、小測驗區<span class="en-sub">Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
-            <p><strong>第 1 題：</strong>若 <span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> f(t) dt</span>，則 <span class="math">A'(x)</span> 等於什麼？</p>
+            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>若 <span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> f(t) dt</span>，則 <span class="math">A'(x)</span> 等於什麼？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. f(0)</button>
                 <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. f(x)</button>
@@ -684,7 +713,7 @@
         </div>
 
         <div class="quiz-item" id="q2">
-            <p><strong>第 2 題：</strong>算式 <span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span> 同時可以怎麼理解？</p>
+            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>算式 <span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span> 同時可以怎麼理解？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 它是從 0 到 x 的總面積，也是 f(x) 的極大值</button>
                 <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 它同時是 A(x) 的平均變化率，也是這段小區間的平均高度</button>
@@ -695,7 +724,7 @@
         </div>
 
         <div class="quiz-item" id="q3">
-            <p><strong>第 3 題：</strong>為什麼當 Δx 越來越小時，平均高度會接近 f(x)？</p>
+            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>為什麼當 Δx 越來越小時，平均高度會接近 f(x)？</p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 因為 Δx 變小，所以面積一定變大</button>
                 <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 因為函數連續，x 附近的高度都接近 f(x)</button>
@@ -707,7 +736,7 @@
     </div>
 
     <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
-        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 10px;">✨ 總結 ✨</h3>
+        <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 10px;">✨ 總結 ✨<span class="en-sub">Summary</span></h3>
         <p style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">
             微積分基本定理不是單純背公式，而是在說：<br><br>
             <strong>積分負責累積，微分負責看瞬間變化。</strong><br>
@@ -715,29 +744,29 @@
         </p>
         
         <div style="background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-            <p style="font-weight: bold; color: var(--primary); text-align: center;">第一定理</p>
+            <p style="font-weight: bold; color: var(--primary); text-align: center;">第一定理<span class="en-sub">Part 1</span></p>
             <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">
                 <span class="math">d/dx &int;<sub>a</sub><sup>x</sup> f(t)dt = f(x)</span>
             </p>
             <hr style="border: 0; border-top: 1px solid #E5E7EB; margin-bottom: 20px;">
-            <p style="font-weight: bold; color: var(--primary); text-align: center;">第二定理</p>
+            <p style="font-weight: bold; color: var(--primary); text-align: center;">第二定理<span class="en-sub">Part 2</span></p>
             <p style="text-align: center; font-size: 1.2rem;">
                 <span class="math">&int;<sub>a</sub><sup>b</sup> f(t)dt = F(b) - F(a)</span>，其中 <span class="math">F' = f</span>
             </p>
         </div>
         
         <p style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.95rem;">
-            不同教材對第一定理、第二定理的命名可能略有不同；本模組把『累積面積微分回到原本函數』稱為第一部分，把『用反導函數端點差計算定積分』稱為第二部分。
+            不同教材對第一定理、第二定理的命名可能略有不同；本模組把『累積面積微分回到原本函數』稱為第一部分，把『用反導函數端點差計算定積分』稱為第二部分。<span class="en-sub">Different textbooks may label these parts differently; here we focus on the two connected ideas.</span>
         </p>
     </div>
 
 </div>
 
 <div class="trilogy-nav">
-    <div class="trilogy-nav-title">微積分三部曲｜完整學習路徑完成</div>
+    <div class="trilogy-nav-title">微積分三部曲｜完整學習路徑完成<span class="en-sub">Calculus Trilogy | Full Learning Path Complete</span></div>
     <div class="trilogy-nav-buttons">
-        <a class="trilogy-nav-btn secondary" href="02-indefinite-integral.html">← 上一站：不定積分</a>
-        <a class="trilogy-nav-btn" href="index.html">返回首頁</a>
+        <a class="trilogy-nav-btn secondary" href="02-indefinite-integral.html">← 上一站：不定積分<span class="en-sub">Previous: Indefinite Integrals</span></a>
+        <a class="trilogy-nav-btn" href="index.html">返回首頁<span class="en-sub">Back to Home</span></a>
     </div>
 </div>
 
@@ -1040,13 +1069,13 @@
             let observationText = "";
             let obColor = "";
             if (diff > 0.5) {
-                observationText = "還有明顯差距";
+                observationText = "還有明顯差距 / still a clear gap";
                 obColor = "#9CA3AF"; // 灰色
             } else if (diff > 0.05) {
-                observationText = "越來越接近";
+                observationText = "越來越接近 / getting closer";
                 obColor = "#F59E0B"; // 橘色
             } else {
-                observationText = "幾乎重合！";
+                observationText = "幾乎重合！ / almost identical";
                 obColor = "#10B981"; // 綠色
             }
 
@@ -1084,7 +1113,7 @@
         },
         2: {
             correct: "完全正確！這是這個分數的雙重意義，它把抽象的「函數變化率」跟具體的「圖形平均高度」完美連結起來了。",
-            wrong: "再看清楚一點喔！分子是「新增面積」，分母是「寬度」，除起來在幾何上代表什麼形狀的特徵呢？"
+            wrong: "再看清楚一點喔！分子是「新增面積」，分母是「寬度」，除起來在幾何上代表什麼形狀的特徵呢？ In English, newly added area divided by width gives an average height."
         },
         3: {
             correct: "非常棒！當函數連續時，x 附近的高度不會突然跳動。區間越小，這段區間的平均高度就越接近起點的真正高度 f(x)。",
@@ -1101,10 +1130,10 @@
 
         if (selected === answers[qNum]) {
             feedbackDiv.classList.add('feedback-correct');
-            feedbackDiv.innerHTML = `<strong>✅ 正確！</strong> ${feedbacks[qNum].correct}`;
+            feedbackDiv.innerHTML = `<strong>✅ 正確！ Correct.</strong> ${feedbacks[qNum].correct}`;
         } else {
             feedbackDiv.classList.add('feedback-wrong');
-            feedbackDiv.innerHTML = `<strong>❌ 答錯了：</strong> ${feedbacks[qNum].wrong}`;
+            feedbackDiv.innerHTML = `<strong>❌ 答錯了 / Try again:</strong> ${feedbacks[qNum].wrong}`;
         }
     }
 

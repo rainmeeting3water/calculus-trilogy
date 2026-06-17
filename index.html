@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>微積分三部曲：從累積量到反導函數</title>
+    <title>微積分三部曲 Calculus Trilogy：從累積量到反導函數</title>
     <style>
         :root {
             --primary: #4F46E5;
@@ -205,6 +205,35 @@
             color: #0F172A;
             white-space: nowrap;
         }
+
+        .en-sub {
+            display: block;
+            margin-top: 4px;
+            color: #64748B;
+            font-size: 0.92em;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .en-inline {
+            color: #64748B;
+            font-size: 0.95em;
+            margin-left: 4px;
+        }
+
+        .bilingual-term {
+            display: inline-block;
+            margin-left: 4px;
+            color: #4F46E5;
+            font-size: 0.92em;
+            font-weight: 600;
+        }
+
+        .bilingual-note {
+            color: #64748B;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -212,109 +241,109 @@
 <div class="container">
 
     <header>
-        <h1>微積分三部曲</h1>
-        <div class="subtitle">從累積量到反導函數，再看懂微積分基本定理</div>
+        <h1>微積分三部曲<span class="en-sub">Calculus Trilogy</span></h1>
+        <div class="subtitle">從累積量到反導函數，再看懂微積分基本定理<span class="en-sub">From accumulation to anti-derivatives, then to the Fundamental Theorem of Calculus</span></div>
         <div class="intro">
-            這套教材用三個互動模組，帶學生逐步理解：
+            這套教材用三個互動模組，帶學生逐步理解：<span class="en-sub">This set of three interactive modules helps students build the ideas step by step.</span>
             <br><br>
-            <strong>定積分</strong>是累積量，<strong>不定積分</strong>是反導函數族，而<strong>微積分基本定理</strong>把兩者真正接起來。
+            <strong>定積分</strong><span class="bilingual-term">definite integral</span> 是累積量 <span class="bilingual-term">accumulation</span>，<strong>不定積分</strong><span class="bilingual-term">indefinite integral</span> 是反導函數族 <span class="bilingual-term">family of anti-derivatives</span>，而 <strong>微積分基本定理</strong><span class="bilingual-term">Fundamental Theorem of Calculus</span> 把兩者真正接起來。<span class="en-sub">Definite integrals represent accumulation; indefinite integrals represent families of anti-derivatives; the Fundamental Theorem of Calculus connects the two.</span>
         </div>
     </header>
 
     <section class="path-section">
-        <h2 class="section-title">學習路徑</h2>
+        <h2 class="section-title">學習路徑<span class="en-sub">Learning Pathway</span></h2>
 
         <div class="path-list">
 
             <article class="module-card">
                 <div>
-                    <span class="stage-label">第一站</span>
-                    <h3>定積分：累積量與黎曼和</h3>
+                    <span class="stage-label">第一站<span class="en-sub">Stage 1</span></span>
+                    <h3>定積分：累積量與黎曼和<span class="en-sub">Definite Integrals: Accumulation and Riemann Sums</span></h3>
                     <p>
                         從很多小矩形開始，理解
                         <span class="math">∫<sub>a</sub><sup>b</sup> f(x) dx</span>
-                        代表從 a 到 b 的帶符號累積量。
+                        代表從 a 到 b 的帶符號累積量。<span class="en-sub">A definite integral represents signed accumulation over an interval from a to b.</span>
                     </p>
 
                     <div class="key-points">
-                        <strong>核心重點</strong>
+                        <strong>核心重點</strong><span class="en-sub">Key Ideas</span>
                         <ul>
-                            <li>小矩形近似</li>
-                            <li>有向貢獻</li>
-                            <li>黎曼和</li>
-                            <li>帶符號面積</li>
+                            <li>小矩形近似<span class="en-inline">rectangle approximation</span></li>
+                            <li>有向貢獻<span class="en-inline">signed contribution</span></li>
+                            <li>黎曼和<span class="en-inline">Riemann sum</span></li>
+                            <li>帶符號面積<span class="en-inline">signed area</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <a class="btn" href="01-definite-integral.html">進入定積分模組</a>
+                <a class="btn" href="01-definite-integral.html">進入定積分模組<span class="en-sub">Enter the Definite Integral Module</span></a>
             </article>
 
             <article class="module-card">
                 <div>
-                    <span class="stage-label">第二站</span>
-                    <h3>不定積分：從微分倒著走</h3>
+                    <span class="stage-label">第二站<span class="en-sub">Stage 2</span></span>
+                    <h3>不定積分：從微分倒著走<span class="en-sub">Indefinite Integrals: Anti-differentiation and Families of Curves</span></h3>
                     <p>
                         從 <span class="math">F'(x)=f(x)</span> 反推
                         <span class="math">F(x)</span>，理解
                         <span class="math">∫f(x)dx=F(x)+C</span>
-                        是一整族反導函數。
+                        是一整族反導函數。<span class="en-sub">An indefinite integral represents a family of anti-derivatives, often shown as a family of curves.</span>
                     </p>
 
                     <div class="key-points">
-                        <strong>核心重點</strong>
+                        <strong>核心重點</strong><span class="en-sub">Key Ideas</span>
                         <ul>
-                            <li>反導函數</li>
-                            <li>函數族</li>
-                            <li>常數 C</li>
-                            <li>微分檢查</li>
+                            <li>反導函數<span class="en-inline">anti-derivative</span></li>
+                            <li>函數族<span class="en-inline">family of functions / family of curves</span></li>
+                            <li>常數 C<span class="en-inline">constant C</span></li>
+                            <li>微分檢查<span class="en-inline">verify by differentiation</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <a class="btn" href="02-indefinite-integral.html">進入不定積分模組</a>
+                <a class="btn" href="02-indefinite-integral.html">進入不定積分模組<span class="en-sub">Enter the Indefinite Integral Module</span></a>
             </article>
 
             <article class="module-card">
                 <div>
-                    <span class="stage-label">第三站</span>
-                    <h3>微積分基本定理：把兩者接起來</h3>
+                    <span class="stage-label">第三站<span class="en-sub">Stage 3</span></span>
+                    <h3>微積分基本定理：把兩者接起來<span class="en-sub">The Fundamental Theorem of Calculus: Connecting Accumulation and Anti-derivatives</span></h3>
                     <p>
                         觀察面積函數
                         <span class="math">A(x)=∫<sub>a</sub><sup>x</sup> f(t)dt</span>
                         的變化率，理解為什麼
-                        <span class="math">A'(x)=f(x)</span>。
+                        <span class="math">A'(x)=f(x)</span>。<span class="en-sub">The accumulation function has derivative f(x).</span>
                     </p>
 
                     <div class="key-points">
-                        <strong>核心重點</strong>
+                        <strong>核心重點</strong><span class="en-sub">Key Ideas</span>
                         <ul>
-                            <li>面積函數</li>
-                            <li>平均高度</li>
-                            <li>瞬間變化率</li>
+                            <li>面積函數<span class="en-inline">area function / accumulation function</span></li>
+                            <li>平均高度<span class="en-inline">average height</span></li>
+                            <li>瞬間變化率<span class="en-inline">instantaneous rate of change</span></li>
                             <li>F(b)-F(a)</li>
                         </ul>
                     </div>
                 </div>
 
-                <a class="btn" href="03-fundamental-theorem.html">進入微積分基本定理模組</a>
+                <a class="btn" href="03-fundamental-theorem.html">進入微積分基本定理模組<span class="en-sub">Enter the Fundamental Theorem Module</span></a>
             </article>
 
         </div>
     </section>
 
     <section class="teacher-note">
-        <h3>教師使用建議</h3>
+        <h3>教師使用建議<span class="en-sub">Teaching Suggestions</span></h3>
         <ol>
-            <li>若學生尚未理解累積量，建議先從「定積分模組」開始。</li>
-            <li>若學生已熟悉微分，可以接著進入「不定積分模組」，理解反導函數族。</li>
-            <li>最後進入「微積分基本定理模組」，把累積量與反導函數連接起來。</li>
-            <li>三個模組可分三節課使用，也可作為一個完整的探究式學習活動。</li>
+            <li>若學生尚未理解累積量，建議先從「定積分模組」開始。<span class="en-sub">If students are new to accumulation, begin with the Definite Integral module.</span></li>
+            <li>若學生已熟悉微分，可以接著進入「不定積分模組」，理解反導函數族。<span class="en-sub">If students already know differentiation, move on to anti-derivatives and families of curves.</span></li>
+            <li>最後進入「微積分基本定理模組」，把累積量與反導函數連接起來。<span class="en-sub">Finally, use the Fundamental Theorem of Calculus to connect accumulation and anti-derivatives.</span></li>
+            <li>三個模組可分三節課使用，也可作為一個完整的探究式學習活動。<span class="en-sub">The three modules can be taught across three lessons or as one complete inquiry activity.</span></li>
         </ol>
     </section>
 
     <footer>
-        微積分三部曲｜定積分・不定積分・微積分基本定理
+        微積分三部曲｜定積分・不定積分・微積分基本定理<span class="en-sub">Calculus Trilogy | Definite Integrals・Indefinite Integrals・Fundamental Theorem of Calculus</span>
     </footer>
 
 </div>

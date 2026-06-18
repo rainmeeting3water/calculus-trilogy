@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不定積分 STEP 導學版｜Indefinite Integrals</title>
+    <style>
+        :root { --primary:#4F46E5; --primary-hover:#4338CA; --secondary:#10B981; --bg:#F8FAFC; --card:#FFFFFF; --text:#1E293B; --muted:#64748B; --border:#E2E8F0; --accent:#EEF2FF; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:var(--bg); color:var(--text); font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif; line-height:1.65; padding:24px; }
+        .page { max-width:920px; margin:0 auto; }
+        header { background:var(--card); border-radius:18px; padding:38px 28px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.05); margin-bottom:26px; }
+        h1 { color:var(--primary); font-size:2rem; line-height:1.25; }
+        .en-sub { display:block; margin-top:5px; color:var(--muted); font-size:0.88em; font-weight:500; line-height:1.4; }
+        .intro { margin:18px auto 0; max-width:720px; color:var(--muted); }
+        .guide-note { background:var(--accent); border-left:5px solid var(--primary); border-radius:0 10px 10px 0; padding:16px 20px; margin-bottom:22px; }
+        .steps { display:grid; gap:14px; }
+        .step-card { background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.035); }
+        .step-card[open] { border-color:#C7D2FE; }
+        summary { cursor:pointer; color:var(--primary); font-size:1.08rem; font-weight:700; padding:18px 20px; background:#FFFFFF; }
+        .step-card[open] summary { background:var(--accent); }
+        .step-content { padding:20px; display:grid; gap:16px; }
+        .prompt-block { border-left:4px solid var(--border); padding:4px 0 4px 14px; }
+        .prompt-block.task { border-color:var(--primary); }
+        .prompt-block.teacher { border-color:#F59E0B; }
+        .prompt-block.observation { border-color:var(--secondary); }
+        h4 { margin-bottom:5px; font-size:1rem; }
+        .math { font-family:"Cambria Math","Times New Roman",serif; background:#F1F5F9; padding:2px 6px; border-radius:5px; white-space:nowrap; }
+        .page-nav { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-top:26px; }
+        .nav-btn { display:inline-block; text-decoration:none; background:var(--primary); color:#FFFFFF; border-radius:8px; padding:10px 14px; font-weight:700; text-align:center; }
+        .nav-btn:hover { background:var(--primary-hover); }
+        .nav-btn.secondary { background:#F1F5F9; color:var(--text); border:1px solid #CBD5E1; }
+        .nav-btn.secondary:hover { background:#E2E8F0; }
+        @media (max-width:600px) { body{padding:14px;} header{padding:28px 18px;} h1{font-size:1.65rem;} summary{padding:16px;} .step-content{padding:16px;} .page-nav{align-items:stretch;flex-direction:column;} .nav-btn{width:100%;} }
+    </style>
+</head>
+<body>
+<main class="page">
+    <header>
+        <h1>不定積分 STEP 導學版<span class="en-sub">Indefinite Integrals: Step-by-step Guided Version</span></h1>
+        <p class="intro">從 differentiation 倒著思考，理解 anti-derivatives、constant C 與 family of curves。<span class="en-sub">Work backward from differentiation to understand anti-derivatives, the constant C, and families of curves.</span></p>
+    </header>
+
+    <div class="guide-note">本頁提供概念導學；需要調整 C 並觀察圖形時，請開啟完整互動版。<span class="en-sub">Use this page for guided reasoning, then open the full interactive version to adjust C and observe the graphs.</span></div>
+
+    <section class="steps">
+        <details class="step-card" open>
+            <summary>STEP 1｜從微分倒著想<span class="en-sub">Think backward from differentiation</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察 <span class="math">f(x)</span>，思考哪一個 <span class="math">F(x)</span> 微分後會得到它。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>If <span class="math">F'(x)=f(x)</span>, what could <span class="math">F(x)</span> be?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>Indefinite integral is connected to anti-differentiation.</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 2｜理解反導函數<span class="en-sub">Understand anti-derivatives</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>比較 <span class="math">f(x)</span> 與 <span class="math">F(x)</span> 的關係。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How can we verify that <span class="math">F(x)</span> is an anti-derivative of <span class="math">f(x)</span>?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>只要 <span class="math">F'(x)=f(x)</span>，<span class="math">F(x)</span> 就是 <span class="math">f(x)</span> 的 anti-derivative。</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 3｜觀察常數 C<span class="en-sub">Observe the constant C</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>調整 <span class="math">C</span>，觀察圖形如何上下平移。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why does changing <span class="math">C</span> not change the derivative?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>The constant <span class="math">C</span> shifts the graph vertically, but the derivative remains the same.</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 4｜理解函數族<span class="en-sub">Understand a family of curves</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>比較不同 <span class="math">C</span> 值形成的圖形。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why does an indefinite integral represent a family of curves?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>An indefinite integral represents a family of anti-derivatives.</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 5｜連到符號 ∫f(x)dx=F(x)+C<span class="en-sub">Connect to the notation ∫f(x)dx=F(x)+C</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>用自己的話說明 <span class="math">+C</span> 的意義。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why must we include <span class="math">+C</span>?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p><span class="math">+C</span> records all possible anti-derivatives.</p></div>
+            </div>
+        </details>
+    </section>
+
+    <nav class="page-nav" aria-label="STEP navigation">
+        <a class="nav-btn secondary" href="../index.html">返回首頁<span class="en-sub">Back to Home</span></a>
+        <a class="nav-btn secondary" href="01-definite-integral-step.html">上一個 STEP：定積分<span class="en-sub">Previous STEP: Definite Integrals</span></a>
+        <a class="nav-btn secondary" href="../02-indefinite-integral.html">開啟完整不定積分互動版<span class="en-sub">Open full interactive version</span></a>
+        <a class="nav-btn" href="03-fundamental-theorem-step.html">下一個 STEP：微積分基本定理<span class="en-sub">Next STEP: Fundamental Theorem of Calculus</span></a>
+    </nav>
+</main>
+</body>
+</html>

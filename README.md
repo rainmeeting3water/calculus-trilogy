@@ -77,6 +77,16 @@
 
 英文用語優先採用 IBDP Mathematics、國際高中數學教材與英美數學課堂常見表達，例如 anti-derivative、anti-differentiation、family of curves、gradient、accumulation function 與 signed area。完整詞彙請參考 BILINGUAL_GLOSSARY.md。
 
+## STEP 導學版
+
+本專案除了完整互動版，也提供 STEP 導學版。STEP 導學版使用可展開式步驟，讓教師或學生依序完成：
+
+- 學生任務 Student Task
+- 教師提問 Teacher Prompt
+- 觀察重點 Key Observation
+
+此版本適合教師導學、學生自學、課堂探究與補救教學。
+
 ## 部署方式
 
 ### GitHub Pages

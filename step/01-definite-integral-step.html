@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定積分 STEP 導學版｜Definite Integrals</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --bg: #F8FAFC;
+            --card: #FFFFFF;
+            --text: #1E293B;
+            --muted: #64748B;
+            --border: #E2E8F0;
+            --accent: #EEF2FF;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.65;
+            padding: 24px;
+        }
+
+        .page { max-width: 920px; margin: 0 auto; }
+
+        header {
+            background: var(--card);
+            border-radius: 18px;
+            padding: 38px 28px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 26px;
+        }
+
+        h1 { color: var(--primary); font-size: 2rem; line-height: 1.25; }
+        .en-sub { display: block; margin-top: 5px; color: var(--muted); font-size: 0.88em; font-weight: 500; line-height: 1.4; }
+        .intro { margin: 18px auto 0; max-width: 720px; color: var(--muted); }
+
+        .guide-note {
+            background: var(--accent);
+            border-left: 5px solid var(--primary);
+            border-radius: 0 10px 10px 0;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+        }
+
+        .steps { display: grid; gap: 14px; }
+
+        .step-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.035);
+        }
+
+        .step-card[open] { border-color: #C7D2FE; }
+
+        summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1.08rem;
+            font-weight: 700;
+            padding: 18px 20px;
+            background: #FFFFFF;
+        }
+
+        .step-card[open] summary { background: var(--accent); }
+        .step-content { padding: 20px; display: grid; gap: 16px; }
+
+        .prompt-block {
+            border-left: 4px solid var(--border);
+            padding: 4px 0 4px 14px;
+        }
+
+        .prompt-block.task { border-color: var(--primary); }
+        .prompt-block.teacher { border-color: #F59E0B; }
+        .prompt-block.observation { border-color: var(--secondary); }
+        h4 { margin-bottom: 5px; font-size: 1rem; }
+        .math { font-family: "Cambria Math", "Times New Roman", serif; background: #F1F5F9; padding: 2px 6px; border-radius: 5px; white-space: nowrap; }
+
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 26px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: var(--primary);
+            color: #FFFFFF;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .nav-btn:hover { background: var(--primary-hover); }
+        .nav-btn.secondary { background: #F1F5F9; color: var(--text); border: 1px solid #CBD5E1; }
+        .nav-btn.secondary:hover { background: #E2E8F0; }
+
+        @media (max-width: 600px) {
+            body { padding: 14px; }
+            header { padding: 28px 18px; }
+            h1 { font-size: 1.65rem; }
+            summary { padding: 16px; }
+            .step-content { padding: 16px; }
+            .page-nav { align-items: stretch; flex-direction: column; }
+            .nav-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<main class="page">
+    <header>
+        <h1>定積分 STEP 導學版<span class="en-sub">Definite Integrals: Step-by-step Guided Version</span></h1>
+        <p class="intro">依序展開每個步驟，先完成學生任務，再討論教師提問與觀察重點。<span class="en-sub">Open each step in order: complete the student task, discuss the teacher prompt, and identify the key observation.</span></p>
+    </header>
+
+    <div class="guide-note">本頁是導學路徑；需要操作圖形、滑桿與表格時，請開啟完整互動版。<span class="en-sub">This page provides the guided pathway. Open the full interactive version when you are ready to use the graph, sliders, and tables.</span></div>
+
+    <section class="steps">
+        <details class="step-card" open>
+            <summary>STEP 1｜先觀察函數圖形<span class="en-sub">Observe the graph first</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察函數圖形在 x 軸上方或下方的區域。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>When is the function above or below the x-axis?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>定積分不是只看幾何面積，也要注意 <strong>signed area</strong>。</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 2｜用小矩形近似累積量<span class="en-sub">Approximate accumulation with small rectangles</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>調整 <span class="math">n</span>，觀察小矩形如何覆蓋曲線下方的區域。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What does each small rectangle represent?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>每一個小矩形代表一小段 <strong>signed contribution</strong>。</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 3｜比較取樣方式<span class="en-sub">Compare sampling methods</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>切換 <strong>left endpoint</strong>、<strong>right endpoint</strong>、<strong>midpoint</strong>。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How does the sampling method affect the approximation?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>不同 sampling methods 會造成不同估計，但 <span class="math">n</span> 變大時會趨近相同累積量。</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 4｜讓 n 變大<span class="en-sub">Let n become larger</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>增加 <span class="math">n</span>，觀察矩形和曲線的貼合程度。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What happens as the number of rectangles increases?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>這是 <strong>Riemann sum</strong> 走向 <strong>definite integral</strong> 的核心直觀。</p></div>
+            </div>
+        </details>
+
+        <details class="step-card">
+            <summary>STEP 5｜連到定積分符號<span class="en-sub">Connect to the definite integral notation</span></summary>
+            <div class="step-content">
+                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>用自己的話說明 <span class="math">∫[a 到 b] f(x) dx</span> 代表什麼。</p></div>
+                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How does the Riemann sum lead to the definite integral?</p></div>
+                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>A definite integral represents accumulation over an interval and can be interpreted as signed area.</p></div>
+            </div>
+        </details>
+    </section>
+
+    <nav class="page-nav" aria-label="STEP navigation">
+        <a class="nav-btn secondary" href="../index.html">返回首頁<span class="en-sub">Back to Home</span></a>
+        <a class="nav-btn secondary" href="../01-definite-integral.html">開啟完整定積分互動版<span class="en-sub">Open full interactive version</span></a>
+        <a class="nav-btn" href="02-indefinite-integral-step.html">下一個 STEP：不定積分<span class="en-sub">Next STEP: Indefinite Integrals</span></a>
+    </nav>
+</main>
+</body>
+</html>

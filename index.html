@@ -206,6 +206,72 @@
             white-space: nowrap;
         }
 
+        .learning-modes {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .mode-panel {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 22px;
+            background: #FFFFFF;
+        }
+
+        .mode-panel.guided {
+            background: #F8FAFF;
+            border-color: #C7D2FE;
+        }
+
+        .mode-panel h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .mode-panel p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .mode-links {
+            display: grid;
+            gap: 10px;
+        }
+
+        .mode-link {
+            display: block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #C7D2FE;
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: #FFFFFF;
+        }
+
+        .mode-link:hover {
+            background: var(--accent-bg);
+        }
+
+        @media (max-width: 700px) {
+            .mode-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-modes {
+                padding: 22px 18px;
+            }
+        }
+
         .en-sub {
             display: block;
             margin-top: 4px;
@@ -249,6 +315,31 @@
             <strong>定積分</strong><span class="bilingual-term">definite integral</span> 是累積量 <span class="bilingual-term">accumulation</span>，<strong>不定積分</strong><span class="bilingual-term">indefinite integral</span> 是反導函數族 <span class="bilingual-term">family of anti-derivatives</span>，而 <strong>微積分基本定理</strong><span class="bilingual-term">Fundamental Theorem of Calculus</span> 把兩者真正接起來。<span class="en-sub">Definite integrals represent accumulation; indefinite integrals represent families of anti-derivatives; the Fundamental Theorem of Calculus connects the two.</span>
         </div>
     </header>
+
+    <section class="learning-modes">
+        <h2 class="section-title">學習模式<span class="en-sub">Learning Modes</span></h2>
+        <div class="mode-grid">
+            <article class="mode-panel">
+                <h3>完整互動版<span class="en-sub">Standard Interactive Version</span></h3>
+                <p>直接進入三個完整互動模組，適合教師展示、學生自由探索與複習。<span class="en-sub">Use the complete interactive modules for teacher demonstrations, open exploration, and review.</span></p>
+                <div class="mode-links">
+                    <a class="mode-link" href="01-definite-integral.html">定積分 Definite Integrals</a>
+                    <a class="mode-link" href="02-indefinite-integral.html">不定積分 Indefinite Integrals</a>
+                    <a class="mode-link" href="03-fundamental-theorem.html">微積分基本定理 Fundamental Theorem of Calculus</a>
+                </div>
+            </article>
+
+            <article class="mode-panel guided">
+                <h3>STEP 導學版<span class="en-sub">Step-by-step Guided Version</span></h3>
+                <p>逐步展開學生任務、教師提問與觀察重點，適合教師導學、學生自學與課堂探究。<span class="en-sub">Open each guided step to follow student tasks, teacher prompts, and key observations.</span></p>
+                <div class="mode-links">
+                    <a class="mode-link" href="step/01-definite-integral-step.html">定積分 STEP 導學版<span class="en-sub">Definite Integrals</span></a>
+                    <a class="mode-link" href="step/02-indefinite-integral-step.html">不定積分 STEP 導學版<span class="en-sub">Indefinite Integrals</span></a>
+                    <a class="mode-link" href="step/03-fundamental-theorem-step.html">微積分基本定理 STEP 導學版<span class="en-sub">Fundamental Theorem of Calculus</span></a>
+                </div>
+            </article>
+        </div>
+    </section>
 
     <section class="path-section">
         <h2 class="section-title">學習路徑<span class="en-sub">Learning Pathway</span></h2>

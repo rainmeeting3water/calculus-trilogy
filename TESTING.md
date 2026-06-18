@@ -71,3 +71,14 @@
 * [ ] 手機版英文不會造成版面破裂
 * [ ] 測驗功能仍正常
 * [ ] 動態產生的表格與數據卡片仍正常顯示
+
+## STEP 導學版測試
+
+* [ ] step/01-definite-integral-step.html 可以正常開啟
+* [ ] step/02-indefinite-integral-step.html 可以正常開啟
+* [ ] step/03-fundamental-theorem-step.html 可以正常開啟
+* [ ] 每個 STEP 可以展開與收合
+* [ ] STEP 頁面連回首頁正常
+* [ ] STEP 頁面連到完整互動版正常
+* [ ] STEP 頁面之間上一個／下一個連結正常
+* [ ] 手機版 STEP 卡片不會破版

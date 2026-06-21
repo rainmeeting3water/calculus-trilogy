@@ -2,6 +2,8 @@
 
 本表整理「微積分三部曲」雙語版使用的核心中英術語。英文優先採用 IBDP Mathematics、國際高中數學教材與英美數學課堂常見用語，避免逐字直譯。
 
+> **IBDP 注意事項：**本表中的 IBDP 相關課程、術語、AA/AI、SL/HL、IA 或 command terms 對應，仍需依現行官方 guide 確認。本表不代表官方課程對應或認證。
+
 | 中文術語 | English Term | 說明 | 出現位置 | IBDP / International Usage Notes |
 |---|---|---|---|---|
 | 微積分 | calculus | 研究變化率與累積量的數學分支。 | 首頁、README | Standard international term. |

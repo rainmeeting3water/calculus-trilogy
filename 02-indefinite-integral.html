@@ -482,11 +482,11 @@
         <h3 class="section-title">一、核心概念：兩種運算的差別<span class="en-sub">Core Idea: Differentiation and Anti-differentiation</span></h3>
         <div class="concept-box">
             <h4>▶ 微分：已知 F(x)，求它的導函數 F'(x)<span class="en-sub">Differentiation: find the derivative F'(x)</span></h4>
-            <p style="margin-bottom: 15px;">已知一個函數 <span class="math">F(x)</span>，求它的變化率 <span class="math">F'(x)</span>。</p>
+            <p style="margin-bottom: 15px;">已知一個函數 <span class="math">F(x)</span>，求它的變化率 <span class="math">F'(x)</span>。<span class="en-sub">Given a function <span class="math">F(x)</span>, differentiation finds its rate of change <span class="math">F'(x)</span>.</span></p>
             
             <h4>▶ 不定積分：已知變化率，反推原函數<span class="en-sub">Indefinite integration: work backward from a rate of change</span></h4>
-            <p>已知 <span class="math">f(x)</span>，反過來找一個函數 <span class="math">F(x)</span>，使得 <span class="math">F'(x) = f(x)</span>。這樣的 <span class="math">F(x)</span> 稱為反導函數，也常稱為原函數<span class="bilingual-term">anti-derivative / antiderivative</span>。</p>
-            <p style="margin-top: 10px; color: var(--text-light);">💡 注意：不定積分不是單一答案，而是一整族函數 <span class="math">F(x) + C</span><span class="en-inline">a family of curves</span>，其中 C 是任意常數。</p>
+            <p>已知 <span class="math">f(x)</span>，反過來找一個函數 <span class="math">F(x)</span>，使得 <span class="math">F'(x) = f(x)</span>。這樣的 <span class="math">F(x)</span> 稱為反導函數，也常稱為原函數<span class="bilingual-term">anti-derivative / antiderivative</span>。<span class="en-sub">Given <span class="math">f(x)</span>, indefinite integration works backward to find a function <span class="math">F(x)</span> such that <span class="math">F'(x)=f(x)</span>. This <span class="math">F(x)</span> is an anti-derivative.</span></p>
+            <p style="margin-top: 10px; color: var(--text-light);">💡 注意：不定積分不是單一答案，而是一整族函數 <span class="math">F(x) + C</span><span class="en-inline">a family of curves</span>，其中 C 是任意常數。<span class="en-sub">Note: an indefinite integral is not a single answer. It represents a family of curves <span class="math">F(x)+C</span>, where C is an arbitrary constant.</span></p>
         </div>
     </div>
 
@@ -494,7 +494,7 @@
         <h3 class="section-title">二、互動圖形觀察<span class="en-sub">Interactive Graph</span></h3>
         <p style="margin-bottom: 15px; color: var(--text-light);">
             請拖動常數 C 滑桿。觀察雖然 <span class="math">F(x) + C</span> 上下移動了，但它的 gradient (slope) 變化（也就是微分結果 <span class="math">f(x)</span>）卻保持不變！
-        </p>
+        <span class="en-sub">Move the constant C slider. Although <span class="math">F(x)+C</span> shifts vertically, its gradient and derivative <span class="math">f(x)</span> remain unchanged.</span></p>
         
         <div class="interactive-grid">
             <!-- 畫布區 -->
@@ -560,30 +560,30 @@
         
         <div class="step">
             <div class="step-num">Step 1：從微分開始<span class="en-sub">Start with differentiation</span></div>
-            <p>我們知道：<span class="math formula">d/dx (x<sup>2</sup>) = 2x</span></p>
+            <p>我們知道：<span class="math formula">d/dx (x<sup>2</sup>) = 2x</span><span class="en-sub">We know this differentiation fact.</span></p>
         </div>
         
         <div class="step">
             <div class="step-num">Step 2：反過來問<span class="en-sub">Ask the reverse question</span></div>
-            <p>如果已知結果是 <span class="math">2x</span>，誰微分後會得到 <span class="math">2x</span>？</p>
+            <p>如果已知結果是 <span class="math">2x</span>，誰微分後會得到 <span class="math">2x</span>？<span class="en-sub">If the derivative is <span class="math">2x</span>, which function could have produced it?</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 3：發現不只一個答案<span class="en-sub">Notice there is more than one answer</span></div>
-            <p><span class="math">x<sup>2</sup></span>、<span class="math">x<sup>2</sup> + 3</span>、<span class="math">x<sup>2</sup> - 5</span> 微分後都會得到 <span class="math">2x</span>。</p>
-            <p>因為在圖形上，加減常數只是把曲線上下平移，每一點的切線 gradient (slope)（rate of change）完全沒有改變。</p>
+            <p><span class="math">x<sup>2</sup></span>、<span class="math">x<sup>2</sup> + 3</span>、<span class="math">x<sup>2</sup> - 5</span> 微分後都會得到 <span class="math">2x</span>。<span class="en-sub">All of these functions have derivative <span class="math">2x</span>.</span></p>
+            <p>因為在圖形上，加減常數只是把曲線上下平移，每一點的切線 gradient (slope)（rate of change）完全沒有改變。<span class="en-sub">Adding or subtracting a constant only shifts the curve vertically; the gradient and rate of change at each point do not change.</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 4：常數 C 的意義<span class="en-sub">Meaning of the constant C</span></div>
-            <p>因為常數微分後會變成 0，所以當我們反向尋找時，原本的常數是多少就「遺失」了，無法唯一決定。</p>
-            <p>因此我們用 <span class="math">C</span> 來代表所有可能的常數：</p>
+            <p>因為常數微分後會變成 0，所以當我們反向尋找時，原本的常數是多少就「遺失」了，無法唯一決定。<span class="en-sub">A constant differentiates to 0, so when we work backward, the original constant cannot be uniquely determined.</span></p>
+            <p>因此我們用 <span class="math">C</span> 來代表所有可能的常數：<span class="en-sub">Therefore we use <span class="math">C</span> to represent all possible constants.</span></p>
             <p class="math-block formula">&int; 2x dx = x<sup>2</sup> + C</p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 5：一般化公式<span class="en-sub">General form</span></div>
-            <p>若找到一個函數 <span class="math">F(x)</span> 滿足 <span class="math">F'(x) = f(x)</span>，則：</p>
+            <p>若找到一個函數 <span class="math">F(x)</span> 滿足 <span class="math">F'(x) = f(x)</span>，則：<span class="en-sub">If we find a function <span class="math">F(x)</span> satisfying <span class="math">F'(x)=f(x)</span>, then the general indefinite integral is as follows.</span></p>
             <div class="math-block formula formula-row" style="border-color: var(--primary); background: #EEF2FF;">
                 <span class="big-op"><span class="op-symbol">&int;</span></span>
                 <i>f(x) dx = F(x) + C</i>
@@ -593,7 +593,7 @@
 
     <div class="section">
         <h3 class="section-title">四、不同 C 值的微分結果比較<span class="en-sub">Comparing Different Values of C</span></h3>
-        <p style="margin-bottom: 15px;">以下表格展示，無論常數 C 填多少，微分後都會「殊途同歸」回到 <span class="math">f(x)</span>。</p>
+        <p style="margin-bottom: 15px;">以下表格展示，無論常數 C 填多少，微分後都會「殊途同歸」回到 <span class="math">f(x)</span>。<span class="en-sub">The table shows that no matter what value C has, differentiating returns to <span class="math">f(x)</span>.</span></p>
         
         <div class="table-container">
             <table>
@@ -616,7 +616,7 @@
         <h3 class="section-title">五、自我小測驗<span class="en-sub">Self-check Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
-            <p><strong>第 1 題：</strong>不定積分 <span class="math formula">&int; 2x dx = ?</span></p>
+            <p><strong>第 1 題：</strong>不定積分 <span class="math formula">&int; 2x dx = ?</span><span class="en-sub">Question 1: Evaluate the indefinite integral.</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. x<sup>2</sup></button>
                 <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. x<sup>2</sup> + C</button>
@@ -627,7 +627,7 @@
         </div>
 
         <div class="quiz-item" id="q2">
-            <p><strong>第 2 題：</strong>不定積分 <span class="math formula">&int; 3x<sup>2</sup> dx = ?</span></p>
+            <p><strong>第 2 題：</strong>不定積分 <span class="math formula">&int; 3x<sup>2</sup> dx = ?</span><span class="en-sub">Question 2: Evaluate the indefinite integral.</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. x<sup>3</sup> + C</button>
                 <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 6x + C</button>
@@ -638,7 +638,7 @@
         </div>
 
         <div class="quiz-item" id="q3">
-            <p><strong>第 3 題：</strong>不定積分 <span class="math formula">&int; cos(x) dx = ?</span></p>
+            <p><strong>第 3 題：</strong>不定積分 <span class="math formula">&int; cos(x) dx = ?</span><span class="en-sub">Question 3: Evaluate the indefinite integral.</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. -sin(x) + C</button>
                 <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. cos(x) + C</button>
@@ -649,7 +649,7 @@
         </div>
 
         <div class="quiz-item" id="q4">
-            <p><strong>第 4 題：</strong>為什麼計算不定積分時，最後一定要加一個常數 C？</p>
+            <p><strong>第 4 題：</strong>為什麼計算不定積分時，最後一定要加一個常數 C？<span class="en-sub">Question 4: Why must we include the constant C when finding an indefinite integral?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(4, 'A')">A. 因為積分會讓數值變大</button>
                 <button class="quiz-btn" onclick="checkAnswer(4, 'B')">B. 因為常數微分後是 0，反推時無法確定原本的常數</button>
@@ -660,7 +660,7 @@
         </div>
 
         <div class="quiz-item" id="q5">
-            <p><strong>第 5 題：</strong>不定積分和定積分最大的差異是什麼？</p>
+            <p><strong>第 5 題：</strong>不定積分和定積分最大的差異是什麼？<span class="en-sub">Question 5: What is the main difference between an indefinite integral and a definite integral?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(5, 'A')">A. 計算的方法完全不同</button>
                 <button class="quiz-btn" onclick="checkAnswer(5, 'B')">B. 不定積分是一個函數族（加 C），定積分算出的是一個具體的數值（累積量）</button>
@@ -673,23 +673,23 @@
 
     <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
         <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：反導函數為什麼能幫我們算定積分？<span class="en-sub">Next: How Anti-derivatives Help Evaluate Definite Integrals</span></h3>
-        <p style="text-align: center; margin-bottom: 20px;">這是微積分中最重要的連結之一。</p>
+        <p style="text-align: center; margin-bottom: 20px;">這是微積分中最重要的連結之一。<span class="en-sub">This is one of the most important connections in calculus.</span></p>
         
-        <p>在這個模組中，我們知道不定積分是在找微分前的函數，也就是反導函數或原函數：</p>
+        <p>在這個模組中，我們知道不定積分是在找微分前的函數，也就是反導函數或原函數：<span class="en-sub">In this module, an indefinite integral means finding an anti-derivative.</span></p>
         <div class="math-block formula formula-row" style="background: white; font-size: 1.1rem; padding: 10px;">
             <span class="big-op"><span class="op-symbol">&int;</span></span>
             <i>f(x) dx = F(x) + C</i>
         </div>
         
-        <p>在上一個定積分模組中，我們知道定積分代表從 a 到 b 的累積量，可以用許多小矩形的有向貢獻逐步逼近：</p>
+        <p>在上一個定積分模組中，我們知道定積分代表從 a 到 b 的累積量，可以用許多小矩形的有向貢獻逐步逼近：<span class="en-sub">In the previous module, a definite integral represented accumulation from a to b, approximated by many signed rectangle contributions.</span></p>
         <div class="math-block formula formula-row" style="background: white; font-size: 1.1rem; padding: 10px;">
             <span class="big-op"><span class="op-top">b</span><span class="op-symbol">&int;</span><span class="op-bottom">a</span></span>
             <i>f(x) dx</i>
         </div>
         
-        <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">接下來的「微積分基本定理」將會說明：</p>
-        <p>當 <span class="math">F'(x)=f(x)</span> 時，微積分基本定理會說明為什麼 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx = F(b) - F(a)</span>。</p>
-        <p>也就是為什麼辛苦算出來的「累積量」，竟然可以直接用「反導函數的端點差」來輕鬆計算！</p>
+        <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">接下來的「微積分基本定理」將會說明：<span class="en-sub">The next module, the Fundamental Theorem of Calculus, will explain the following connection.</span></p>
+        <p>當 <span class="math">F'(x)=f(x)</span> 時，微積分基本定理會說明為什麼 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx = F(b) - F(a)</span>。<span class="en-sub">When <span class="math">F'(x)=f(x)</span>, the Fundamental Theorem of Calculus explains why the definite integral equals <span class="math">F(b)-F(a)</span>.</span></p>
+        <p>也就是為什麼辛苦算出來的「累積量」，竟然可以直接用「反導函數的端點差」來輕鬆計算！<span class="en-sub">This explains why a difficult accumulation can be evaluated using the endpoint difference of an anti-derivative.</span></p>
     </div>
 
     <div class="section" style="text-align: center; background: white; border: 1px solid #E2E8F0;">
@@ -703,8 +703,8 @@
             <li>後續的微積分基本定理，會神奇地把不定積分（反導函數）和定積分（累積量）連接起來。</li>
         </ol>
 
-        <p style="font-weight: bold; color: var(--primary); margin-bottom: 10px;">核心公式：</p>
-        <p style="color: var(--text-light); margin-bottom: 5px;">若 <span class="math">F'(x) = f(x)</span>，則：</p>
+        <p style="font-weight: bold; color: var(--primary); margin-bottom: 10px;">核心公式：<span class="en-sub">Core formula.</span></p>
+        <p style="color: var(--text-light); margin-bottom: 5px;">若 <span class="math">F'(x) = f(x)</span>，則：<span class="en-sub">If <span class="math">F'(x)=f(x)</span>, then the general form is as follows.</span></p>
         <div class="math-block formula formula-row" style="background: #F8FAFC; max-width: 400px; margin: 0 auto;">
             <span class="big-op"><span class="op-symbol">&int;</span></span>
             <i>f(x) dx = F(x) + C</i>

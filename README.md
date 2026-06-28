@@ -2,6 +2,8 @@
 
 這是一套給高中生使用的微積分互動教材，使用純 HTML / CSS / JavaScript 製作，不依賴外部套件。
 
+This project is a static interactive calculus learning resource for secondary-school students. It is built with plain HTML, CSS, and JavaScript, and does not depend on external packages.
+
 ## 檔案結構
 
 * index.html：首頁與學習路徑
@@ -73,7 +75,13 @@
 
 ## 雙語版本說明
 
-本教材採用「中文主概念 + 英文數學詞彙輔助」的雙語呈現方式，目的不是完全替換成英文，而是協助學生建立中文概念與英文術語之間的連結。
+本教材採用「中文主句 + 英文對照句」的雙語呈現方式，協助學生同時理解中文概念與國際數學英文表達。
+
+This resource uses a Chinese-first, English-parallel format so that students can connect Chinese mathematical ideas with international-style English mathematics language.
+
+本次雙語一致性調整優先補齊 STEP 導學頁、主要教學段落、提示文字、總結文字與測驗題幹的中英對照。
+
+This bilingual consistency pass prioritises STEP guided pages, main teaching paragraphs, prompts, summaries, and quiz question text.
 
 英文用語優先採用 IBDP Mathematics、國際高中數學教材與英美數學課堂常見表達，例如 anti-derivative、anti-differentiation、family of curves、gradient、accumulation function 與 signed area。完整詞彙請參考 BILINGUAL_GLOSSARY.md。
 

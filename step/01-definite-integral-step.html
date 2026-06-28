@@ -133,50 +133,112 @@
     <div class="guide-note">本頁是導學路徑；需要操作圖形、滑桿與表格時，請開啟完整互動版。<span class="en-sub">This page provides the guided pathway. Open the full interactive version when you are ready to use the graph, sliders, and tables.</span></div>
 
     <section class="steps">
+
         <details class="step-card" open>
             <summary>STEP 1｜先觀察函數圖形<span class="en-sub">Observe the graph first</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察函數圖形在 x 軸上方或下方的區域。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>When is the function above or below the x-axis?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>定積分不是只看幾何面積，也要注意 <strong>signed area</strong>。</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>觀察函數圖形在 x 軸上方或下方的區域。</p>
+                    <p class="en-sub">Observe where the graph is above or below the x-axis.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>函數什麼時候在 x 軸上方？什麼時候在 x 軸下方？</p>
+                    <p class="en-sub">When is the function above or below the x-axis?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>定積分不只是幾何面積，也要注意帶符號面積。</p>
+                    <p class="en-sub">A definite integral is not only about geometric area; it can also be interpreted as signed area.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 2｜用小矩形近似累積量<span class="en-sub">Approximate accumulation with small rectangles</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>調整 <span class="math">n</span>，觀察小矩形如何覆蓋曲線下方的區域。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What does each small rectangle represent?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>每一個小矩形代表一小段 <strong>signed contribution</strong>。</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>調整 <span class="math">n</span>，觀察小矩形如何覆蓋曲線下方的區域。</p>
+                    <p class="en-sub">Adjust <span class="math">n</span> and observe how the small rectangles cover the region under the curve.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>每一個小矩形代表什麼？</p>
+                    <p class="en-sub">What does each small rectangle represent?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>每一個小矩形代表一小段帶符號貢獻。</p>
+                    <p class="en-sub">Each small rectangle represents a signed contribution over a small interval.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 3｜比較取樣方式<span class="en-sub">Compare sampling methods</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>切換 <strong>left endpoint</strong>、<strong>right endpoint</strong>、<strong>midpoint</strong>。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How does the sampling method affect the approximation?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>不同 sampling methods 會造成不同估計，但 <span class="math">n</span> 變大時會趨近相同累積量。</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>切換起點端點、終點端點與中點取樣方式。</p>
+                    <p class="en-sub">Switch between the starting endpoint, ending endpoint, and midpoint sampling methods.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>取樣方式會如何影響近似結果？</p>
+                    <p class="en-sub">How does the sampling method affect the approximation?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>不同取樣方式會造成不同估計，但 <span class="math">n</span> 變大時會趨近相同累積量。</p>
+                    <p class="en-sub">Different sampling methods can give different estimates, but as <span class="math">n</span> becomes larger, they approach the same accumulation.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 4｜讓 n 變大<span class="en-sub">Let n become larger</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>增加 <span class="math">n</span>，觀察矩形和曲線的貼合程度。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What happens as the number of rectangles increases?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>這是 <strong>Riemann sum</strong> 走向 <strong>definite integral</strong> 的核心直觀。</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>增加 <span class="math">n</span>，觀察矩形和曲線的貼合程度。</p>
+                    <p class="en-sub">Increase <span class="math">n</span> and observe how closely the rectangles fit the curve.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>當矩形數量增加時會發生什麼事？</p>
+                    <p class="en-sub">What happens as the number of rectangles increases?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>這是黎曼和走向定積分的核心直觀。</p>
+                    <p class="en-sub">This is the key intuition behind a Riemann sum approaching a definite integral.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 5｜連到定積分符號<span class="en-sub">Connect to the definite integral notation</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>用自己的話說明 <span class="math">∫[a 到 b] f(x) dx</span> 代表什麼。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How does the Riemann sum lead to the definite integral?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>A definite integral represents accumulation over an interval and can be interpreted as signed area.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>用自己的話說明 <span class="math">∫[a 到 b] f(x) dx</span> 代表什麼。</p>
+                    <p class="en-sub">Explain in your own words what <span class="math">∫[a to b] f(x) dx</span> represents.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>黎曼和如何引導我們得到定積分？</p>
+                    <p class="en-sub">How does the Riemann sum lead to the definite integral?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>定積分表示一個區間上的累積量，也可以理解為帶符號面積。</p>
+                    <p class="en-sub">A definite integral represents accumulation over an interval and can be interpreted as signed area.</p>
+                </div>
             </div>
         </details>
+
     </section>
 
     <nav class="page-nav" aria-label="STEP navigation">

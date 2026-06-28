@@ -546,7 +546,7 @@
 
     <div class="section">
         <h3 class="section-title">二、讓寬度 Δx 越來越小<span class="en-sub">Let Δx Approach 0</span></h3>
-        <p style="margin-bottom: 15px;">我們來看看，當寬度 <span class="math">Δx</span> 越來越接近 0 時，平均高度會發生什麼事？</p>
+        <p style="margin-bottom: 15px;">我們來看看，當寬度 <span class="math">Δx</span> 越來越接近 0 時，平均高度會發生什麼事？<span class="en-sub">As the width <span class="math">Δx</span> approaches 0, what happens to the average height?</span></p>
         <button id="shrinkDxBtn" class="btn">▶ 自動讓 Δx 越來越小<span class="en-sub">Run Δx-shrink table</span></button>
         
         <div class="table-container">
@@ -568,7 +568,7 @@
         </div>
         <p style="text-align: center; margin-top: 15px; color: var(--primary); font-weight: bold;">
             🔍 觀察表格：當 Δx 越來越小時，平均高度是不是越來越接近 f(x)？
-        </p>
+        <span class="en-sub">Observe the table: as <span class="math">Δx</span> becomes smaller, does the average height approach <span class="math">f(x)</span>?</span></p>
     </div>
 
     <div class="section">
@@ -581,35 +581,35 @@
         <div class="step">
             <div class="step-num">Step 1：定義面積函數<span class="en-sub">Define the accumulation function</span></div>
             <p><span class="math">A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt</span></p>
-            <p>意思是從起點 a 到位置 x 的累積面積。</p>
+            <p>意思是從起點 a 到位置 x 的累積面積。<span class="en-sub">This means the accumulated area from the starting point a to the position x.</span></p>
         </div>
         
         <div class="step">
             <div class="step-num">Step 2：觀察新增面積<span class="en-sub">Observe the newly added area</span></div>
-            <p>當位置從 x 變成 x+Δx，新增的面積是：</p>
+            <p>當位置從 x 變成 x+Δx，新增的面積是：<span class="en-sub">When the position changes from x to x+Δx, the newly added area is as follows.</span></p>
             <p><span class="math">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 3：把新增面積除以 Δx (找出平均高度)<span class="en-sub">Divide the newly added area by Δx to find the average height</span></div>
             <p><span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span></p>
-            <p>這個算式同時具有兩個重要意義：</p>
+            <p>這個算式同時具有兩個重要意義：<span class="en-sub">This expression has two important meanings at the same time.</span></p>
             <ul style="margin-left: 20px; color: var(--text-light);">
                 <li>它是面積函數 A(x) 的<b>平均變化率</b>。</li>
                 <li>它也是從 x 到 x+Δx 這段區間內，圖形的<b>平均高度</b>。</li>
             </ul>
-            <p style="margin-top: 10px; font-weight: bold; color: var(--primary);">也就是說，同一個式子，一邊連到「導數」，一邊連到「面積平均高度」。</p>
+            <p style="margin-top: 10px; font-weight: bold; color: var(--primary);">也就是說，同一個式子，一邊連到「導數」，一邊連到「面積平均高度」。<span class="en-sub">The same expression connects to the derivative on one side and to average height on the other.</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 4：讓 Δx 越來越小 (取極限)<span class="en-sub">Let Δx approach 0</span></div>
-            <p>加上極限符號，這就是面積函數 <span class="math">A(x)</span> 的導數定義：</p>
+            <p>加上極限符號，這就是面積函數 <span class="math">A(x)</span> 的導數定義：<span class="en-sub">Adding the limit gives the derivative definition for the area function <span class="math">A(x)</span>.</span></p>
             <div class="math-block">
                 <span class="math">A'(x) = lim<sub>&Delta;x&rarr;0</sub> [A(x+&Delta;x) - A(x)] / &Delta;x</span>
             </div>
-            <p>因為函數是連續的，x 附近的函數高度不會突然跳動，所以當區間縮得很小時，這一段的平均高度會越來越接近 f(x)。</p>
-            <p style="color: #6B7280; font-size: 0.9rem; margin-top: 10px;">(註：目前的互動圖展示的是 Δx>0，也就是從右側逼近。完整的導數還需要考慮 Δx<0 從左側逼近。因為這裡的 f 是連續函數，所以不論從右邊小區間或左邊小區間取平均高度，當區間寬度趨近 0 時，都會逼近同一個高度 f(x)。)</p>
-            <p style="margin-top: 10px; font-weight:bold;">所以得到：<span class="math">A'(x) = f(x)</span></p>
+            <p>因為函數是連續的，x 附近的函數高度不會突然跳動，所以當區間縮得很小時，這一段的平均高度會越來越接近 f(x)。<span class="en-sub">Because the function is continuous, the heights near x do not jump suddenly; over a very short interval, the average height approaches <span class="math">f(x)</span>.</span></p>
+            <p style="color: #6B7280; font-size: 0.9rem; margin-top: 10px;">(註：目前的互動圖展示的是 Δx>0，也就是從右側逼近。完整的導數還需要考慮 Δx<0 從左側逼近。因為這裡的 f 是連續函數，所以不論從右邊小區間或左邊小區間取平均高度，當區間寬度趨近 0 時，都會逼近同一個高度 f(x)。)<span class="en-sub">Note: the interactive graph currently shows <span class="math">Δx&gt;0</span>, a right-hand approach. A full derivative also considers <span class="math">Δx&lt;0</span>; continuity makes both approaches tend to the same height <span class="math">f(x)</span>.</span></p>
+            <p style="margin-top: 10px; font-weight:bold;">所以得到：<span class="math">A'(x) = f(x)</span><span class="en-sub">Therefore we obtain <span class="math">A'(x)=f(x)</span>.</span></p>
         </div>
 
         <div class="conclusion-box" style="margin-top: 20px;">
@@ -620,24 +620,24 @@
     <div class="section">
         <h3 class="section-title">四、從第一定理到第二定理<span class="en-sub">From Part 1 to Part 2 of the Theorem</span></h3>
         
-        <p style="margin-bottom: 15px; color: var(--text-light);">在高中階段，我們先討論 <span class="math">f</span> 在區間上連續的情況。</p>
+        <p style="margin-bottom: 15px; color: var(--text-light);">在高中階段，我們先討論 <span class="math">f</span> 在區間上連續的情況。<span class="en-sub">At this level, we first discuss the case where <span class="math">f</span> is continuous on the interval.</span></p>
 
-        <p style="margin-bottom: 15px;">第一部分我們已經知道面積函數的瞬間變化率就是當下高度：</p>
+        <p style="margin-bottom: 15px;">第一部分我們已經知道面積函數的瞬間變化率就是當下高度：<span class="en-sub">From the first part, we know that the instantaneous rate of change of the area function is the current height.</span></p>
         
         <div class="step">
             <p><span class="math">A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt</span></p>
-            <p>得到 <span class="math">A'(x) = f(x)</span></p>
+            <p>得到 <span class="math">A'(x) = f(x)</span><span class="en-sub">This gives <span class="math">A'(x)=f(x)</span>.</span></p>
         </div>
         
-        <p style="margin-bottom: 15px;">如果我們另外找到一個函數 <span class="math">F</span>，它微分後會變回 <span class="math">f</span>，也就是 <span class="math">F' = f</span>，那麼 <span class="math">F</span> 稱為 <span class="math">f</span> 的反導函數，也常稱為原函數。</p>
+        <p style="margin-bottom: 15px;">如果我們另外找到一個函數 <span class="math">F</span>，它微分後會變回 <span class="math">f</span>，也就是 <span class="math">F' = f</span>，那麼 <span class="math">F</span> 稱為 <span class="math">f</span> 的反導函數，也常稱為原函數。<span class="en-sub">If we also find a function <span class="math">F</span> whose derivative is <span class="math">f</span>, then <span class="math">F</span> is an anti-derivative of <span class="math">f</span>.</span></p>
         
         <div class="step">
-            <p>因為 <span class="math">A(x)</span> 和 <span class="math">F(x)</span> 的微分結果一樣：</p>
-            <p>直覺上，如果兩個函數在每一點的變化速度都一樣，那它們的圖形形狀相同，只可能上下平移，所以只差一個常數。</p>
+            <p>因為 <span class="math">A(x)</span> 和 <span class="math">F(x)</span> 的微分結果一樣：<span class="en-sub">Because <span class="math">A(x)</span> and <span class="math">F(x)</span> have the same derivative.</span></p>
+            <p>直覺上，如果兩個函數在每一點的變化速度都一樣，那它們的圖形形狀相同，只可能上下平移，所以只差一個常數。<span class="en-sub">If two functions have the same rate of change at every point, their graphs have the same shape and can differ only by a vertical shift.</span></p>
             <div class="math-block" style="font-size: 1.1rem; padding: 10px;">
                 <span class="math">(A - F)' = A' - F' = f - f = 0</span>
             </div>
-            <p>也就是說，A-F 的變化率一直是 0，所以 A-F 在這個區間上是一個常數。</p>
+            <p>也就是說，A-F 的變化率一直是 0，所以 A-F 在這個區間上是一個常數。<span class="en-sub">That is, the rate of change of A-F is always 0, so A-F is constant on the interval.</span></p>
             <p>所以：</p>
             <p><span class="math">A - F = C</span></p>
             <p>也就是：</p>
@@ -645,7 +645,7 @@
         </div>
         
         <div class="step">
-            <p>我們知道從起點到起點的累積面積一定是 0，也就是：</p>
+            <p>我們知道從起點到起點的累積面積一定是 0，也就是：<span class="en-sub">The accumulated area from the starting point back to itself is 0.</span></p>
             <p><span class="math">A(a) = &int;<sub>a</sub><sup>a</sup> f(t) dt = 0</span></p>
             <p>所以：</p>
             <p><span class="math">0 = F(a) + C</span></p>
@@ -654,16 +654,16 @@
         </div>
         
         <div class="step">
-            <p>把 <span class="math">C</span> 代回去，所以：</p>
+            <p>把 <span class="math">C</span> 代回去，所以：<span class="en-sub">Substitute <span class="math">C</span> back into the expression.</span></p>
             <p><span class="math">A(x) = F(x) - F(a)</span></p>
         </div>
         
         <div class="step">
-            <p>最後代入 <span class="math">x = b</span>：</p>
+            <p>最後代入 <span class="math">x = b</span>：<span class="en-sub">Finally substitute <span class="math">x=b</span>.</span></p>
             <div class="math-block">
                 <span class="math">&int;<sub>a</sub><sup>b</sup> f(t) dt = F(b) - F(a)</span>
             </div>
-            <p style="font-size: 0.9rem; color: #6B7280; margin-top: 10px;">(註：若圖形在 x 軸下方，這裡的累積量會以帶符號面積理解。)</p>
+            <p style="font-size: 0.9rem; color: #6B7280; margin-top: 10px;">(註：若圖形在 x 軸下方，這裡的累積量會以帶符號面積理解。)<span class="en-sub">If the graph is below the x-axis, this accumulation is interpreted as signed area.</span></p>
         </div>
 
         <div class="conclusion-box" style="margin-top: 20px; text-align: left;">
@@ -677,11 +677,11 @@
         
         <div class="example-box">
             <div class="example-title">例題 1：拋物線下的面積<span class="en-sub">Example 1: Area under a parabola</span></div>
-            <p>設定 <span class="math">f(x) = x² + 1</span>，起點 <span class="math">a = 0</span></p>
+            <p>設定 <span class="math">f(x) = x² + 1</span>，起點 <span class="math">a = 0</span><span class="en-sub">Set <span class="math">f(x)=x²+1</span> with starting point <span class="math">a=0</span>.</span></p>
             <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (t² + 1) dt</span></p>
-            <p>經過計算（你可以先觀察圖形），真正的面積公式是：</p>
+            <p>經過計算（你可以先觀察圖形），真正的面積公式是：<span class="en-sub">After calculation, the area function is as follows.</span></p>
             <p><span class="math">A(x) = x³/3 + x</span></p>
-            <p>現在我們對面積函數微分：</p>
+            <p>現在我們對面積函數微分：<span class="en-sub">Now differentiate the area function.</span></p>
             <p><span class="math">A'(x) = 3x²/3 + 1 = x² + 1 = f(x)</span></p>
             <div style="margin-top:10px; padding:10px; background:#FFFBEB; border-left:4px solid #F59E0B;">
                 <strong>💡 驗證成功：</strong> 先累積面積，再對面積函數微分，會回到原本的高度函數。
@@ -690,9 +690,9 @@
 
         <div class="example-box">
             <div class="example-title">例題 2：直線下的面積<span class="en-sub">Example 2: Area under a straight line</span></div>
-            <p>設定 <span class="math">f(x) = 2x + 1</span>，起點 <span class="math">a = 0</span></p>
+            <p>設定 <span class="math">f(x) = 2x + 1</span>，起點 <span class="math">a = 0</span><span class="en-sub">Set <span class="math">f(x)=2x+1</span> with starting point <span class="math">a=0</span>.</span></p>
             <p>定義面積函數：<span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> (2t + 1) dt</span></p>
-            <p>這個面積是一個梯形，算出來的結果是：</p>
+            <p>這個面積是一個梯形，算出來的結果是：<span class="en-sub">This area is a trapezoid, and the result is as follows.</span></p>
             <p><span class="math">A(x) = x² + x</span></p>
             <p>對面積函數微分：</p>
             <p><span class="math">A'(x) = 2x + 1 = f(x)</span></p>
@@ -706,7 +706,7 @@
         <h3 class="section-title">六、小測驗區<span class="en-sub">Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
-            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>若 <span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> f(t) dt</span>，則 <span class="math">A'(x)</span> 等於什麼？</p>
+            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>若 <span class="math">A(x) = &int;<sub>0</sub><sup>x</sup> f(t) dt</span>，則 <span class="math">A'(x)</span> 等於什麼？<span class="en-sub">Question 1: If <span class="math">A(x)=∫[0 to x]f(t)dt</span>, what is <span class="math">A'(x)</span>?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. f(0)</button>
                 <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. f(x)</button>
@@ -717,7 +717,7 @@
         </div>
 
         <div class="quiz-item" id="q2">
-            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>算式 <span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span> 同時可以怎麼理解？</p>
+            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>算式 <span class="math">[A(x+&Delta;x) - A(x)] / &Delta;x</span> 同時可以怎麼理解？<span class="en-sub">Question 2: How can <span class="math">[A(x+Δx)-A(x)]/Δx</span> be interpreted?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 它是從 0 到 x 的總面積，也是 f(x) 的極大值</button>
                 <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 它同時是 A(x) 的平均變化率，也是這段小區間的平均高度</button>
@@ -728,7 +728,7 @@
         </div>
 
         <div class="quiz-item" id="q3">
-            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>為什麼當 Δx 越來越小時，平均高度會接近 f(x)？</p>
+            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>為什麼當 Δx 越來越小時，平均高度會接近 f(x)？<span class="en-sub">Question 3: Why does the average height approach <span class="math">f(x)</span> as <span class="math">Δx</span> becomes smaller?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 因為 Δx 變小，所以面積一定變大</button>
                 <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 因為函數連續，x 附近的高度都接近 f(x)</button>
@@ -745,7 +745,7 @@
             微積分基本定理不是單純背公式，而是在說：<br><br>
             <strong>積分負責累積，微分負責看瞬間變化。</strong><br>
             當我們累積的是曲線下面積時，面積增加的瞬間速度，就是當下的函數高度。
-        </p>
+        <span class="en-sub">The Fundamental Theorem of Calculus is not just a formula to memorise. Integration accumulates; differentiation describes instantaneous change. For accumulated area, the instantaneous rate of increase is the current height.</span></p>
         
         <div style="background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
             <p style="font-weight: bold; color: var(--primary); text-align: center;">第一定理<span class="en-sub">Part 1</span></p>
@@ -756,7 +756,7 @@
             <p style="font-weight: bold; color: var(--primary); text-align: center;">第二定理<span class="en-sub">Part 2</span></p>
             <p style="text-align: center; font-size: 1.2rem;">
                 <span class="math">&int;<sub>a</sub><sup>b</sup> f(t)dt = F(b) - F(a)</span>，其中 <span class="math">F' = f</span>
-            </p>
+            <span class="en-sub">where <span class="math">F'=f</span>.</span></p>
         </div>
         
         <p style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.95rem;">

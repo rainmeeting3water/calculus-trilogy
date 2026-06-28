@@ -38,56 +38,118 @@
 <main class="page">
     <header>
         <h1>微積分基本定理 STEP 導學版<span class="en-sub">The Fundamental Theorem of Calculus: Step-by-step Guided Version</span></h1>
-        <p class="intro">從 accumulation function 出發，連接 average height、current height、differentiation 與 integration。<span class="en-sub">Begin with an accumulation function, then connect average height, current height, differentiation, and integration.</span></p>
+        <p class="intro">從累積函數出發，連接平均高度、當下高度、微分與積分。<span class="en-sub">Begin with an accumulation function, then connect average height, current height, differentiation, and integration.</span></p>
     </header>
 
     <div class="guide-note">本頁整理推理順序；需要操作 x、Δx 與動態表格時，請開啟完整互動版。<span class="en-sub">This page organises the reasoning. Open the full interactive version to work with x, Δx, and the dynamic table.</span></div>
 
     <section class="steps">
+
         <details class="step-card" open>
             <summary>STEP 1｜定義累積函數<span class="en-sub">Define the accumulation function</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察 <span class="math">A(x)=∫[a 到 x] f(t) dt</span> 的意義。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What does <span class="math">A(x)</span> accumulate as <span class="math">x</span> changes?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p><span class="math">A(x)</span> is an accumulation function.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>觀察 <span class="math">A(x)=∫[a 到 x] f(t) dt</span> 的意義。</p>
+                    <p class="en-sub">Observe the meaning of <span class="math">A(x)=∫[a to x] f(t) dt</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>當 <span class="math">x</span> 改變時，<span class="math">A(x)</span> 累積了什麼？</p>
+                    <p class="en-sub">What does <span class="math">A(x)</span> accumulate as <span class="math">x</span> changes?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p><span class="math">A(x)</span> 是一個累積函數。</p>
+                    <p class="en-sub"><span class="math">A(x)</span> is an accumulation function.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 2｜觀察新增面積<span class="en-sub">Observe the newly added area</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察 <span class="math">x</span> 增加 <span class="math">Δx</span> 時，多出來的面積。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What does <span class="math">A(x+Δx)-A(x)</span> represent?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>It represents the newly added accumulation over a short interval.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>觀察 <span class="math">x</span> 增加 <span class="math">Δx</span> 時，多出來的面積。</p>
+                    <p class="en-sub">Observe the extra area added when <span class="math">x</span> increases by <span class="math">Δx</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p><span class="math">A(x+Δx)-A(x)</span> 代表什麼？</p>
+                    <p class="en-sub">What does <span class="math">A(x+Δx)-A(x)</span> represent?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>它代表短區間上的新增累積量。</p>
+                    <p class="en-sub">It represents the newly added accumulation over a short interval.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 3｜比較平均高度與當下高度<span class="en-sub">Compare average height and current height</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察 <span class="math">[A(x+Δx)-A(x)]/Δx</span> 與 <span class="math">f(x)</span> 的差距。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>What happens when <span class="math">Δx</span> becomes smaller?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>The average height approaches the current height <span class="math">f(x)</span>.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>觀察 <span class="math">[A(x+Δx)-A(x)]/Δx</span> 與 <span class="math">f(x)</span> 的差距。</p>
+                    <p class="en-sub">Compare <span class="math">[A(x+Δx)-A(x)]/Δx</span> with <span class="math">f(x)</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>當 <span class="math">Δx</span> 變小時會發生什麼事？</p>
+                    <p class="en-sub">What happens when <span class="math">Δx</span> becomes smaller?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>平均高度會接近當下高度 <span class="math">f(x)</span>。</p>
+                    <p class="en-sub">The average height approaches the current height <span class="math">f(x)</span>.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 4｜理解 A'(x)=f(x)<span class="en-sub">Understand A'(x)=f(x)</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>用自己的話說明為什麼面積函數的變化率等於當下高度。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why is the derivative of the accumulation function equal to the function being accumulated?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>The derivative of the accumulation function is the function being accumulated.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>用自己的話說明為什麼累積函數的瞬間變化率等於當下高度。</p>
+                    <p class="en-sub">Explain in your own words why the instantaneous rate of change of the accumulation function equals the current height.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>為什麼累積函數的導函數會等於被累積的函數？</p>
+                    <p class="en-sub">Why is the derivative of the accumulation function equal to the function being accumulated?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>累積函數的導函數就是被累積的函數。</p>
+                    <p class="en-sub">The derivative of the accumulation function is the function being accumulated.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 5｜連到 F(b)-F(a)<span class="en-sub">Connect to F(b)-F(a)</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>理解如果 <span class="math">F'(x)=f(x)</span>，則 <span class="math">∫[a 到 b] f(x) dx = F(b)-F(a)</span>。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How does an anti-derivative help us evaluate a definite integral?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>The Fundamental Theorem of Calculus connects differentiation and integration.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>理解如果 <span class="math">F'(x)=f(x)</span>，則 <span class="math">∫[a 到 b] f(x) dx = F(b)-F(a)</span>。</p>
+                    <p class="en-sub">Understand that if <span class="math">F'(x)=f(x)</span>, then <span class="math">∫[a to b] f(x) dx = F(b)-F(a)</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>反導函數如何幫助我們計算定積分？</p>
+                    <p class="en-sub">How does an anti-derivative help us evaluate a definite integral?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>微積分基本定理連接了微分與積分。</p>
+                    <p class="en-sub">The Fundamental Theorem of Calculus connects differentiation and integration.</p>
+                </div>
             </div>
         </details>
+
     </section>
 
     <nav class="page-nav" aria-label="STEP navigation">

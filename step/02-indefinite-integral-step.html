@@ -38,56 +38,118 @@
 <main class="page">
     <header>
         <h1>不定積分 STEP 導學版<span class="en-sub">Indefinite Integrals: Step-by-step Guided Version</span></h1>
-        <p class="intro">從 differentiation 倒著思考，理解 anti-derivatives、constant C 與 family of curves。<span class="en-sub">Work backward from differentiation to understand anti-derivatives, the constant C, and families of curves.</span></p>
+        <p class="intro">從微分倒著思考，理解反導函數、常數 C 與函數族。<span class="en-sub">Work backward from differentiation to understand anti-derivatives, the constant C, and families of curves.</span></p>
     </header>
 
     <div class="guide-note">本頁提供概念導學；需要調整 C 並觀察圖形時，請開啟完整互動版。<span class="en-sub">Use this page for guided reasoning, then open the full interactive version to adjust C and observe the graphs.</span></div>
 
     <section class="steps">
+
         <details class="step-card" open>
             <summary>STEP 1｜從微分倒著想<span class="en-sub">Think backward from differentiation</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>觀察 <span class="math">f(x)</span>，思考哪一個 <span class="math">F(x)</span> 微分後會得到它。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>If <span class="math">F'(x)=f(x)</span>, what could <span class="math">F(x)</span> be?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>Indefinite integral is connected to anti-differentiation.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>觀察 <span class="math">f(x)</span>，思考哪一個 <span class="math">F(x)</span> 微分後會得到它。</p>
+                    <p class="en-sub">Observe <span class="math">f(x)</span> and think about which <span class="math">F(x)</span> has this function as its derivative.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>如果 <span class="math">F'(x)=f(x)</span>，那麼 <span class="math">F(x)</span> 可能是什麼？</p>
+                    <p class="en-sub">If <span class="math">F'(x)=f(x)</span>, what could <span class="math">F(x)</span> be?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>不定積分和反微分有關。</p>
+                    <p class="en-sub">An indefinite integral is connected to anti-differentiation.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 2｜理解反導函數<span class="en-sub">Understand anti-derivatives</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>比較 <span class="math">f(x)</span> 與 <span class="math">F(x)</span> 的關係。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>How can we verify that <span class="math">F(x)</span> is an anti-derivative of <span class="math">f(x)</span>?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>只要 <span class="math">F'(x)=f(x)</span>，<span class="math">F(x)</span> 就是 <span class="math">f(x)</span> 的 anti-derivative。</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>比較 <span class="math">f(x)</span> 與 <span class="math">F(x)</span> 的關係。</p>
+                    <p class="en-sub">Compare the relationship between <span class="math">f(x)</span> and <span class="math">F(x)</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>我們如何驗證 <span class="math">F(x)</span> 是 <span class="math">f(x)</span> 的反導函數？</p>
+                    <p class="en-sub">How can we verify that <span class="math">F(x)</span> is an anti-derivative of <span class="math">f(x)</span>?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>只要 <span class="math">F'(x)=f(x)</span>，<span class="math">F(x)</span> 就是 <span class="math">f(x)</span> 的反導函數。</p>
+                    <p class="en-sub">If <span class="math">F'(x)=f(x)</span>, then <span class="math">F(x)</span> is an anti-derivative of <span class="math">f(x)</span>.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 3｜觀察常數 C<span class="en-sub">Observe the constant C</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>調整 <span class="math">C</span>，觀察圖形如何上下平移。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why does changing <span class="math">C</span> not change the derivative?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>The constant <span class="math">C</span> shifts the graph vertically, but the derivative remains the same.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>調整 <span class="math">C</span>，觀察圖形如何上下平移。</p>
+                    <p class="en-sub">Adjust <span class="math">C</span> and observe how the graph shifts vertically.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>為什麼改變 <span class="math">C</span> 不會改變導函數？</p>
+                    <p class="en-sub">Why does changing <span class="math">C</span> not change the derivative?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>常數 <span class="math">C</span> 讓圖形上下平移，但導函數保持不變。</p>
+                    <p class="en-sub">The constant <span class="math">C</span> shifts the graph vertically, but the derivative remains the same.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 4｜理解函數族<span class="en-sub">Understand a family of curves</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>比較不同 <span class="math">C</span> 值形成的圖形。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why does an indefinite integral represent a family of curves?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p>An indefinite integral represents a family of anti-derivatives.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>比較不同 <span class="math">C</span> 值形成的圖形。</p>
+                    <p class="en-sub">Compare the graphs formed by different values of <span class="math">C</span>.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>為什麼不定積分代表一整族函數？</p>
+                    <p class="en-sub">Why does an indefinite integral represent a family of curves?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p>不定積分代表一整族反導函數。</p>
+                    <p class="en-sub">An indefinite integral represents a family of anti-derivatives.</p>
+                </div>
             </div>
         </details>
 
         <details class="step-card">
             <summary>STEP 5｜連到符號 ∫f(x)dx=F(x)+C<span class="en-sub">Connect to the notation ∫f(x)dx=F(x)+C</span></summary>
             <div class="step-content">
-                <div class="prompt-block task"><h4>學生任務 Student Task</h4><p>用自己的話說明 <span class="math">+C</span> 的意義。</p></div>
-                <div class="prompt-block teacher"><h4>教師提問 Teacher Prompt</h4><p>Why must we include <span class="math">+C</span>?</p></div>
-                <div class="prompt-block observation"><h4>觀察重點 Key Observation</h4><p><span class="math">+C</span> records all possible anti-derivatives.</p></div>
+                <div class="prompt-block task">
+                    <h4>學生任務 Student Task</h4>
+                    <p>用自己的話說明 <span class="math">+C</span> 的意義。</p>
+                    <p class="en-sub">Explain in your own words what <span class="math">+C</span> means.</p>
+                </div>
+                <div class="prompt-block teacher">
+                    <h4>教師提問 Teacher Prompt</h4>
+                    <p>為什麼一定要加上 <span class="math">+C</span>？</p>
+                    <p class="en-sub">Why must we include <span class="math">+C</span>?</p>
+                </div>
+                <div class="prompt-block observation">
+                    <h4>觀察重點 Key Observation</h4>
+                    <p><span class="math">+C</span> 記錄所有可能的反導函數。</p>
+                    <p class="en-sub"><span class="math">+C</span> records all possible anti-derivatives.</p>
+                </div>
             </div>
         </details>
+
     </section>
 
     <nav class="page-nav" aria-label="STEP navigation">

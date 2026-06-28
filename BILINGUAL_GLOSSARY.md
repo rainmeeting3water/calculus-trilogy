@@ -3,6 +3,8 @@
 本表整理「微積分三部曲」雙語版使用的核心中英術語。英文優先採用 IBDP Mathematics、國際高中數學教材與英美數學課堂常見用語，避免逐字直譯。
 
 > **IBDP 注意事項：**本表中的 IBDP 相關課程、術語、AA/AI、SL/HL、IA 或 command terms 對應，仍需依現行官方 guide 確認。本表不代表官方課程對應或認證。
+>
+> **Bilingual consistency note:** Use full English sentences alongside Chinese teaching sentences when the text is student-facing. Use anti-derivative / antiderivative for「原函數」when discussing indefinite integrals; avoid literal translation choices.
 
 | 中文術語 | English Term | 說明 | 出現位置 | IBDP / International Usage Notes |
 |---|---|---|---|---|
@@ -13,8 +15,8 @@
 | 微分 | differentiation | 從函數求導函數的運算。 | 02、03 模組 | IBDP uses differentiation for the process of finding a derivative. |
 | 積分 | integration | 累積或尋找反導函數的運算。 | 三個模組 | IBDP uses integration for both definite and indefinite integral contexts. |
 | 導函數 | derivative | 描述函數變化率的函數。 | 02、03 模組 | Standard IBDP term. |
-| 反導函數／原函數 | anti-derivative / antiderivative | 微分後會得到原本函數的函數。 | 首頁、02、03 模組 | IBDP calculus content refers to anti-differentiation and anti-derivatives; avoid original function. |
-| 反微分 | anti-differentiation | 由導函數反推反導函數的過程。 | 首頁、02 模組 | Prefer anti-differentiation over reverse differentiation. |
+| 反導函數／原函數 | anti-derivative / antiderivative | 微分後會得到原本函數的函數。 | 首頁、02、03 模組 | IBDP calculus content refers to anti-differentiation and anti-derivatives; avoid literal translation choices. |
+| 反微分 | anti-differentiation | 由導函數反推反導函數的過程。 | 首頁、02 模組 | Use anti-differentiation for the process of finding anti-derivatives. |
 | 函數 | function | 對每個輸入給出對應輸出的規則。 | 三個模組 | Standard term. |
 | 函數族 | family of functions / family of curves | 由參數 C 形成的一整族函數圖形。 | 首頁、02 模組 | For graphs of indefinite integrals, family of curves is natural. |
 | 常數 C | constant C | 不定積分中代表任意垂直平移的常數。 | 首頁、02 模組 | The constant C shifts the graph vertically. |

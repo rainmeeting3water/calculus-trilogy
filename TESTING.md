@@ -104,6 +104,10 @@
 
 ## 雙語版本測試
 
+* [ ] STEP 標題皆有中文與英文對照
+* [ ] Student Task / Teacher Prompt / Key Observation each include Chinese and English text
+* [ ] 三個完整互動頁的主要教學段落有英文對照句
+* [ ] 404 頁面的標題、說明與返回按鈕有中英對照
 * [x] 首頁標題與三張卡片有中英並列
 * [x] 三個模組的主要標題有中英並列
 * [x] 操作區標籤仍清楚可讀

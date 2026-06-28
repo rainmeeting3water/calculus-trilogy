@@ -680,7 +680,7 @@
 
     <div class="section">
         <h3 class="section-title">二、觀察 n 越來越大<span class="en-sub">As n Increases</span></h3>
-        <p style="margin-bottom: 15px;">我們來看看，當分割數量 <span class="math">n</span> 不斷增加（代表每段長度 <span class="math">|&Delta;x|</span> 越來越小）時，矩形總和會發生什麼事？</p>
+        <p style="margin-bottom: 15px;">我們來看看，當分割數量 <span class="math">n</span> 不斷增加（代表每段長度 <span class="math">|&Delta;x|</span> 越來越小）時，矩形總和會發生什麼事？<span class="en-sub">As the number of subdivisions <span class="math">n</span> increases, each width <span class="math">|&Delta;x|</span> becomes smaller. What happens to the rectangle approximation sum?</span></p>
         <button id="runTableBtn" class="btn">▶ 觀察 n 越來越大<span class="en-sub">Run n-increase table</span></button>
         
         <div class="table-container">
@@ -708,22 +708,22 @@
         
         <div class="step">
             <div class="step-num">Step 1：從一個矩形開始<span class="en-sub">Start with one rectangle</span></div>
-            <p>矩形面積 = 底 &times; 高。</p>
-            <p>在函數圖形下，一個小矩形的底長是 <span class="math">|&Delta;x|</span>，高度大小大約是 <span class="math">|f(x<sub>i</sub><sup>*</sup>)|</span>。</p>
-            <p>但定積分保留方向與正負號，所以第 i 塊對定積分的有向貢獻是 <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span>。</p>
+            <p>矩形面積 = 底 &times; 高。<span class="en-sub">The area of a rectangle is base multiplied by height.</span></p>
+            <p>在函數圖形下，一個小矩形的底長是 <span class="math">|&Delta;x|</span>，高度大小大約是 <span class="math">|f(x<sub>i</sub><sup>*</sup>)|</span>。<span class="en-sub">Under the graph of a function, the base of a small rectangle is <span class="math">|&Delta;x|</span>, and its height is approximately <span class="math">|f(x<sub>i</sub><sup>*</sup>)|</span>.</span></p>
+            <p>但定積分保留方向與正負號，所以第 i 塊對定積分的有向貢獻是 <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span>。<span class="en-sub">A definite integral preserves direction and sign, so the directed contribution of the i-th rectangle is <span class="math">f(x<sub>i</sub><sup>*</sup>)&Delta;x</span>.</span></p>
             <p style="margin-top: 5px;">公式：<span class="math">第 i 塊有向貢獻 = f(x<sub>i</sub><sup>*</sup>)&Delta;x</span></p>
         </div>
         
         <div class="step">
             <div class="step-num">Step 2：把區間 [a, b] 切成很多小段<span class="en-sub">Subdivide the interval [a, b]</span></div>
-            <p>如果把從 a 到 b 的距離切成 <span class="math">n</span> 等分，每一小段的有向寬度是：</p>
+            <p>如果把從 a 到 b 的距離切成 <span class="math">n</span> 等分，每一小段的有向寬度是：<span class="en-sub">If the interval from a to b is divided into <span class="math">n</span> equal parts, each subinterval has the following directed width.</span></p>
             <p class="math-block">&Delta;x = (b - a) / n</p>
-            <p>若 <span class="math">a &lt; b</span>，<span class="math">&Delta;x</span> 為正；若 <span class="math">a &gt; b</span>，<span class="math">&Delta;x</span> 為負，表示累積方向相反。</p>
+            <p>若 <span class="math">a &lt; b</span>，<span class="math">&Delta;x</span> 為正；若 <span class="math">a &gt; b</span>，<span class="math">&Delta;x</span> 為負，表示累積方向相反。<span class="en-sub">If <span class="math">a &lt; b</span>, then <span class="math">&Delta;x</span> is positive. If <span class="math">a &gt; b</span>, then <span class="math">&Delta;x</span> is negative, meaning the direction of accumulation is reversed.</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 3：把很多小矩形加起來<span class="en-sub">Add the small rectangles</span></div>
-            <p>把所有小矩形的有向貢獻加起來（稱為黎曼和），就可以得到近似的總累積量：</p>
+            <p>把所有小矩形的有向貢獻加起來（稱為黎曼和），就可以得到近似的總累積量：<span class="en-sub">Adding all directed contributions gives a Riemann sum, which approximates the total accumulation.</span></p>
             <div class="math-block formula-row">
                 <span class="big-op" style="font-size: 0.9rem;">
                     <span class="op-top">n</span>
@@ -732,19 +732,19 @@
                 </span>
                 <span>f(x<sub>i</sub><sup>*</sup>) &Delta;x</span>
             </div>
-            <p style="font-size: 0.95rem; color: var(--text-light);">（其中 <span class="math">x<sub>i</sub><sup>*</sup></span> 可以選起點端點、終點端點或中點。若 <span class="math">a &lt; b</span>，起點端點就是左端點；若 <span class="math">a &gt; b</span>，起點端點會在右側，表示累積方向已經反過來。）</p>
+            <p style="font-size: 0.95rem; color: var(--text-light);">（其中 <span class="math">x<sub>i</sub><sup>*</sup></span> 可以選起點端點、終點端點或中點。若 <span class="math">a &lt; b</span>，起點端點就是左端點；若 <span class="math">a &gt; b</span>，起點端點會在右側，表示累積方向已經反過來。）<span class="en-sub">Here <span class="math">x<sub>i</sub><sup>*</sup></span> can be chosen by the starting endpoint, ending endpoint, or midpoint. The endpoint labels follow the direction of accumulation.</span></p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 4：讓切割越來越細<span class="en-sub">Make the subdivision finer</span></div>
-            <p>當 <span class="math">n</span> 越來越大，每段長度 <span class="math">|&Delta;x|</span> 越來越小，小矩形的頂部就會越貼近函數曲線。</p>
-            <p>當矩形總和越來越穩定，趨近於一個極限值時，我們就把這個極限值記為定積分符號：</p>
+            <p>當 <span class="math">n</span> 越來越大，每段長度 <span class="math">|&Delta;x|</span> 越來越小，小矩形的頂部就會越貼近函數曲線。<span class="en-sub">As <span class="math">n</span> becomes larger, each <span class="math">|&Delta;x|</span> becomes smaller, and the tops of the rectangles fit the curve more closely.</span></p>
+            <p>當矩形總和越來越穩定，趨近於一個極限值時，我們就把這個極限值記為定積分符號：<span class="en-sub">When the rectangle sums approach a stable limiting value, we write that limit using definite integral notation.</span></p>
             <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx</p>
         </div>
 
         <div class="step">
             <div class="step-num">Step 5：理解上下限與方向<span class="en-sub">Interpret limits and direction</span></div>
-            <p><span class="math">a</span> 是開始累積的位置，<span class="math">b</span> 是結束累積的位置。</p>
+            <p><span class="math">a</span> 是開始累積的位置，<span class="math">b</span> 是結束累積的位置。<span class="en-sub"><span class="math">a</span> is the starting position of accumulation, and <span class="math">b</span> is the ending position.</span></p>
             <ul style="margin-left: 25px; margin-top: 10px;">
                 <li>若 <span class="math">a = b</span>，沒有寬度，所以：<span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx = 0</span></li>
                 <li style="margin-top: 8px;">若 <span class="math">a &gt; b</span>，代表累積的方向反過來（<span class="math">&Delta;x</span> 變為負），所以定積分的值會變號：<br>
@@ -755,7 +755,7 @@
 
     <div class="section">
         <h3 class="section-title">四、定積分是「帶符號的面積」<span class="en-sub">A Definite Integral as Signed Area</span></h3>
-        <p>定積分不只是普通的幾何面積，而是<strong>帶符號的累積量</strong>。</p>
+        <p>定積分不只是普通的幾何面積，而是<strong>帶符號的累積量</strong>。<span class="en-sub">A definite integral is not merely geometric area; it is signed accumulation.</span></p>
         <ul style="margin-left: 25px; margin-top: 15px; line-height: 1.8;">
             <li><strong>高度 f(x) &gt; 0 (圖形在 x 軸上方)：</strong>在向右累積 (a &lt; b) 時貢獻<strong>正值</strong>；若向左累積 (a &gt; b) 則貢獻<strong>負值</strong>。</li>
             <li><strong>高度 f(x) &lt; 0 (圖形在 x 軸下方)：</strong>在向右累積 (a &lt; b) 時貢獻<strong>負值</strong>；若向左累積 (a &gt; b) 則貢獻<strong>正值</strong>。</li>
@@ -764,7 +764,7 @@
         </ul>
         <p style="margin-top: 10px; color: var(--text-light);">
             在一般從左到右累積，也就是 <span class="math">a &lt; b</span> 的情況下，x 軸上方貢獻正值，x 軸下方貢獻負值；若 <span class="math">a &gt; b</span>，累積方向反過來，定積分值會變號 / Reversing direction changes the sign of the definite integral。
-        </p>
+        <span class="en-sub">For accumulation from left to right, regions above the x-axis contribute positively and regions below the x-axis contribute negatively. Reversing the direction changes the sign of the definite integral.</span></p>
         <div style="background: #FFFBEB; padding: 15px; border-left: 4px solid #F59E0B; margin-top: 15px; border-radius: 0 8px 8px 0;">
             💡 <strong>試試看：</strong> 在上面的互動區，選擇函數 <span class="math">f(x) = sin(x)</span>，並將區間設為 a=-3, b=3，觀察正負面積如何接近抵消！
         </div>
@@ -776,7 +776,7 @@
         <div class="step">
             <div class="step-num">1. 上下限相同，累積量為 0</div>
             <p class="math-block">&int;<sub>a</sub><sup>a</sup> f(x) dx = 0</p>
-            <p>說明：從 a 累積到 a，沒有寬度，所以累積量為 0。</p>
+            <p>說明：從 a 累積到 a，沒有寬度，所以累積量為 0。<span class="en-sub">Accumulating from a to a has no width, so the accumulation is 0.</span></p>
         </div>
         
         <div class="step">
@@ -788,48 +788,48 @@
         <div class="step">
             <div class="step-num">3. 區間可加性</div>
             <p class="math-block">&int;<sub>a</sub><sup>b</sup> f(x) dx = &int;<sub>a</sub><sup>c</sup> f(x) dx + &int;<sub>c</sub><sup>b</sup> f(x) dx</p>
-            <p>說明：從 a 到 b 的累積量，可以拆成從 a 到 c 加上從 c 到 b。</p>
+            <p>說明：從 a 到 b 的累積量，可以拆成從 a 到 c 加上從 c 到 b。<span class="en-sub">The accumulation from a to b can be split into the accumulation from a to c plus the accumulation from c to b.</span></p>
             <p style="margin-top: 10px; font-weight: bold; color: var(--primary);">這個性質之後會幫助我們理解：<br>
-            <span class="math" style="display:inline-block; margin-top: 8px;">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span></p>
+            <span class="math" style="display:inline-block; margin-top: 8px;">A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt</span><span class="en-sub">This property will help us understand the added accumulation in the next module.</span></p>
         </div>
         
         <div class="step">
             <div class="step-num">4. 常數倍可以提出來</div>
             <p class="math-block">&int;<sub>a</sub><sup>b</sup> k f(x) dx = k &int;<sub>a</sub><sup>b</sup> f(x) dx</p>
-            <p>說明：如果每一點的高度都變成 k 倍，總累積量也會變成 k倍。</p>
+            <p>說明：如果每一點的高度都變成 k 倍，總累積量也會變成 k倍。<span class="en-sub">If every height is multiplied by k, the total accumulation is also multiplied by k.</span></p>
         </div>
         
         <div class="step">
             <div class="step-num">5. 和可以拆開</div>
             <p class="math-block">&int;<sub>a</sub><sup>b</sup> [f(x) + g(x)] dx = &int;<sub>a</sub><sup>b</sup> f(x) dx + &int;<sub>a</sub><sup>b</sup> g(x) dx</p>
-            <p>說明：兩個函數相加後的累積量，可以分開累積再相加。</p>
+            <p>說明：兩個函數相加後的累積量，可以分開累積再相加。<span class="en-sub">The accumulation of a sum of two functions can be separated into the sum of their accumulations.</span></p>
         </div>
     </div>
 
     <div class="section" style="background: #EEF2FF; border: 2px solid #C7D2FE;">
         <h3 class="section-title" style="border-bottom: none; text-align: center; margin-bottom: 5px;">六、下一步：讓上限動起來<span class="en-sub">Next: Let the Upper Limit Move</span></h3>
-        <p style="text-align: center; margin-bottom: 20px;">這也是通往微積分基本定理的橋樑。</p>
+        <p style="text-align: center; margin-bottom: 20px;">這也是通往微積分基本定理的橋樑。<span class="en-sub">This is also the bridge to the Fundamental Theorem of Calculus.</span></p>
         
-        <p>如果下限 <span class="math">a</span> 固定，但上限不再是固定的數字 <span class="math">b</span>，而是會移動的位置 <span class="math">x</span>，我們可以定義一個新的面積函數：</p>
+        <p>如果下限 <span class="math">a</span> 固定，但上限不再是固定的數字 <span class="math">b</span>，而是會移動的位置 <span class="math">x</span>，我們可以定義一個新的面積函數：<span class="en-sub">If the lower limit <span class="math">a</span> is fixed but the upper limit moves with <span class="math">x</span>, we can define a new area function.</span></p>
         
         <div class="math-block" style="background: white;">
             A(x) = &int;<sub>a</sub><sup>x</sup> f(t) dt
         </div>
-        <p style="font-size: 0.95rem; color: var(--text-light);">這裡用 t 當積分變數，是為了避免和上限 x 混淆。</p>
-        <p>這個 <span class="math">A(x)</span> 代表從 <span class="math">a</span> 累積到 <span class="math">x</span> 的總量。</p>
+        <p style="font-size: 0.95rem; color: var(--text-light);">這裡用 t 當積分變數，是為了避免和上限 x 混淆。<span class="en-sub">The variable t is used as the integration variable to avoid confusion with the moving upper limit x.</span></p>
+        <p>這個 <span class="math">A(x)</span> 代表從 <span class="math">a</span> 累積到 <span class="math">x</span> 的總量。<span class="en-sub"><span class="math">A(x)</span> represents the total accumulation from <span class="math">a</span> to <span class="math">x</span>.</span></p>
         
-        <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">思考問題（下個模組的重點）：</p>
+        <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">思考問題（下個模組的重點）：<span class="en-sub">Thinking question for the next module.</span></p>
         <div class="math-block" style="background: white;">
             A(x+&Delta;x) - A(x) = &int;<sub>x</sub><sup>x+&Delta;x</sup> f(t) dt
         </div>
-        <p>下一個模組會研究這段新增累積量除以 <span class="math">&Delta;x</span> 後，當 <span class="math">&Delta;x</span> 越來越小時會接近什麼。</p>
+        <p>下一個模組會研究這段新增累積量除以 <span class="math">&Delta;x</span> 後，當 <span class="math">&Delta;x</span> 越來越小時會接近什麼。<span class="en-sub">The next module studies what this added accumulation divided by <span class="math">&Delta;x</span> approaches as <span class="math">&Delta;x</span> becomes smaller.</span></p>
     </div>
 
     <div class="section">
         <h3 class="section-title">七、自我小測驗<span class="en-sub">Self-check Quiz</span></h3>
 
         <div class="quiz-item" id="q1">
-            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>在定積分符號 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 中，下標 a 和上標 b 代表什麼？</p>
+            <p><strong>第 1 題：</strong><span class="en-inline">Question 1:</span>在定積分符號 <span class="math">&int;<sub>a</sub><sup>b</sup> f(x) dx</span> 中，下標 a 和上標 b 代表什麼？<span class="en-sub">In the definite integral notation, what do the lower limit a and upper limit b represent?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(1, 'A')">A. 函數的最大值與最小值</button>
                 <button class="quiz-btn" onclick="checkAnswer(1, 'B')">B. x 軸與 y 軸的交點</button>
@@ -840,7 +840,7 @@
         </div>
 
         <div class="quiz-item" id="q2">
-            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>當分割數 n 越來越大時，用小矩形計算的總和通常會怎樣？</p>
+            <p><strong>第 2 題：</strong><span class="en-inline">Question 2:</span>當分割數 n 越來越大時，用小矩形計算的總和通常會怎樣？<span class="en-sub">As the number of subdivisions n becomes larger, what usually happens to the rectangle approximation sum?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(2, 'A')">A. 變得無限大</button>
                 <button class="quiz-btn" onclick="checkAnswer(2, 'B')">B. 越來越接近曲線下方的實際累積量</button>
@@ -851,7 +851,7 @@
         </div>
 
         <div class="quiz-item" id="q3">
-            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>若上下限相同 (a = b)，那麼 <span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx</span> 的值等於多少？</p>
+            <p><strong>第 3 題：</strong><span class="en-inline">Question 3:</span>若上下限相同 (a = b)，那麼 <span class="math">&int;<sub>a</sub><sup>a</sup> f(x) dx</span> 的值等於多少？<span class="en-sub">If the lower and upper limits are the same, what is the value of the definite integral?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(3, 'A')">A. 0</button>
                 <button class="quiz-btn" onclick="checkAnswer(3, 'B')">B. 1</button>
@@ -862,7 +862,7 @@
         </div>
 
         <div class="quiz-item" id="q4">
-            <p><strong>第 4 題：</strong><span class="en-inline">Question 4:</span>在一般從左到右累積，也就是 a &lt; b 的情況下，若函數圖形在 x 軸下方，這塊區域對定積分的貢獻是什麼？</p>
+            <p><strong>第 4 題：</strong><span class="en-inline">Question 4:</span>在一般從左到右累積，也就是 a &lt; b 的情況下，若函數圖形在 x 軸下方，這塊區域對定積分的貢獻是什麼？<span class="en-sub">When accumulating from left to right, what contribution does a region below the x-axis make to the definite integral?</span></p>
             <div class="quiz-options">
                 <button class="quiz-btn" onclick="checkAnswer(4, 'A')">A. 正的累積量</button>
                 <button class="quiz-btn" onclick="checkAnswer(4, 'B')">B. 負的累積量</button>
@@ -875,7 +875,7 @@
 
     <div class="section" style="text-align: center; background: white; border: 1px solid #E2E8F0;">
         <h3 class="section-title" style="border-bottom: none; margin-bottom: 10px;">✨ 總結 ✨<span class="en-sub">Summary</span></h3>
-        <p style="font-size: 1.1rem; margin-bottom: 20px;">定積分的核心不是先背公式，而是理解：</p>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">定積分的核心不是先背公式，而是理解：<span class="en-sub">The core of a definite integral is not memorising a formula first, but understanding the accumulation process.</span></p>
         
         <ol style="text-align: left; max-width: 400px; margin: 0 auto 25px auto; font-size: 1.1rem; line-height: 1.8;">
             <li>把區間切成很多小段。</li>
@@ -907,7 +907,7 @@
         <p style="margin-top: 25px; color: var(--text-light);">
             這個模組先幫我們建立「定積分是累積量」的直觀概念。<br>
             之後的「微積分基本定理」會進一步研究：當上限變成會移動的 x 時，累積量 <span class="math">A(x)</span> 的變化率會等於什麼。
-        </p>
+        <span class="en-sub">This module first builds the intuition that a definite integral is accumulation. The Fundamental Theorem of Calculus then studies the rate of change of <span class="math">A(x)</span> when the upper limit moves.</span></p>
     </div>
 
 </div>
